@@ -1,0 +1,10 @@
+{
+  "scripts": {
+    "frontend": "cd frontend && yarn start",
+    "backend": "cd backend && rails s",
+    "start": "concurrently \"yarn run frontend\" \"yarn run backend\""
+  },
+  "devDependencies": {
+    "concurrently": "^7.0.0"
+  }
+}
