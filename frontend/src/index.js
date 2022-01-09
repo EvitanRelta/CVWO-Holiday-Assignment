@@ -2,6 +2,7 @@ import ApiClient from 'devise-token-auth-client';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
+import { BrowserRouter } from "react-router-dom";
 
 const render = async Component => {
     const client = new ApiClient ({
@@ -9,7 +10,9 @@ const render = async Component => {
     });
     await client.isInitialized;
     ReactDOM.render(
-        <Component client={client}/>,
+        <BrowserRouter>
+            <Component client={client}/>
+        </BrowserRouter>,
         document.getElementById('root')
     );
 };

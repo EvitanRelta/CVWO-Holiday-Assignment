@@ -44,7 +44,7 @@ const Login = ({ client }) => {
                         label='password'
                         value={password}
                         onChange={e => setPassword(e.target.value)}
-                        onKeyPress={e => handleKeyPress}
+                        onKeyPress={handleKeyPress}
                     />
                     <Button
                         variant='contained'

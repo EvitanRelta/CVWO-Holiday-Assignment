@@ -1,8 +1,12 @@
 import React from 'react';
-import { Login } from './routes';
+import { Login, Home } from './routes';
+import { Routes, Route } from "react-router-dom";
 
 const App = ({ client }) => (
-    <Login client={client}/>
+    <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="login" element={<Login client={client} />} />
+    </Routes>
 );
 
 export default App;
