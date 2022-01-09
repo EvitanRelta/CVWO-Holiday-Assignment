@@ -1,23 +1,25 @@
 import React, { useState } from 'react';
 import { Button, Paper, Stack, TextField } from '@mui/material';
 
-const userLogin = async (client, email, password) => {
+const userSignup = async (client, email, password, passwordConfirmation) => {
     try {
-        return await client.emailSignIn({
+        return await client.emailSignUp({
             email,
-            password
+            password,
+            passwordConfirmation
         });
     } catch (e) {
         console.error(e);
     }
 };
 
-const Login = ({ client }) => {
+const Signup = ({ client }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [passwordConfirmation, setConfirmPassword] = useState('');
     const handleSubmission = async () => {
         console.log('enter', client);
-        console.log(await userLogin(client, email, password));
+        console.log(await userSignup(client, email, password, passwordConfirmation));
     };
     const handleKeyPress = e => {
         if (e.key !== 'Enter') return;
@@ -29,21 +31,28 @@ const Login = ({ client }) => {
                 variant='outlined'
                 sx={{ width:400, padding:5 }}
             >
-                <h2>Login page</h2>
+                <h2>Sign Up page</h2>
                 <Stack>
                     <TextField
                         autoFocus
                         id='email'
-                        label='email'
+                        label='Email'
                         value={email}
                         onChange={e => setEmail(e.target.value)}
                         onKeyPress={handleKeyPress}
                     />
                     <TextField
                         id='password'
-                        label='password'
+                        label='Password'
                         value={password}
                         onChange={e => setPassword(e.target.value)}
+                        onKeyPress={handleKeyPress}
+                    />
+                    <TextField
+                        id='comfirm-password'
+                        label='Confirm Password'
+                        value={passwordConfirmation}
+                        onChange={e => setConfirmPassword(e.target.value)}
                         onKeyPress={handleKeyPress}
                     />
                     <Button
@@ -58,4 +67,4 @@ const Login = ({ client }) => {
     );
 };
 
-export default Login;
+export default Signup;
