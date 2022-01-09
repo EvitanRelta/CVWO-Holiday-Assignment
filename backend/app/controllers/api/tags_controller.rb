@@ -1,5 +1,6 @@
 class TagsController < ApplicationController
   before_action :set_tag, only: %i[ show update destroy ]
+  before_action :authenticate_user!
 
   # GET /tags
   def index
@@ -16,6 +17,7 @@ class TagsController < ApplicationController
   # POST /tags
   def create
     @tag = Tag.new(tag_params)
+    @tag.user_id = current_user.id
 
     if @tag.save
       render json: @tag, status: :created, location: @tag
@@ -46,6 +48,6 @@ class TagsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def tag_params
-      params.require(:tag).permit(:name)
+      params.require(:tag).permit(:name, :category_id)
     end
 end
