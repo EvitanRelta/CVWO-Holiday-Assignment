@@ -10,5 +10,5 @@ class User < ActiveRecord::Base
 
   has_many :tasks
   has_many :categories
-  has_many :tags
+  has_many :tags, through: :categories
 end
