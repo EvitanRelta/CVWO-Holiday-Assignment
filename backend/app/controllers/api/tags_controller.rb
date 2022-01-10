@@ -1,4 +1,4 @@
-class TagsController < ApplicationController
+class Api::TagsController < ApplicationController
   before_action :set_tag, only: %i[ show update destroy ]
   before_action :authenticate_user!
 
