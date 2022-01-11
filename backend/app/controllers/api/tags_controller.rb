@@ -1,12 +1,14 @@
 class Api::TagsController < ApplicationController
   before_action :set_api_tag, only: [:show, :update, :destroy]
-
+  before_action :authenticate_user!
+  
   # GET /api/tags
-  def index
-    @api_tags = Api::Tag.all
+  # Doesn't make sense to get tags without categories.
+  # def index
+  #   @api_tags = Api::Tag.all
 
-    render json: @api_tags
-  end
+  #   render json: @api_tags
+  # end
 
   # GET /api/tags/1
   def show
@@ -15,7 +17,8 @@ class Api::TagsController < ApplicationController
 
   # POST /api/tags
   def create
-    @api_tag = Api::Tag.new(api_tag_params)
+    @category = current_user.categories.find_by(category_id: params[:category_id])
+    @api_tag = @category.tags.new(api_tag_params)
 
     if @api_tag.save
       render json: @api_tag, status: :created, location: @api_tag
@@ -41,11 +44,17 @@ class Api::TagsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_api_tag
-      @api_tag = Api::Tag.find(params[:id])
+      tag = Api::Tag.find(params[:id])
+      
+      if not current_user.categories.exists?(id: tag.category_id)
+        head :unauthorized
+      else
+        @api_tag = tag
+      end
     end
 
     # Only allow a list of trusted parameters through.
     def api_tag_params
-      params.require(:api_tag).permit(:name)
+      params.require(:api_tag).permit(:name, :category_id)
     end
 end

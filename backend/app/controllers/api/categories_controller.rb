@@ -1,9 +1,10 @@
 class Api::CategoriesController < ApplicationController
   before_action :set_api_category, only: [:show, :update, :destroy]
+  before_action :authenticate_user!
 
   # GET /api/categories
   def index
-    @api_categories = Api::Category.all
+    @api_categories = current_user.categories
 
     render json: @api_categories
   end
@@ -15,7 +16,8 @@ class Api::CategoriesController < ApplicationController
 
   # POST /api/categories
   def create
-    @api_category = Api::Category.new(api_category_params)
+    @api_category = current_user.categories.new(api_category_params)
+    @api_category.user_id = current_user.id
 
     if @api_category.save
       render json: @api_category, status: :created, location: @api_category
@@ -41,7 +43,11 @@ class Api::CategoriesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_api_category
-      @api_category = Api::Category.find(params[:id])
+      if params[:id] != current_user.id
+        head :unauthorized
+      else
+        @api_category = current_user.categories.find(params[:id])
+      end
     end
 
     # Only allow a list of trusted parameters through.

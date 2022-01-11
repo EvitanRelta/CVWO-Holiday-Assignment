@@ -1,9 +1,10 @@
 class Api::TasksController < ApplicationController
   before_action :set_api_task, only: [:show, :update, :destroy]
+  before_action :authenticate_user!
 
   # GET /api/tasks
   def index
-    @api_tasks = Api::Task.all
+    @api_tasks = current_user.tasks
 
     render json: @api_tasks
   end
@@ -15,8 +16,9 @@ class Api::TasksController < ApplicationController
 
   # POST /api/tasks
   def create
-    @api_task = Api::Task.new(api_task_params)
-
+    @api_task = current_user.tasks.new(api_task_params)
+    @api_task.user_id = current_user.id
+    
     if @api_task.save
       render json: @api_task, status: :created, location: @api_task
     else
@@ -41,7 +43,11 @@ class Api::TasksController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_api_task
-      @api_task = Api::Task.find(params[:id])
+      if params[:id] != current_user.id
+        head :unauthorized
+      else
+        @api_task = current_user.tasks.find(params[:id])
+      end
     end
 
     # Only allow a list of trusted parameters through.
