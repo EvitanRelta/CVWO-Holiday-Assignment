@@ -4,6 +4,6 @@ class Api::Tag < ApplicationRecord
         foreign_key: "category_id"
 
     has_and_belongs_to_many :tasks, 
-        join_table: "tasks_tags", 
-        foreign_key: "task_id"
+        class_name: "Api::Task",
+        join_table: "api_tags_tasks"
 end
