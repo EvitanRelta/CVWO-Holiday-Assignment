@@ -4,11 +4,9 @@ class Api::TagsController < ApplicationController
   
   # GET /api/tags
   # Doesn't make sense to get tags without categories.
-  # def index
-  #   @api_tags = Api::Tag.all
-
-  #   render json: @api_tags
-  # end
+  def index
+    head :not_found
+  end
 
   # GET /api/tags/1
   def show
@@ -44,12 +42,12 @@ class Api::TagsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_api_tag
-      tag = Api::Tag.find(params[:id])
+      tag = Api::Tag.find_by(id: params[:id])
       
-      if not current_user.categories.exists?(id: tag.category_id)
-        head :unauthorized
-      else
+      if tag and current_user.categories.exists?(id: tag.category_id)
         @api_tag = tag
+      else
+        head :unauthorized 
       end
     end
 

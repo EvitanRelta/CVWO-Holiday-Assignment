@@ -43,10 +43,10 @@ class Api::CategoriesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_api_category
-      if params[:id] != current_user.id
-        head :unauthorized
-      else
+      if current_user.categories.exists?(id: params[:id])
         @api_category = current_user.categories.find(params[:id])
+      else
+        head :unauthorized
       end
     end
 

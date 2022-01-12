@@ -43,10 +43,10 @@ class Api::TasksController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_api_task
-      if params[:id] != current_user.id
-        head :unauthorized
-      else
+      if current_user.tasks.exists?(id: params[:id])
         @api_task = current_user.tasks.find(params[:id])
+      else
+        head :unauthorized
       end
     end
 
