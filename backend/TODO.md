@@ -1,3 +1,2 @@
-- validations uniqueness pressence
-- controller what happens if duplicate categories? does it fail the HTTP request?
-- controller add tag to task
+- validate pressence in model
+- add Google login
