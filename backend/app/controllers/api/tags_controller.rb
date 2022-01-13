@@ -32,8 +32,11 @@ class Api::TagsController < ApplicationController
 
   # DELETE /api/tags/1
   def destroy
-    @api_tag.destroy
-    head :ok
+    if @api_tag.destroy
+      head :ok
+    else
+      render json: @api_tag.errors, status: :unprocessable_entity
+    end
   end
 
   private
