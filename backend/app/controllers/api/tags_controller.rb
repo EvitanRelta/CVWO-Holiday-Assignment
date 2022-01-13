@@ -1,12 +1,6 @@
 class Api::TagsController < ApplicationController
   before_action :set_api_tag, only: [:show, :update, :destroy]
   before_action :authenticate_user!
-  
-  # GET /api/tags
-  # Doesn't make sense to get tags without categories.
-  def index
-    head :not_found
-  end
 
   # GET /api/tags/1
   def show
