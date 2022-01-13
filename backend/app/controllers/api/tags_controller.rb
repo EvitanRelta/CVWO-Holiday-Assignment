@@ -10,15 +10,17 @@ class Api::TagsController < ApplicationController
 
   # GET /api/tags/1
   def show
-    render json: @api_tag
+    render json: Api::TagBlueprint.render(@api_tag, view: :all)
   end
 
   # POST /api/tags
   def create
-    @category = current_user.categories.find_by(category_id: params[:category_id])
-    @api_tag = @category.tags.new(api_tag_params)
-
-    if @api_tag.save
+    @category = current_user.categories.find_by(id: create_params[:category_id])
+    @api_tag = @category.tags.new(create_params) if @category
+    
+    if not @category
+      head :unauthorized
+    elsif @api_tag.save
       render json: @api_tag, status: :created, location: @api_tag
     else
       render json: @api_tag.errors, status: :unprocessable_entity
@@ -37,6 +39,7 @@ class Api::TagsController < ApplicationController
   # DELETE /api/tags/1
   def destroy
     @api_tag.destroy
+    head :ok
   end
 
   private
@@ -53,6 +56,13 @@ class Api::TagsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def api_tag_params
-      params.require(:api_tag).permit(:name, :category_id)
+      params.require(:tag).permit(:name, :category_id)
+    end
+
+    # Require params when creating
+    def create_params
+      tag = params.require(:tag)
+      tag.require([:name, :category_id])
+      tag.permit(:name, :category_id)
     end
 end

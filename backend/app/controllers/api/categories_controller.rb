@@ -6,17 +6,17 @@ class Api::CategoriesController < ApplicationController
   def index
     @api_categories = current_user.categories
 
-    render json: @api_categories
+    render json: Api::CategoryBlueprint.render(@api_categories)
   end
 
   # GET /api/categories/1
   def show
-    render json: @api_category
+    render json: Api::CategoryBlueprint.render(@api_category)
   end
 
   # POST /api/categories
   def create
-    @api_category = current_user.categories.new(api_category_params)
+    @api_category = current_user.categories.new(create_params)
     @api_category.user_id = current_user.id
 
     if @api_category.save
@@ -38,6 +38,7 @@ class Api::CategoriesController < ApplicationController
   # DELETE /api/categories/1
   def destroy
     @api_category.destroy
+    head :ok
   end
 
   private
@@ -52,6 +53,13 @@ class Api::CategoriesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def api_category_params
-      params.require(:api_category).permit(:name, :allow_multiple_tags)
+      params.require(:category).permit(:name, :allow_multiple_tags)
+    end
+    
+    # Require params when creating
+    def create_params
+      category = params.require(:category)
+      category.require([:name, :allow_multiple_tags])
+      category.permit(:name, :allow_multiple_tags)
     end
 end
