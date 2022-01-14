@@ -1,25 +1,12 @@
 import React, { useState } from 'react';
 import { Button, Paper, Stack, TextField } from '@mui/material';
 
-const userSignup = async (client, email, password, passwordConfirmation) => {
-    try {
-        return await client.emailSignUp({
-            email,
-            password,
-            passwordConfirmation
-        });
-    } catch (e) {
-        console.error(e);
-    }
-};
-
-const Signup = ({ client }) => {
+const Signup = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [passwordConfirmation, setConfirmPassword] = useState('');
     const handleSubmission = async () => {
-        console.log('enter', client);
-        console.log(await userSignup(client, email, password, passwordConfirmation));
+        console.log('Signing up.');
     };
     const handleKeyPress = e => {
         if (e.key !== 'Enter') return;

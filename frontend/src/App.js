@@ -2,11 +2,11 @@ import React from 'react';
 import { Login, Home, Signup } from './routes';
 import { Routes, Route } from "react-router-dom";
 
-const App = ({ client }) => (
+const App = () => (
     <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="login" element={<Login client={client} />} />
-        <Route path="signup" element={<Signup client={client} />} />
+        <Route path="login" element={<Login />} />
+        <Route path="signup" element={<Signup />} />
     </Routes>
 );
 
