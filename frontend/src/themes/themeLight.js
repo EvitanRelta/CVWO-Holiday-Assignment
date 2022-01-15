@@ -1,15 +1,22 @@
 import { createTheme } from '@mui/material/styles';
-import { grey } from '@mui/material/colors';
-import addBaseTheme from './addBaseTheme';
+import { grey, blue, orange } from '@mui/material/colors';
+import themeBase from './themeBase';
+import addStyleOverrides from './addStyleOverrides';
+import Lodash from 'lodash';
 
-let themeLight = createTheme({
-    palette: {
-        primary: {
-            main: grey[400]
-        },
-        tonalOffset: 0.2
-    }
-});
+let themeLight = createTheme(
+    Lodash.merge(themeBase, {
+        palette: {
+            primary: {
+                main: orange[400]   //grey[400]
+            },
+            secondary: {
+                main: blue[600]
+            },
+            tonalOffset: 0.2
+        }
+    })
+);
 
 themeLight = createTheme(themeLight, {
     palette: {
@@ -20,6 +27,6 @@ themeLight = createTheme(themeLight, {
     },
 });
 
-themeLight = addBaseTheme(themeLight);
+themeLight = addStyleOverrides(themeLight);
 
 export default themeLight;

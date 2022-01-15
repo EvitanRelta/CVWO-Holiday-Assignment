@@ -1,4 +1,3 @@
-import { BorderColor } from '@mui/icons-material';
 import { createTheme, alpha } from '@mui/material/styles';
 
 const customTextFieldOpacities = {
@@ -15,16 +14,14 @@ const customTextFieldOpacities = {
     selectedOpacity: 0.08
 };
 
-let addBaseTheme = theme => {
-    const getContrastColor = alphaVal => alpha(theme.palette.primary.contrastText, alphaVal);
+let addStyleOverrides = theme => {
+    const _ = theme.palette;
+    const getContrastColor = alphaVal => alpha(
+        _.getContrastText(_.background.default),
+        alphaVal
+    );
 
     return createTheme(theme, {
-        typography: {
-            fontFamily: 'Verdana, sans-serif'
-        },
-        shape: {
-            borderRadius: 10
-        },
         components: {
             MuiTextField: {
                 styleOverrides: {
@@ -56,4 +53,4 @@ let addBaseTheme = theme => {
     })
 };
 
-export default addBaseTheme;
+export default addStyleOverrides;
