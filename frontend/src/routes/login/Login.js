@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { styled } from '@mui/material/styles';
 import { ThemeProvider } from '@mui/material/styles';
-import { themeLight, themeDark } from '../../themes';
+import { lightTheme, darkTheme } from '../../themes';
 import { Button, Paper, Stack, TextField, Typography, IconButton, CssBaseline, useMediaQuery, Link } from '@mui/material';
 import { DarkMode, Google } from '@mui/icons-material';
 
@@ -34,7 +34,7 @@ const Login = () => {
     const [isDarkMode, setIsDarkMode] = useState(hasSystemDarkMode);
 
     return (
-        <ThemeProvider theme={isDarkMode ? themeDark : themeLight}>
+        <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
             <CssBaseline />
             <StyledPaper variant='outlined'>
                 <Stack spacing={2}>

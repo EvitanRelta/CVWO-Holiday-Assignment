@@ -4,29 +4,29 @@ import themeBase from './themeBase';
 import addStyleOverrides from './addStyleOverrides';
 import Lodash from 'lodash';
 
-let themeLight = createTheme(
+let darkTheme = createTheme(
     Lodash.merge(themeBase, {
         palette: {
+            mode: 'dark',
             primary: {
-                main: orange[400]   //grey[400]
+                main: orange[600]   // '#4f4f4f'
             },
             secondary: {
-                main: blue[600]
+                main: blue[400]
             },
             tonalOffset: 0.2
         }
     })
 );
 
-themeLight = createTheme(themeLight, {
+darkTheme = createTheme(darkTheme, {
     palette: {
         background: {
-            default: grey[500],
-            paper: grey[50]
+            paper: '#2b2b2b'
         },
     },
 });
 
-themeLight = addStyleOverrides(themeLight);
+darkTheme = addStyleOverrides(darkTheme);
 
-export default themeLight;
+export default darkTheme;
