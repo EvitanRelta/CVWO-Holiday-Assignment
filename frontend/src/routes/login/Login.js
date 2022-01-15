@@ -2,17 +2,21 @@ import React, { useState } from 'react';
 import { styled } from '@mui/material/styles';
 import { ThemeProvider } from '@mui/material/styles';
 import { themeLight, themeDark } from '../../themes';
-import { Button, Paper, Stack, TextField, Typography, IconButton, CssBaseline, useMediaQuery } from '@mui/material';
-import { DarkMode } from '@mui/icons-material';
+import { Button, Paper, Stack, TextField, Typography, IconButton, CssBaseline, useMediaQuery, Link } from '@mui/material';
+import { DarkMode, Google } from '@mui/icons-material';
 
-const StyledPaper = styled(Paper)(({ theme }) => ({
+const StyledPaper = styled(Paper)({
     position: 'absolute',
     width: 400,
-    height: 390,
+    height: 450,
     left: 'calc(50% - 400px/2)',
     top: 'calc(50% - 400px/2 - 0.5px)',
     padding: 40
-}));
+});
+
+const FullWidthButton = styled(Button)({
+    width: '100%'
+});
 
 const StyledDarkModeIconButton = styled(IconButton)(({ theme }) => ({
     position: 'absolute',
@@ -33,8 +37,17 @@ const Login = () => {
         <ThemeProvider theme={isDarkMode ? themeDark : themeLight}>
             <CssBaseline />
             <StyledPaper variant='outlined'>
-                <Stack spacing={3}>
+                <Stack spacing={2}>
                     <Typography variant='h4'>Log in</Typography>
+                    <FullWidthButton
+                        variant='contained'
+                        onClick={handleSubmission}
+                        startIcon={<Google />}
+                        color='google'
+                    >
+                        Continue with Google
+                    </FullWidthButton>
+                    <Typography align='center'>or</Typography>
                     <TextField
                         color='primary'
                         autoFocus
@@ -53,13 +66,13 @@ const Login = () => {
                         onChange={e => setPassword(e.target.value)}
                         onKeyPress={handleKeyPress}
                     />
-                    <Button
+                    <FullWidthButton
                         variant='contained'
                         onClick={handleSubmission}
-                        sx={{ width:'100%' }}
                     >
                         Login
-                    </Button>
+                    </FullWidthButton>
+                    <Link color='secondary' href='/signup'>Create new account</Link>
                 </Stack>
                 <StyledDarkModeIconButton
                     onClick={e => setIsDarkMode(state => !state)}
