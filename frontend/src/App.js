@@ -1,5 +1,5 @@
 import React from 'react';
-import { Login, Home, Signup } from './routes';
+import { Login, Home, Signup } from './pages';
 import { Routes, Route } from "react-router-dom";
 
 const App = () => (
