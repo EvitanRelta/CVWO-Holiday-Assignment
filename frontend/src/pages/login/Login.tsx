@@ -4,7 +4,7 @@ import { ThemeProvider } from '@mui/material/styles';
 import { lightTheme, darkTheme } from '../../themes';
 import { Button, Paper, Stack, TextField, Typography, IconButton, CssBaseline, useMediaQuery, Link } from '@mui/material';
 import { DarkMode, Google } from '@mui/icons-material';
-import PwVisibilityIconAdornment from '../components/PwVisibilityIconAdornment';
+import { PwVisibilityIconAdornment } from '../components';
 
 
 interface LoginProps {}
