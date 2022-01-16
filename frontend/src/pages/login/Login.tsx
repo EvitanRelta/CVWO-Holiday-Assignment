@@ -4,7 +4,7 @@ import { ThemeProvider } from '@mui/material/styles';
 import { lightTheme, darkTheme } from '../../themes';
 import { Button, Paper, Stack, TextField, Typography, IconButton, CssBaseline, useMediaQuery, Link } from '@mui/material';
 import { DarkMode, Google } from '@mui/icons-material';
-import PasswordVisibilityIconAdornment from '../components/PasswordVisibilityIconAdornment';
+import PwVisibilityIconAdornment from '../components/PwVisibilityIconAdornment';
 
 
 interface LoginProps {}
@@ -72,7 +72,7 @@ const Login = ({}: LoginProps) => {
                         onChange={e => setPassword(e.target.value)}
                         onKeyPress={handleKeyPress}
                         InputProps={{
-                            endAdornment: <PasswordVisibilityIconAdornment
+                            endAdornment: <PwVisibilityIconAdornment
                                 isPasswordVisible={isPasswordVisible}
                                 onClick={() => setIsPasswordVisible(state => !state)}
                             />

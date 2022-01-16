@@ -3,12 +3,12 @@ import { IconButton, InputAdornment } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 
 
-interface PasswordVisibilityIconAdornmentProps {
+interface PwVisibilityIconAdornmentProps {
     isPasswordVisible: boolean;
     onClick: React.MouseEventHandler;
 }
 
-const PasswordVisibilityIconAdornment = ({ isPasswordVisible, onClick }: PasswordVisibilityIconAdornmentProps) => (
+const PwVisibilityIconAdornment = ({ isPasswordVisible, onClick }: PwVisibilityIconAdornmentProps) => (
     <InputAdornment position="end">
         <IconButton
             onClick={onClick}
@@ -19,4 +19,4 @@ const PasswordVisibilityIconAdornment = ({ isPasswordVisible, onClick }: Passwor
     </InputAdornment>
 );
 
-export default PasswordVisibilityIconAdornment;
+export default PwVisibilityIconAdornment;

@@ -4,7 +4,7 @@ import { ThemeProvider } from '@mui/material/styles';
 import { lightTheme, darkTheme } from '../../themes';
 import { Button, Paper, Stack, TextField, Typography, IconButton, CssBaseline, useMediaQuery, Link } from '@mui/material';
 import { DarkMode } from '@mui/icons-material';
-import PasswordVisibilityIconAdornment from '../components/PasswordVisibilityIconAdornment';
+import PwVisibilityIconAdornment from '../components/PwVisibilityIconAdornment';
 
 
 interface SignupProps {}
@@ -75,7 +75,7 @@ const Signup = ({}: SignupProps) => {
                         onChange={e => setPassword(e.target.value)}
                         onKeyPress={handleKeyPress}
                         InputProps={{
-                            endAdornment: <PasswordVisibilityIconAdornment
+                            endAdornment: <PwVisibilityIconAdornment
                                 isPasswordVisible={isPasswordVisible}
                                 onClick={() => setIsPasswordVisible(state => !state)}
                             />
@@ -91,7 +91,7 @@ const Signup = ({}: SignupProps) => {
                         onChange={e => setConfirmPassword(e.target.value)}
                         onKeyPress={handleKeyPress}
                         InputProps={{
-                            endAdornment: <PasswordVisibilityIconAdornment
+                            endAdornment: <PwVisibilityIconAdornment
                                 isPasswordVisible={isConfirmPwVisible}
                                 onClick={() => setIsConfirmPwVisible(state => !state)}
                             />
