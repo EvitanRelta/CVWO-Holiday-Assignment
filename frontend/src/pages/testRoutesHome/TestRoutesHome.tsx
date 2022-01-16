@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 interface HomeProps {}
 
-const Home = ({}: HomeProps) => (
+const TestRoutesHome = ({}: HomeProps) => (
     <>
     <h1>Home page</h1>
     <Link to='/login'>Login</Link>
@@ -13,4 +13,4 @@ const Home = ({}: HomeProps) => (
     </>
 );
 
-export default Home;
+export default TestRoutesHome;

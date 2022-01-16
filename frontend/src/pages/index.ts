@@ -1,5 +1,5 @@
 import Login from './login/Login';
-import Home from './home/Home'
+import TestRoutesHome from './testRoutesHome/TestRoutesHome'
 import Signup from './signup/Signup'
 
-export { Login, Home, Signup };
+export { Login, TestRoutesHome, Signup };
