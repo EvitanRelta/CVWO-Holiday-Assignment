@@ -84,7 +84,7 @@ const Login = ({}: LoginProps) => {
                     >
                         Login
                     </FullWidthButton>
-                    <Link color='secondary' href='/signup'>Create new account</Link>
+                    <Link color='hyperlink.main' href='/signup'>Create new account</Link>
                 </Stack>
                 <StyledDarkModeIconButton
                     onClick={() => setIsDarkMode(state => !state)}

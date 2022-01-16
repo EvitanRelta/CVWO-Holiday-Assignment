@@ -11,7 +11,7 @@ let darkTheme = createTheme(
             primary: {
                 main: orange[600]   // '#4f4f4f'
             },
-            secondary: {
+            hyperlink: {
                 main: blue[400]
             },
             tonalOffset: 0.2

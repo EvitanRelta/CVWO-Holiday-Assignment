@@ -10,7 +10,7 @@ let lightTheme = createTheme(
             primary: {
                 main: orange[400]   //grey[400]
             },
-            secondary: {
+            hyperlink: {
                 main: blue[600]
             },
             tonalOffset: 0.2

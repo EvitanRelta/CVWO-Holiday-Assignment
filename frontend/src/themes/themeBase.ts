@@ -3,9 +3,11 @@ import { ThemeOptions } from "@mui/material";
 declare module '@mui/material/styles' {
     interface Palette {
         google: Palette['primary'];
+        hyperlink: Palette['primary'];
     }
     interface PaletteOptions {
         google: PaletteOptions['primary'];
+        hyperlink: PaletteOptions['primary'];
     }
 }
 declare module '@mui/material/Button' {
@@ -20,6 +22,7 @@ const themeBase: ThemeOptions = {
             main: '#1a73e8',
             contrastText: 'white'
         },
+        hyperlink: {},
         tonalOffset: 0.2
     },
     typography: {
