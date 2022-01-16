@@ -4,6 +4,7 @@ import { ThemeProvider } from '@mui/material/styles';
 import { lightTheme, darkTheme } from '../../themes';
 import { Button, Paper, Stack, TextField, Typography, IconButton, CssBaseline, useMediaQuery, Link } from '@mui/material';
 import { DarkMode, Google } from '@mui/icons-material';
+import PasswordVisibilityIconAdornment from '../components/PasswordVisibilityIconAdornment';
 
 const StyledPaper = styled(Paper)({
     position: 'absolute',
@@ -29,6 +30,7 @@ const StyledDarkModeIconButton = styled(IconButton)(({ theme }) => ({
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
     const hasSystemDarkMode = useMediaQuery('(prefers-color-scheme: dark)', { noSsr: true });
     const [isDarkMode, setIsDarkMode] = useState(hasSystemDarkMode);
@@ -62,9 +64,16 @@ const Login = () => {
                         variant='outlined'
                         id='password'
                         label='Password'
+                        type={isPasswordVisible ? 'text' : 'password'}
                         value={password}
                         onChange={e => setPassword(e.target.value)}
                         onKeyPress={handleKeyPress}
+                        InputProps={{
+                            endAdornment: <PasswordVisibilityIconAdornment
+                                isPasswordVisible={isPasswordVisible}
+                                onClick={_ => setIsPasswordVisible(state => !state)}
+                            />
+                        }}
                     />
                     <FullWidthButton
                         variant='contained'
