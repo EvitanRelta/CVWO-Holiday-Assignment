@@ -1,5 +1,5 @@
 import { createTheme } from '@mui/material/styles';
-import { grey, blue, orange } from '@mui/material/colors';
+import { blue, orange } from '@mui/material/colors';
 import themeBase from './themeBase';
 import addStyleOverrides from './addStyleOverrides';
 import Lodash from 'lodash';
