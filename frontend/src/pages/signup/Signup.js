@@ -1,27 +1,62 @@
 import React, { useState } from 'react';
-import { Button, Paper, Stack, TextField } from '@mui/material';
+import { styled } from '@mui/material/styles';
+import { ThemeProvider } from '@mui/material/styles';
+import { lightTheme, darkTheme } from '../../themes';
+import { Button, Paper, Stack, TextField, Typography, IconButton, CssBaseline, useMediaQuery, Link } from '@mui/material';
+import { DarkMode } from '@mui/icons-material';
+import PasswordVisibilityIconAdornment from '../components/PasswordVisibilityIconAdornment';
+
+const StyledPaper = styled(Paper)({
+    position: 'absolute',
+    width: 400,
+    height: 500,
+    left: 'calc(50% - 400px/2)',
+    top: 'calc(50% - 400px/2 - 0.5px)',
+    padding: 40
+});
+
+const FullWidthButton = styled(Button)({
+    width: '100%'
+});
+
+const StyledDarkModeIconButton = styled(IconButton)(({ theme }) => ({
+    position: 'absolute',
+    width: 45,
+    height: 45,
+    right: 20,
+    bottom: 20
+}));
 
 const Signup = () => {
+    const [nickname, setNickname] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [passwordConfirmation, setConfirmPassword] = useState('');
-    const handleSubmission = async () => {
-        console.log('Signing up.');
-    };
-    const handleKeyPress = e => {
-        if (e.key !== 'Enter') return;
-        handleSubmission()
-    };
+    const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+    const [isConfirmPwVisible, setIsConfirmPwVisible] = useState(false);
+
+    const hasSystemDarkMode = useMediaQuery('(prefers-color-scheme: dark)', { noSsr: true });
+    const [isDarkMode, setIsDarkMode] = useState(hasSystemDarkMode);
+
     return (
-        <>
-            <Paper 
-                variant='outlined'
-                sx={{ width:400, padding:5 }}
-            >
-                <h2>Sign Up page</h2>
-                <Stack>
+        <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
+            <CssBaseline />
+            <StyledPaper variant='outlined'>
+                <Stack spacing={2}>
+                    <Typography variant='h4'>Sign up</Typography>
                     <TextField
+                        color='primary'
                         autoFocus
+                        variant='outlined'
+                        id='nickname'
+                        label='Nickname'
+                        value={nickname}
+                        onChange={e => setNickname(e.target.value)}
+                        onKeyPress={handleKeyPress}
+                    />
+                    <TextField
+                        color='primary'
+                        variant='outlined'
                         id='email'
                         label='Email'
                         value={email}
@@ -29,29 +64,61 @@ const Signup = () => {
                         onKeyPress={handleKeyPress}
                     />
                     <TextField
+                        variant='outlined'
                         id='password'
                         label='Password'
+                        type={isPasswordVisible ? 'text' : 'password'}
                         value={password}
                         onChange={e => setPassword(e.target.value)}
                         onKeyPress={handleKeyPress}
+                        InputProps={{
+                            endAdornment: <PasswordVisibilityIconAdornment
+                                isPasswordVisible={isPasswordVisible}
+                                onClick={_ => setIsPasswordVisible(state => !state)}
+                            />
+                        }}
                     />
                     <TextField
-                        id='comfirm-password'
+                        required
+                        variant='outlined'
+                        id='password-confirmation'
                         label='Confirm Password'
+                        type={isConfirmPwVisible ? 'text' : 'password'}
                         value={passwordConfirmation}
                         onChange={e => setConfirmPassword(e.target.value)}
                         onKeyPress={handleKeyPress}
+                        InputProps={{
+                            endAdornment: <PasswordVisibilityIconAdornment
+                                isPasswordVisible={isConfirmPwVisible}
+                                onClick={_ => setIsConfirmPwVisible(state => !state)}
+                            />
+                        }}
                     />
-                    <Button
+                    <FullWidthButton
                         variant='contained'
                         onClick={handleSubmission}
                     >
-                        Login
-                    </Button>
+                        Sign up
+                    </FullWidthButton>
+                    <Link color='secondary' href='/login'>Login to existing account</Link>
                 </Stack>
-            </Paper>
-        </>
+                <StyledDarkModeIconButton
+                    onClick={e => setIsDarkMode(state => !state)}
+                >
+                    <DarkMode />
+                </StyledDarkModeIconButton>
+            </StyledPaper>
+        </ThemeProvider>
     );
+};
+
+const handleSubmission = async () => {
+    console.log('Logging in.');
+
+};
+const handleKeyPress = e => {
+    if (e.key !== 'Enter') return;
+    handleSubmission()
 };
 
 export default Signup;
