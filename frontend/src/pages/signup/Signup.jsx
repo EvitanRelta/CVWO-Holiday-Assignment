@@ -19,13 +19,13 @@ const FullWidthButton = styled(Button)({
     width: '100%'
 });
 
-const StyledDarkModeIconButton = styled(IconButton)(({ theme }) => ({
+const StyledDarkModeIconButton = styled(IconButton)({
     position: 'absolute',
     width: 45,
     height: 45,
     right: 20,
     bottom: 20
-}));
+});
 
 const Signup = () => {
     const [nickname, setNickname] = useState('');
