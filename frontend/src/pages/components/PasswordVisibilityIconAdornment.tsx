@@ -1,7 +1,14 @@
+import React from 'react';
 import { IconButton, InputAdornment } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 
-const PasswordVisibilityIconAdornment = ({ isPasswordVisible, onClick }) => (
+
+interface PasswordVisibilityIconAdornmentProps {
+    isPasswordVisible: boolean;
+    onClick: React.MouseEventHandler;
+}
+
+const PasswordVisibilityIconAdornment = ({ isPasswordVisible, onClick }: PasswordVisibilityIconAdornmentProps) => (
     <InputAdornment position="end">
         <IconButton
             onClick={onClick}

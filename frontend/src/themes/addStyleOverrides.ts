@@ -1,4 +1,5 @@
 import { createTheme, alpha } from '@mui/material/styles';
+import { Theme } from "@mui/material";
 
 const customTextFieldOpacities = {
     // Custom opacity types
@@ -14,9 +15,9 @@ const customTextFieldOpacities = {
     selectedOpacity: 0.08
 };
 
-let addStyleOverrides = theme => {
+let addStyleOverrides = (theme: Theme) => {
     const _ = theme.palette;
-    const getContrastColor = alphaVal => alpha(
+    const getContrastColor = (alphaVal: number) => alpha(
         _.getContrastText(_.background.default),
         alphaVal
     );
