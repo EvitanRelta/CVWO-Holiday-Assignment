@@ -39,6 +39,16 @@ const Login = ({}: LoginProps) => {
     const hasSystemDarkMode = useMediaQuery('(prefers-color-scheme: dark)', { noSsr: true });
     const [isDarkMode, setIsDarkMode] = useState(hasSystemDarkMode);
 
+
+    const handleSubmission = async () => {
+        navigate('/home');
+    };
+    const handleKeyPress = (e: React.KeyboardEvent) => {
+        if (e.key !== 'Enter') return;
+        handleSubmission();
+    };
+
+
     return (
         <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
             <CssBaseline />
@@ -95,15 +105,6 @@ const Login = ({}: LoginProps) => {
             </StyledPaper>
         </ThemeProvider>
     );
-};
-
-const handleSubmission = async () => {
-    console.log('Logging in.');
-
-};
-const handleKeyPress = (e: React.KeyboardEvent) => {
-    if (e.key !== 'Enter') return;
-    handleSubmission()
 };
 
 export default Login;

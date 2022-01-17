@@ -10,6 +10,8 @@ const TestRoutesHome = ({}: HomeProps) => (
     <Link to='/login'>Login</Link>
     <br />
     <Link to='/signup'>Sign Up</Link>
+    <br />
+    <Link to='/home'>Home</Link>
     </>
 );
 
