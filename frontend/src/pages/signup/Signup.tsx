@@ -6,6 +6,9 @@ import { Button, Paper, Stack, TextField, Typography, IconButton, CssBaseline, u
 import { DarkMode } from '@mui/icons-material';
 import { PwVisibilityIconAdornment } from '../components';
 import { Link as RouterLink } from 'react-router-dom';
+import { RootState } from '../../store/reducers';
+import { useDispatch, useSelector } from 'react-redux';
+import { toggleDarkMode } from '../../store/actionsCreators';
 
 interface SignupProps {}
 
@@ -37,9 +40,8 @@ const Signup = ({}: SignupProps) => {
     const [passwordConfirmation, setConfirmPassword] = useState('');
     const [isPasswordVisible, setIsPasswordVisible] = useState(false);
     const [isConfirmPwVisible, setIsConfirmPwVisible] = useState(false);
-
-    const hasSystemDarkMode = useMediaQuery('(prefers-color-scheme: dark)', { noSsr: true });
-    const [isDarkMode, setIsDarkMode] = useState(hasSystemDarkMode);
+    const isDarkMode = useSelector((state: RootState) => state.isDarkMode);
+    const dispatch = useDispatch();
 
     return (
         <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
@@ -106,7 +108,7 @@ const Signup = ({}: SignupProps) => {
                     <Link color='hyperlink.main' to='/login' component={RouterLink}>Login to existing account</Link>
                 </Stack>
                 <StyledDarkModeIconButton
-                    onClick={() => setIsDarkMode(state => !state)}
+                    onClick={() => dispatch(toggleDarkMode())}
                 >
                     <DarkMode />
                 </StyledDarkModeIconButton>

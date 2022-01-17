@@ -6,6 +6,9 @@ import { Button, Paper, Stack, TextField, Typography, IconButton, CssBaseline, u
 import { DarkMode, Google } from '@mui/icons-material';
 import { PwVisibilityIconAdornment } from '../components';
 import { useNavigate, Link as RouterLink } from 'react-router-dom';
+import { RootState } from '../../store/reducers';
+import { useDispatch, useSelector } from 'react-redux';
+import { toggleDarkMode } from '../../store/actionsCreators';
 
 interface LoginProps {}
 
@@ -35,10 +38,8 @@ const Login = ({}: LoginProps) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [isPasswordVisible, setIsPasswordVisible] = useState(false);
-
-    const hasSystemDarkMode = useMediaQuery('(prefers-color-scheme: dark)', { noSsr: true });
-    const [isDarkMode, setIsDarkMode] = useState(hasSystemDarkMode);
-
+    const isDarkMode = useSelector((state: RootState) => state.isDarkMode);
+    const dispatch = useDispatch();
 
     const handleSubmission = async () => {
         navigate('/home');
@@ -98,7 +99,7 @@ const Login = ({}: LoginProps) => {
                     <Link color='hyperlink.main' to='/signup' component={RouterLink}>Create new account</Link>
                 </Stack>
                 <StyledDarkModeIconButton
-                    onClick={() => setIsDarkMode(state => !state)}
+                    onClick={() => dispatch(toggleDarkMode())}
                 >
                     <DarkMode />
                 </StyledDarkModeIconButton>
