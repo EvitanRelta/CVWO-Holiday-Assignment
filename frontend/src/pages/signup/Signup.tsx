@@ -5,7 +5,7 @@ import { lightTheme, darkTheme } from '../../themes';
 import { Button, Paper, Stack, TextField, Typography, IconButton, CssBaseline, useMediaQuery, Link } from '@mui/material';
 import { DarkMode } from '@mui/icons-material';
 import { PwVisibilityIconAdornment } from '../components';
-import { useNavigate } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
 
 interface SignupProps {}
 
@@ -31,7 +31,6 @@ const StyledDarkModeIconButton = styled(IconButton)({
 });
 
 const Signup = ({}: SignupProps) => {
-    const navigate = useNavigate();
     const [nickname, setNickname] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -104,7 +103,7 @@ const Signup = ({}: SignupProps) => {
                     >
                         Sign up
                     </FullWidthButton>
-                    <Link color='hyperlink.main' href='#' onClick={() => navigate('/login')}>Login to existing account</Link>
+                    <Link color='hyperlink.main' to='/login' component={RouterLink}>Login to existing account</Link>
                 </Stack>
                 <StyledDarkModeIconButton
                     onClick={() => setIsDarkMode(state => !state)}

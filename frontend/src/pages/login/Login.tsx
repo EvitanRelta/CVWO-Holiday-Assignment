@@ -5,7 +5,7 @@ import { lightTheme, darkTheme } from '../../themes';
 import { Button, Paper, Stack, TextField, Typography, IconButton, CssBaseline, useMediaQuery, Link } from '@mui/material';
 import { DarkMode, Google } from '@mui/icons-material';
 import { PwVisibilityIconAdornment } from '../components';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link as RouterLink } from 'react-router-dom';
 
 interface LoginProps {}
 
@@ -95,7 +95,7 @@ const Login = ({}: LoginProps) => {
                     >
                         Login
                     </FullWidthButton>
-                    <Link color='hyperlink.main' href='#' onClick={() => navigate('/signup')}>Create new account</Link>
+                    <Link color='hyperlink.main' to='/signup' component={RouterLink}>Create new account</Link>
                 </Stack>
                 <StyledDarkModeIconButton
                     onClick={() => setIsDarkMode(state => !state)}
