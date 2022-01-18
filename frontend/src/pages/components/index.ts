@@ -1,3 +1,4 @@
 import PwVisibilityIconAdornment from "./PwVisibilityIconAdornment";
+import ResponsiveAppBar from './ResponsiveAppBar'
 
-export { PwVisibilityIconAdornment }
+export { PwVisibilityIconAdornment, ResponsiveAppBar }

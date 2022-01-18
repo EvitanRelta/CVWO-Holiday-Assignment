@@ -1,17 +1,37 @@
 import React, { useState } from 'react';
+import { styled } from '@mui/material/styles';
 import { ThemeProvider } from '@mui/material/styles';
 import { lightTheme, darkTheme } from '../../themes';
-import { useMediaQuery } from '@mui/material';
+
+import { AppBar, Toolbar, Box, Button, Paper, Stack, TextField, Typography, IconButton, CssBaseline, useMediaQuery, Link } from '@mui/material';
+import { Menu as MenuIcon, AccountCircle } from '@mui/icons-material';
+import MenuItem from '@mui/material/MenuItem';
+import Menu from '@mui/material/Menu';
+import { DarkMode, Google } from '@mui/icons-material';
+
+import { ResponsiveAppBar } from '../components';
+import {  } from '../components'
+
+import { RootState } from '../../store/reducers';
+import { useDispatch, useSelector } from 'react-redux';
+import { toggleDarkMode } from '../../store/actionsCreators';
 
 interface HomeProps {}
 
 const Home = ({}: HomeProps) => {
-    const hasSystemDarkMode = useMediaQuery('(prefers-color-scheme: dark)', { noSsr: true });
-    const [isDarkMode, setIsDarkMode] = useState(hasSystemDarkMode);
+    const isDarkMode = useSelector((state: RootState) => state.isDarkMode);
+    const dispatch = useDispatch();
 
 
     return (
         <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
+            <CssBaseline />
+            <ResponsiveAppBar />
+            <IconButton
+                onClick={() => dispatch(toggleDarkMode())}
+            >
+                <DarkMode />
+            </IconButton>
         </ThemeProvider>
     );
 };
