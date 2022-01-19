@@ -1,5 +1,5 @@
 import { Action, Reducer } from 'redux';
-import { SetDarkModeAction } from '../actionsCreators/setDarkMode';
+import { SetDarkModeAction } from './actionCreators/setDarkMode';
 
 // Defaults to Light-Mode if fail to get preference.
 const systemPrefersDarkMode = (
@@ -7,7 +7,7 @@ const systemPrefersDarkMode = (
         && window.matchMedia('(prefers-color-scheme: dark)').matches
 ) || false;
 
-const isDarkMode: Reducer<boolean, SetDarkModeAction | Action<'isDarkMode/toggle'>> = (state = systemPrefersDarkMode, action) => {
+const isDarkModeReducer: Reducer<boolean, SetDarkModeAction | Action<'isDarkMode/toggle'>> = (state = systemPrefersDarkMode, action) => {
     switch (action.type) {
         case 'isDarkMode/set':
             return action.payload;
@@ -18,4 +18,4 @@ const isDarkMode: Reducer<boolean, SetDarkModeAction | Action<'isDarkMode/toggle
     }
 };
 
-export default isDarkMode;
+export default isDarkModeReducer;

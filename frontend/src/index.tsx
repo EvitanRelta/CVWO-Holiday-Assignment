@@ -4,7 +4,7 @@ import App from './App';
 import { BrowserRouter } from "react-router-dom";
 import { createStore } from 'redux'; 
 import { Provider } from 'react-redux';
-import combinedReducer from './store/reducers';
+import combinedReducer from './store/combinedReducer';
 
 const store = createStore(
     combinedReducer,
