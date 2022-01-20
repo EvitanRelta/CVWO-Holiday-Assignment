@@ -22,7 +22,8 @@ let darkTheme = createTheme(
 darkTheme = createTheme(darkTheme, {
     palette: {
         background: {
-            paper: '#2b2b2b'
+            paper: '#2b2b2b',
+            nestedSideBarItem: '#141414',
         },
     },
 });

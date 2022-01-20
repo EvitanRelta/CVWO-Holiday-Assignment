@@ -22,7 +22,8 @@ lightTheme = createTheme(lightTheme, {
     palette: {
         background: {
             default: grey[500],
-            paper: grey[50]
+            paper: grey[50],
+            nestedSideBarItem: grey[300],
         },
     },
 });
