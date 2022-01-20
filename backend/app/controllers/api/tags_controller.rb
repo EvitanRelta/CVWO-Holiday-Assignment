@@ -1,6 +1,6 @@
 class Api::TagsController < ApplicationController
-  before_action :set_api_tag, only: [:show, :update, :destroy]
   before_action :authenticate_user!
+  before_action :set_api_tag, only: [:show, :update, :destroy]
 
   # GET /api/tags/1
   def show

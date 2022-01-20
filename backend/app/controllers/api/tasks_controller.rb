@@ -1,6 +1,6 @@
 class Api::TasksController < ApplicationController
-  before_action :set_api_task, only: [:show, :update, :destroy]
   before_action :authenticate_user!
+  before_action :set_api_task, only: [:show, :update, :destroy]
 
   # GET /api/tasks
   def index

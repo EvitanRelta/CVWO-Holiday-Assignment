@@ -1,6 +1,6 @@
 class Api::TaskTagsController < ApplicationController
-    before_action :set_api_task, only: [:create, :destroy]
     before_action :authenticate_user!
+    before_action :set_api_task, only: [:create, :destroy]
 
     # POST /api/:task/tags
     def create
