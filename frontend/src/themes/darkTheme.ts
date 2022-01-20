@@ -5,7 +5,7 @@ import addStyleOverrides from './addStyleOverrides';
 import Lodash from 'lodash';
 
 let darkTheme = createTheme(
-    Lodash.merge(themeBase, {
+    Lodash.merge({}, themeBase, {
         palette: {
             mode: 'dark',
             primary: {
