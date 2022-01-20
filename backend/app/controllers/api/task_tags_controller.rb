@@ -42,7 +42,7 @@ class Api::TaskTagsController < ApplicationController
           @tag = tag
           @task = task
         else
-          head :unauthorized
+          head :forbidden
         end
       end
   end

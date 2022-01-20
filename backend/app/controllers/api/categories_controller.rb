@@ -50,7 +50,7 @@ class Api::CategoriesController < ApplicationController
       if current_user.categories.exists?(id: params[:id])
         @api_category = current_user.categories.find(params[:id])
       else
-        head :unauthorized
+        head :forbidden
       end
     end
 

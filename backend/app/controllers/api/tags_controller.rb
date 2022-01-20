@@ -13,7 +13,7 @@ class Api::TagsController < ApplicationController
     @api_tag = @category.tags.new(create_params) if @category
     
     if not @category
-      head :unauthorized
+      head :forbidden
     elsif @api_tag.save
       render json: @api_tag, status: :created, location: @api_tag
     else
@@ -47,7 +47,7 @@ class Api::TagsController < ApplicationController
       if tag and current_user.categories.exists?(id: tag.category_id)
         @api_tag = tag
       else
-        head :unauthorized 
+        head :forbidden
       end
     end
 

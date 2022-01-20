@@ -50,7 +50,7 @@ class Api::TasksController < ApplicationController
       if current_user.tasks.exists?(id: params[:id])
         @api_task = current_user.tasks.find(params[:id])
       else
-        head :unauthorized
+        head :forbidden
       end
     end
 
