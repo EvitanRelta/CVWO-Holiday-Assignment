@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from './store/rootReducer';
 import { darkTheme, lightTheme } from './themes';
 import tryLoginFromCookies from './store/user/thunkActionCreators/tryLoginFromCookies';
-import Center from './pages/components/Center';
+import { Center } from './pages/components';
 
 interface AppProps {}
 

@@ -2,11 +2,10 @@ import React, { useState } from 'react';
 import { styled } from '@mui/material/styles';
 import { Button, Stack, TextField, Typography, IconButton, Link, Box } from '@mui/material';
 import { DarkMode } from '@mui/icons-material';
-import { PwVisibilityIconAdornment } from '../components';
+import { PwVisibilityIconAdornment, LoginSignupContainer } from '../components';
 import { Link as RouterLink } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { toggleDarkMode } from '../../store/isDarkMode/actionCreators';
-import LoginSignupContainer from '../components/LoginSignupContainer';
 
 
 interface SignupProps {}
