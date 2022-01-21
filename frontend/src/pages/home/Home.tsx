@@ -25,7 +25,7 @@ const Home = ({}: HomeProps) => {
 
 
     return !userState.user
-    ? <Navigate to={'../login'} />
+    ? <Navigate to={'../login'} replace />
     : (
         <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
             <CssBaseline />

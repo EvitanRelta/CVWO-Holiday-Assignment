@@ -53,7 +53,7 @@ const Login = ({}: LoginProps) => {
 
 
     return userState.user
-    ? <Navigate to={'../home'} />
+    ? <Navigate to={'../home'} replace />
     : (
         <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
             <CssBaseline />
