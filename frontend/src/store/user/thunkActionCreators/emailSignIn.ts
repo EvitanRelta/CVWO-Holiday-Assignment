@@ -15,6 +15,6 @@ export default (email: string, password: string) => async (dispatch: Dispatch<Us
             dispatch({
                 type: USER_EMAIL_LOGIN_FAIL,
                 payload: err.message
-            })
+            });
     }
 };

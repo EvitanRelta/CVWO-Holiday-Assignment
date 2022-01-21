@@ -21,7 +21,7 @@ export type UserEmailLoginFail = {
 };
 
 export type UserSignedOut = {
-    type: typeof USER_SIGNED_OUT
-}
+    type: typeof USER_SIGNED_OUT;
+};
 
 export type UserDispatchTypes = UserLoading | UserEmailLoginSuccess | UserEmailLoginFail | UserSignedOut;
