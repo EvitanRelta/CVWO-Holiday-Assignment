@@ -1,5 +1,5 @@
 import { User } from '../../apiClient/types';
-import { UserDispatchTypes, USER_EMAIL_LOGIN_FAIL, USER_EMAIL_LOGIN_SUCCESS, USER_LOADING, USER_SIGNED_OUT } from './actionTypes';
+import { UserDispatchTypes, USER_EMAIL_LOGIN_FAIL, USER_LOGIN_SUCCESS, USER_LOADING, USER_SIGNED_OUT } from './actionTypes';
 
 type UserState = {
     user?: User;
@@ -22,7 +22,7 @@ const userReducer = (state: UserState = initialState, action: UserDispatchTypes)
                 isLoading: false,
                 errorMessage: action.payload
             };
-        case USER_EMAIL_LOGIN_SUCCESS:
+        case USER_LOGIN_SUCCESS:
             return {
                 isLoading: false,
                 user: action.payload
