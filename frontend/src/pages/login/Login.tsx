@@ -8,25 +8,13 @@ import { RootState } from '../../store/rootReducer';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleDarkMode } from '../../store/isDarkMode/actionCreators';
 import emailSignIn from '../../store/user/thunkActionCreators/emailSignIn';
+import LoginSignupContainer from '../components/LoginSignupContainer';
+
 
 interface LoginProps {}
 
-const StyledPaper = styled(Paper)({
-    position: 'absolute',
-    width: 400,
-    left: 'calc(50% - 400px/2)',
-    top: 'calc(50% - 400px/2 - 0.5px)',
-    padding: 40
-});
-
 const FullWidthButton = styled(Button)({
     width: '100%'
-});
-
-const StyledDarkModeIconButton = styled(IconButton)({
-    position: 'absolute',
-    right: 20,
-    bottom: 20
 });
 
 const Login = ({}: LoginProps) => {
@@ -49,68 +37,71 @@ const Login = ({}: LoginProps) => {
     return userState.user
     ? <Navigate to={'../home'} replace />
     : (
-        <StyledPaper variant='outlined'>
-            <Stack spacing={2}>
-                <Typography variant='h4'>Log in</Typography>
-                <FullWidthButton
-                    disabled={userState.isLoading}
-                    variant='contained'
-                    onClick={handleSubmission}
-                    startIcon={<Google />}
-                    color='google'
-                >
-                    Continue with Google
-                </FullWidthButton>
-                <Typography align='center'>or</Typography>
-                <TextField
-                    disabled={userState.isLoading}
-                    color='primary'
-                    autoFocus
-                    variant='outlined'
-                    id='email'
-                    label='Email'
-                    value={email}
-                    onChange={e => setEmail(e.target.value)}
-                    onKeyPress={handleKeyPress}
-                />
-                <TextField
-                    disabled={userState.isLoading}
-                    variant='outlined'
-                    id='password'
-                    label='Password'
-                    type={isPasswordVisible ? 'text' : 'password'}
-                    value={password}
-                    onChange={e => setPassword(e.target.value)}
-                    onKeyPress={handleKeyPress}
-                    InputProps={{
-                        endAdornment: <PwVisibilityIconAdornment
-                            isPasswordVisible={isPasswordVisible}
-                            onClick={() => setIsPasswordVisible(state => !state)}
-                        />
-                    }}
-                />
-                {userState.errorMessage
-                    ? <Alert severity="error">{userState.errorMessage}</Alert>
-                    : <Box />
-                }
-                <FullWidthButton
-                    disabled={userState.isLoading}
-                    variant='contained'
-                    onClick={handleSubmission}
-                >
-                    Login
-                </FullWidthButton>
-                {userState.isLoading
-                    ? <Typography color='hyperlink.disabled' sx={{textDecoration: 'underline'}}>Create new account</Typography>
-                    : <Link color='hyperlink.main' to='/signup' component={RouterLink}>Create new account</Link>
-                }
-            </Stack>
-            <StyledDarkModeIconButton
-                onClick={() => dispatch(toggleDarkMode())}
-            >
-                <DarkMode />
-            </StyledDarkModeIconButton>
-        </StyledPaper>
+        <LoginSignupContainer>
+                <Stack spacing={2}>
+                    <Typography variant='h4'>Log in</Typography>
+                    <FullWidthButton
+                        disabled={userState.isLoading}
+                        variant='contained'
+                        onClick={handleSubmission}
+                        startIcon={<Google />}
+                        color='google'
+                    >
+                        Continue with Google
+                    </FullWidthButton>
+                    <Typography align='center'>or</Typography>
+                    <TextField
+                        disabled={userState.isLoading}
+                        color='primary'
+                        autoFocus
+                        variant='outlined'
+                        id='email'
+                        label='Email'
+                        value={email}
+                        onChange={e => setEmail(e.target.value)}
+                        onKeyPress={handleKeyPress}
+                    />
+                    <TextField
+                        disabled={userState.isLoading}
+                        variant='outlined'
+                        id='password'
+                        label='Password'
+                        type={isPasswordVisible ? 'text' : 'password'}
+                        value={password}
+                        onChange={e => setPassword(e.target.value)}
+                        onKeyPress={handleKeyPress}
+                        InputProps={{
+                            endAdornment: <PwVisibilityIconAdornment
+                                isPasswordVisible={isPasswordVisible}
+                                onClick={() => setIsPasswordVisible(state => !state)}
+                            />
+                        }}
+                    />
+                    {userState.errorMessage
+                        ? <Alert severity="error">{userState.errorMessage}</Alert>
+                        : null
+                    }
+                    <FullWidthButton
+                        disabled={userState.isLoading}
+                        variant='contained'
+                        onClick={handleSubmission}
+                    >
+                        Login
+                    </FullWidthButton>
+                    <Box>
+                    {userState.isLoading
+                        ? <Typography color='hyperlink.disabled' sx={{textDecoration: 'underline'}}>Create new account</Typography>
+                        : <Link color='hyperlink.main' to='/signup' component={RouterLink}>Create new account</Link>
+                    }
+                    <IconButton
+                        onClick={() => dispatch(toggleDarkMode())}
+                        sx={{ float: 'right' }}
+                    >
+                        <DarkMode />
+                    </IconButton>
+                    </Box>
+                </Stack>
+        </LoginSignupContainer>
     );
 };
 

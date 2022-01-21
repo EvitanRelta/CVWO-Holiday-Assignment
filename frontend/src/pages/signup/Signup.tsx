@@ -1,30 +1,18 @@
 import React, { useState } from 'react';
 import { styled } from '@mui/material/styles';
-import { Button, Paper, Stack, TextField, Typography, IconButton, Link } from '@mui/material';
+import { Button, Stack, TextField, Typography, IconButton, Link, Box } from '@mui/material';
 import { DarkMode } from '@mui/icons-material';
 import { PwVisibilityIconAdornment } from '../components';
 import { Link as RouterLink } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { toggleDarkMode } from '../../store/isDarkMode/actionCreators';
+import LoginSignupContainer from '../components/LoginSignupContainer';
+
 
 interface SignupProps {}
 
-const StyledPaper = styled(Paper)({
-    position: 'absolute',
-    width: 400,
-    left: 'calc(50% - 400px/2)',
-    top: 'calc(50% - 400px/2 - 0.5px)',
-    padding: 40
-});
-
 const FullWidthButton = styled(Button)({
     width: '100%'
-});
-
-const StyledDarkModeIconButton = styled(IconButton)({
-    position: 'absolute',
-    right: 20,
-    bottom: 20
 });
 
 const Signup = ({}: SignupProps) => {
@@ -37,7 +25,7 @@ const Signup = ({}: SignupProps) => {
     const dispatch = useDispatch();
 
     return (
-        <StyledPaper variant='outlined'>
+        <LoginSignupContainer>
             <Stack spacing={2}>
                 <Typography variant='h4'>Sign up</Typography>
                 <TextField
@@ -96,14 +84,17 @@ const Signup = ({}: SignupProps) => {
                 >
                     Sign up
                 </FullWidthButton>
-                <Link color='hyperlink.main' to='/login' component={RouterLink}>Login to existing account</Link>
+                <Box>
+                    <Link color='hyperlink.main' to='/login' component={RouterLink}>Login to existing account</Link>
+                    <IconButton
+                        onClick={() => dispatch(toggleDarkMode())}
+                        sx={{ float: 'right' }}
+                    >
+                        <DarkMode />
+                    </IconButton>
+                </Box>
             </Stack>
-            <StyledDarkModeIconButton
-                onClick={() => dispatch(toggleDarkMode())}
-            >
-                <DarkMode />
-            </StyledDarkModeIconButton>
-        </StyledPaper>
+        </LoginSignupContainer>
     );
 };
 
