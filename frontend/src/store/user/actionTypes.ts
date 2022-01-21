@@ -5,6 +5,7 @@ export const USER_LOADING = 'user/loading';
 export const USER_LOGIN_SUCCESS = 'user/emailLoginSuccess';
 export const USER_EMAIL_LOGIN_FAIL = 'user/emailLoginFail';
 export const USER_SIGNED_OUT = 'user/signOut';
+export const USER_LOGGING_IN_FROM_COOKIES = 'user/loggingInFromCookies';
 
 export type UserLoading = {
     type: typeof USER_LOADING;
@@ -24,4 +25,8 @@ export type UserSignedOut = {
     type: typeof USER_SIGNED_OUT;
 };
 
-export type UserDispatchTypes = UserLoading | UserLoginSuccess | UserEmailLoginFail | UserSignedOut;
+export type UserLoggingInFromCookies = {
+    type: typeof USER_LOGGING_IN_FROM_COOKIES;
+}
+
+export type UserDispatchTypes = UserLoading | UserLoginSuccess | UserEmailLoginFail | UserSignedOut | UserLoggingInFromCookies;
