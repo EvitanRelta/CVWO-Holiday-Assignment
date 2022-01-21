@@ -1,13 +1,10 @@
 import React, { useState } from 'react';
 import { styled } from '@mui/material/styles';
-import { ThemeProvider } from '@mui/material/styles';
-import { lightTheme, darkTheme } from '../../themes';
-import { Button, Paper, Stack, TextField, Typography, IconButton, CssBaseline, useMediaQuery, Link } from '@mui/material';
+import { Button, Paper, Stack, TextField, Typography, IconButton, Link } from '@mui/material';
 import { DarkMode } from '@mui/icons-material';
 import { PwVisibilityIconAdornment } from '../components';
 import { Link as RouterLink } from 'react-router-dom';
-import { RootState } from '../../store/rootReducer';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { toggleDarkMode } from '../../store/isDarkMode/actionCreators';
 
 interface SignupProps {}
