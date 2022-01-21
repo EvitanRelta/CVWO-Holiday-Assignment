@@ -2,9 +2,9 @@ import { combineReducers } from 'redux';
 import isDarkModeReducer from './isDarkMode/isDarkModeReducer';
 
 
-const combinedReducer = combineReducers({
+const rootReducer = combineReducers({
     isDarkMode: isDarkModeReducer
 });
 
-export default combinedReducer;
-export type RootState = ReturnType<typeof combinedReducer>;
+export default rootReducer;
+export type RootState = ReturnType<typeof rootReducer>;

@@ -4,10 +4,10 @@ import App from './App';
 import { BrowserRouter } from "react-router-dom";
 import { createStore } from 'redux'; 
 import { Provider } from 'react-redux';
-import combinedReducer from './store/combinedReducer';
+import rootReducer from './store/rootReducer';
 
 const store = createStore(
-    combinedReducer,
+    rootReducer,
     // @ts-ignore
     // https://github.com/zalmoxisus/redux-devtools-extension
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()

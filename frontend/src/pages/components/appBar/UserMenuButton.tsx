@@ -6,7 +6,7 @@ import Menu from '@mui/material/Menu';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import { AccountCircle } from '@mui/icons-material';
-import { RootState } from '../../../store/combinedReducer';
+import { RootState } from '../../../store/rootReducer';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleDarkMode } from '../../../store/isDarkMode/actionCreators';
 import { Switch } from '@mui/material';

@@ -6,7 +6,7 @@ import { Button, Paper, Stack, TextField, Typography, IconButton, CssBaseline, u
 import { DarkMode, Google } from '@mui/icons-material';
 import { PwVisibilityIconAdornment } from '../components';
 import { useNavigate, Link as RouterLink } from 'react-router-dom';
-import { RootState } from '../../store/combinedReducer';
+import { RootState } from '../../store/rootReducer';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleDarkMode } from '../../store/isDarkMode/actionCreators';
 
