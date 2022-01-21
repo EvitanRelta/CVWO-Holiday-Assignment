@@ -40,80 +40,76 @@ const Signup = ({}: SignupProps) => {
     const [passwordConfirmation, setConfirmPassword] = useState('');
     const [isPasswordVisible, setIsPasswordVisible] = useState(false);
     const [isConfirmPwVisible, setIsConfirmPwVisible] = useState(false);
-    const isDarkMode = useSelector((state: RootState) => state.isDarkMode);
     const dispatch = useDispatch();
 
     return (
-        <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
-            <CssBaseline />
-            <StyledPaper variant='outlined'>
-                <Stack spacing={2}>
-                    <Typography variant='h4'>Sign up</Typography>
-                    <TextField
-                        color='primary'
-                        autoFocus
-                        variant='outlined'
-                        id='nickname'
-                        label='Nickname'
-                        value={nickname}
-                        onChange={e => setNickname(e.target.value)}
-                        onKeyPress={handleKeyPress}
-                    />
-                    <TextField
-                        color='primary'
-                        variant='outlined'
-                        id='email'
-                        label='Email'
-                        value={email}
-                        onChange={e => setEmail(e.target.value)}
-                        onKeyPress={handleKeyPress}
-                    />
-                    <TextField
-                        variant='outlined'
-                        id='password'
-                        label='Password'
-                        type={isPasswordVisible ? 'text' : 'password'}
-                        value={password}
-                        onChange={e => setPassword(e.target.value)}
-                        onKeyPress={handleKeyPress}
-                        InputProps={{
-                            endAdornment: <PwVisibilityIconAdornment
-                                isPasswordVisible={isPasswordVisible}
-                                onClick={() => setIsPasswordVisible(state => !state)}
-                            />
-                        }}
-                    />
-                    <TextField
-                        required
-                        variant='outlined'
-                        id='password-confirmation'
-                        label='Confirm Password'
-                        type={isConfirmPwVisible ? 'text' : 'password'}
-                        value={passwordConfirmation}
-                        onChange={e => setConfirmPassword(e.target.value)}
-                        onKeyPress={handleKeyPress}
-                        InputProps={{
-                            endAdornment: <PwVisibilityIconAdornment
-                                isPasswordVisible={isConfirmPwVisible}
-                                onClick={() => setIsConfirmPwVisible(state => !state)}
-                            />
-                        }}
-                    />
-                    <FullWidthButton
-                        variant='contained'
-                        onClick={handleSubmission}
-                    >
-                        Sign up
-                    </FullWidthButton>
-                    <Link color='hyperlink.main' to='/login' component={RouterLink}>Login to existing account</Link>
-                </Stack>
-                <StyledDarkModeIconButton
-                    onClick={() => dispatch(toggleDarkMode())}
+        <StyledPaper variant='outlined'>
+            <Stack spacing={2}>
+                <Typography variant='h4'>Sign up</Typography>
+                <TextField
+                    color='primary'
+                    autoFocus
+                    variant='outlined'
+                    id='nickname'
+                    label='Nickname'
+                    value={nickname}
+                    onChange={e => setNickname(e.target.value)}
+                    onKeyPress={handleKeyPress}
+                />
+                <TextField
+                    color='primary'
+                    variant='outlined'
+                    id='email'
+                    label='Email'
+                    value={email}
+                    onChange={e => setEmail(e.target.value)}
+                    onKeyPress={handleKeyPress}
+                />
+                <TextField
+                    variant='outlined'
+                    id='password'
+                    label='Password'
+                    type={isPasswordVisible ? 'text' : 'password'}
+                    value={password}
+                    onChange={e => setPassword(e.target.value)}
+                    onKeyPress={handleKeyPress}
+                    InputProps={{
+                        endAdornment: <PwVisibilityIconAdornment
+                            isPasswordVisible={isPasswordVisible}
+                            onClick={() => setIsPasswordVisible(state => !state)}
+                        />
+                    }}
+                />
+                <TextField
+                    required
+                    variant='outlined'
+                    id='password-confirmation'
+                    label='Confirm Password'
+                    type={isConfirmPwVisible ? 'text' : 'password'}
+                    value={passwordConfirmation}
+                    onChange={e => setConfirmPassword(e.target.value)}
+                    onKeyPress={handleKeyPress}
+                    InputProps={{
+                        endAdornment: <PwVisibilityIconAdornment
+                            isPasswordVisible={isConfirmPwVisible}
+                            onClick={() => setIsConfirmPwVisible(state => !state)}
+                        />
+                    }}
+                />
+                <FullWidthButton
+                    variant='contained'
+                    onClick={handleSubmission}
                 >
-                    <DarkMode />
-                </StyledDarkModeIconButton>
-            </StyledPaper>
-        </ThemeProvider>
+                    Sign up
+                </FullWidthButton>
+                <Link color='hyperlink.main' to='/login' component={RouterLink}>Login to existing account</Link>
+            </Stack>
+            <StyledDarkModeIconButton
+                onClick={() => dispatch(toggleDarkMode())}
+            >
+                <DarkMode />
+            </StyledDarkModeIconButton>
+        </StyledPaper>
     );
 };
 

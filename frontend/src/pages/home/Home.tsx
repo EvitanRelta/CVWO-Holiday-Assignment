@@ -19,7 +19,6 @@ import { Navigate } from 'react-router-dom';
 interface HomeProps {}
 
 const Home = ({}: HomeProps) => {
-    const isDarkMode = useSelector((state: RootState) => state.isDarkMode);
     const userState = useSelector((state: RootState) => state.user);
     const dispatch = useDispatch();
 
@@ -27,15 +26,14 @@ const Home = ({}: HomeProps) => {
     return !userState.user
     ? <Navigate to={'../login'} replace />
     : (
-        <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
-            <CssBaseline />
+       <>
             <ResponsiveAppBar />
             <IconButton
                 onClick={() => dispatch(toggleDarkMode())}
             >
                 <DarkMode />
             </IconButton>
-        </ThemeProvider>
+       </>
     );
 };
 

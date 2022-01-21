@@ -38,7 +38,6 @@ const Login = ({}: LoginProps) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [isPasswordVisible, setIsPasswordVisible] = useState(false);
-    const isDarkMode = useSelector((state: RootState) => state.isDarkMode);
     const userState = useSelector((state: RootState) => state.user);
     const dispatch = useDispatch();
 
@@ -55,71 +54,68 @@ const Login = ({}: LoginProps) => {
     return userState.user
     ? <Navigate to={'../home'} replace />
     : (
-        <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
-            <CssBaseline />
-            <StyledPaper variant='outlined'>
-                <Stack spacing={2}>
-                    <Typography variant='h4'>Log in</Typography>
-                    <FullWidthButton
-                        disabled={userState.isLoading}
-                        variant='contained'
-                        onClick={handleSubmission}
-                        startIcon={<Google />}
-                        color='google'
-                    >
-                        Continue with Google
-                    </FullWidthButton>
-                    <Typography align='center'>or</Typography>
-                    <TextField
-                        disabled={userState.isLoading}
-                        color='primary'
-                        autoFocus
-                        variant='outlined'
-                        id='email'
-                        label='Email'
-                        value={email}
-                        onChange={e => setEmail(e.target.value)}
-                        onKeyPress={handleKeyPress}
-                    />
-                    <TextField
-                        disabled={userState.isLoading}
-                        variant='outlined'
-                        id='password'
-                        label='Password'
-                        type={isPasswordVisible ? 'text' : 'password'}
-                        value={password}
-                        onChange={e => setPassword(e.target.value)}
-                        onKeyPress={handleKeyPress}
-                        InputProps={{
-                            endAdornment: <PwVisibilityIconAdornment
-                                isPasswordVisible={isPasswordVisible}
-                                onClick={() => setIsPasswordVisible(state => !state)}
-                            />
-                        }}
-                    />
-                    {userState.errorMessage
-                        ? <Alert severity="error">{userState.errorMessage}</Alert>
-                        : <Box />
-                    }
-                    <FullWidthButton
-                        disabled={userState.isLoading}
-                        variant='contained'
-                        onClick={handleSubmission}
-                    >
-                        Login
-                    </FullWidthButton>
-                    {userState.isLoading
-                        ? <Typography color='hyperlink.disabled' sx={{textDecoration: 'underline'}}>Create new account</Typography>
-                        : <Link color='hyperlink.main' to='/signup' component={RouterLink}>Create new account</Link>
-                    }
-                </Stack>
-                <StyledDarkModeIconButton
-                    onClick={() => dispatch(toggleDarkMode())}
+        <StyledPaper variant='outlined'>
+            <Stack spacing={2}>
+                <Typography variant='h4'>Log in</Typography>
+                <FullWidthButton
+                    disabled={userState.isLoading}
+                    variant='contained'
+                    onClick={handleSubmission}
+                    startIcon={<Google />}
+                    color='google'
                 >
-                    <DarkMode />
-                </StyledDarkModeIconButton>
-            </StyledPaper>
-        </ThemeProvider>
+                    Continue with Google
+                </FullWidthButton>
+                <Typography align='center'>or</Typography>
+                <TextField
+                    disabled={userState.isLoading}
+                    color='primary'
+                    autoFocus
+                    variant='outlined'
+                    id='email'
+                    label='Email'
+                    value={email}
+                    onChange={e => setEmail(e.target.value)}
+                    onKeyPress={handleKeyPress}
+                />
+                <TextField
+                    disabled={userState.isLoading}
+                    variant='outlined'
+                    id='password'
+                    label='Password'
+                    type={isPasswordVisible ? 'text' : 'password'}
+                    value={password}
+                    onChange={e => setPassword(e.target.value)}
+                    onKeyPress={handleKeyPress}
+                    InputProps={{
+                        endAdornment: <PwVisibilityIconAdornment
+                            isPasswordVisible={isPasswordVisible}
+                            onClick={() => setIsPasswordVisible(state => !state)}
+                        />
+                    }}
+                />
+                {userState.errorMessage
+                    ? <Alert severity="error">{userState.errorMessage}</Alert>
+                    : <Box />
+                }
+                <FullWidthButton
+                    disabled={userState.isLoading}
+                    variant='contained'
+                    onClick={handleSubmission}
+                >
+                    Login
+                </FullWidthButton>
+                {userState.isLoading
+                    ? <Typography color='hyperlink.disabled' sx={{textDecoration: 'underline'}}>Create new account</Typography>
+                    : <Link color='hyperlink.main' to='/signup' component={RouterLink}>Create new account</Link>
+                }
+            </Stack>
+            <StyledDarkModeIconButton
+                onClick={() => dispatch(toggleDarkMode())}
+            >
+                <DarkMode />
+            </StyledDarkModeIconButton>
+        </StyledPaper>
     );
 };
 
