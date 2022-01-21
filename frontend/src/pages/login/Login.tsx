@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { styled } from '@mui/material/styles';
 import { ThemeProvider } from '@mui/material/styles';
 import { lightTheme, darkTheme } from '../../themes';
-import { Button, Paper, Stack, TextField, Typography, IconButton, CssBaseline, useMediaQuery, Link } from '@mui/material';
+import { Button, Paper, Stack, TextField, Typography, IconButton, CssBaseline, useMediaQuery, Link, Alert, Box } from '@mui/material';
 import { DarkMode, Google } from '@mui/icons-material';
 import { PwVisibilityIconAdornment } from '../components';
 import { useNavigate, Link as RouterLink, Navigate } from 'react-router-dom';
@@ -16,7 +16,7 @@ interface LoginProps {}
 const StyledPaper = styled(Paper)({
     position: 'absolute',
     width: 400,
-    height: 450,
+    //height: 450,
     left: 'calc(50% - 400px/2)',
     top: 'calc(50% - 400px/2 - 0.5px)',
     padding: 40
@@ -97,6 +97,10 @@ const Login = ({}: LoginProps) => {
                             />
                         }}
                     />
+                    {userState.errorMessage
+                        ? <Alert severity="error">{userState.errorMessage}</Alert>
+                        : <Box />
+                    }
                     <FullWidthButton
                         disabled={userState.isLoading}
                         variant='contained'
