@@ -52,7 +52,8 @@ const getAuthAxiosInstance = ({ baseURL, timeout=10000 }: GetAuthAxiosInstance):
 
     // Response Interception
     const updateAuthHeaders = (res: AxiosResponse) => {
-        const newAuthHeaders = Lodash.pick(res.headers, Lodash.keys(authHeaders));
+        const removedEmptyHeaders = Lodash.pickBy(res.headers, Lodash.identity);
+        const newAuthHeaders = Lodash.pick(removedEmptyHeaders, Lodash.keys(authHeaders));
         Lodash.assign(authHeaders, newAuthHeaders);
         saveAuthHeadersToCookies();
         return res;
