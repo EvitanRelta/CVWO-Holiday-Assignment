@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { toggleDarkMode } from '../../../store/isDarkMode/actionCreators';
 import { Switch } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import signOut from '../../../store/user/thunkActionCreators/signOut';
 
 
 interface UserMenuButtonProps {}
@@ -19,6 +20,7 @@ const UserMenuButton = ({}: UserMenuButtonProps) => {
     const navigate = useNavigate();
     const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
     const isDarkMode = useSelector((state: RootState) => state.isDarkMode);
+    const userState = useSelector((state: RootState) => state.user);
     const dispatch = useDispatch();
 
     const handleOpenUserMenu = (e: React.MouseEvent<HTMLElement>) => {
@@ -61,7 +63,7 @@ const UserMenuButton = ({}: UserMenuButtonProps) => {
                 <MenuItem key={'profile'} onClick={handleCloseUserMenu}>
                     <Typography textAlign="center">Profile</Typography>
                 </MenuItem>
-                <MenuItem key={'logout'} onClick={() => navigate('../login')}>
+                <MenuItem key={'logout'} onClick={() => dispatch(signOut())}>
                     <Typography textAlign="center">Logout</Typography>
                 </MenuItem>
                 <MenuItem key={'Dark'}>

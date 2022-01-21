@@ -11,7 +11,8 @@ let lightTheme = createTheme(
                 main: orange[400]   //grey[400]
             },
             hyperlink: {
-                main: blue[600]
+                main: blue[600],
+                disabled: grey[700]
             },
             tonalOffset: 0.2
         }

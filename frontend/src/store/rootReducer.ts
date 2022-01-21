@@ -1,9 +1,11 @@
 import { combineReducers } from 'redux';
 import isDarkModeReducer from './isDarkMode/isDarkModeReducer';
+import userReducer from './user/userReducer';
 
 
 const rootReducer = combineReducers({
-    isDarkMode: isDarkModeReducer
+    isDarkMode: isDarkModeReducer,
+    user: userReducer
 });
 
 export default rootReducer;

@@ -1,13 +1,17 @@
-import { ThemeOptions } from "@mui/material";
+import { PaletteColor, ThemeOptions } from "@mui/material";
 
 declare module '@mui/material/styles' {
     interface Palette {
         google: Palette['primary'];
-        hyperlink: Palette['primary'];
+        hyperlink: Palette['primary'] & {
+            disabled?: string;
+        }
     }
     interface PaletteOptions {
         google: PaletteOptions['primary'];
-        hyperlink: PaletteOptions['primary'];
+        hyperlink: PaletteOptions['primary'] & {
+            disabled?: string;
+        }
     }
 }
 declare module '@mui/material/Button' {

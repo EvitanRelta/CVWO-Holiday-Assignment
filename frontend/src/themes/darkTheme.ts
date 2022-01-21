@@ -1,5 +1,5 @@
 import { createTheme } from '@mui/material/styles';
-import { blue, orange } from '@mui/material/colors';
+import { blue, grey, orange } from '@mui/material/colors';
 import themeBase from './themeBase';
 import addStyleOverrides from './addStyleOverrides';
 import Lodash from 'lodash';
@@ -12,7 +12,8 @@ let darkTheme = createTheme(
                 main: orange[600]   // '#4f4f4f'
             },
             hyperlink: {
-                main: blue[400]
+                main: blue[400],
+                disabled: grey[500]
             },
             tonalOffset: 0.2
         }

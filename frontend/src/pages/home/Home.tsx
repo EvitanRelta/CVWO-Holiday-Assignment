@@ -14,15 +14,19 @@ import { ResponsiveAppBar } from '../components';
 import { RootState } from '../../store/rootReducer';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleDarkMode } from '../../store/isDarkMode/actionCreators';
+import { Navigate } from 'react-router-dom';
 
 interface HomeProps {}
 
 const Home = ({}: HomeProps) => {
     const isDarkMode = useSelector((state: RootState) => state.isDarkMode);
+    const userState = useSelector((state: RootState) => state.user);
     const dispatch = useDispatch();
 
 
-    return (
+    return !userState.user
+    ? <Navigate to={'../login'} />
+    : (
         <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
             <CssBaseline />
             <ResponsiveAppBar />

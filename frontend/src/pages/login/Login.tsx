@@ -5,10 +5,11 @@ import { lightTheme, darkTheme } from '../../themes';
 import { Button, Paper, Stack, TextField, Typography, IconButton, CssBaseline, useMediaQuery, Link } from '@mui/material';
 import { DarkMode, Google } from '@mui/icons-material';
 import { PwVisibilityIconAdornment } from '../components';
-import { useNavigate, Link as RouterLink } from 'react-router-dom';
+import { useNavigate, Link as RouterLink, Navigate } from 'react-router-dom';
 import { RootState } from '../../store/rootReducer';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleDarkMode } from '../../store/isDarkMode/actionCreators';
+import emailSignIn from '../../store/user/thunkActionCreators/emailSignIn';
 
 interface LoginProps {}
 
@@ -34,15 +35,16 @@ const StyledDarkModeIconButton = styled(IconButton)({
 });
 
 const Login = ({}: LoginProps) => {
-    const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [isPasswordVisible, setIsPasswordVisible] = useState(false);
     const isDarkMode = useSelector((state: RootState) => state.isDarkMode);
+    const userState = useSelector((state: RootState) => state.user);
     const dispatch = useDispatch();
 
     const handleSubmission = async () => {
-        navigate('/home');
+        //navigate('/home');
+        dispatch(emailSignIn(email, password));
     };
     const handleKeyPress = (e: React.KeyboardEvent) => {
         if (e.key !== 'Enter') return;
@@ -50,13 +52,16 @@ const Login = ({}: LoginProps) => {
     };
 
 
-    return (
+    return userState.user
+    ? <Navigate to={'../home'} />
+    : (
         <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
             <CssBaseline />
             <StyledPaper variant='outlined'>
                 <Stack spacing={2}>
                     <Typography variant='h4'>Log in</Typography>
                     <FullWidthButton
+                        disabled={userState.isLoading}
                         variant='contained'
                         onClick={handleSubmission}
                         startIcon={<Google />}
@@ -66,6 +71,7 @@ const Login = ({}: LoginProps) => {
                     </FullWidthButton>
                     <Typography align='center'>or</Typography>
                     <TextField
+                        disabled={userState.isLoading}
                         color='primary'
                         autoFocus
                         variant='outlined'
@@ -76,6 +82,7 @@ const Login = ({}: LoginProps) => {
                         onKeyPress={handleKeyPress}
                     />
                     <TextField
+                        disabled={userState.isLoading}
                         variant='outlined'
                         id='password'
                         label='Password'
@@ -91,12 +98,16 @@ const Login = ({}: LoginProps) => {
                         }}
                     />
                     <FullWidthButton
+                        disabled={userState.isLoading}
                         variant='contained'
                         onClick={handleSubmission}
                     >
                         Login
                     </FullWidthButton>
-                    <Link color='hyperlink.main' to='/signup' component={RouterLink}>Create new account</Link>
+                    {userState.isLoading
+                        ? <Typography color='hyperlink.disabled' sx={{textDecoration: 'underline'}}>Create new account</Typography>
+                        : <Link color='hyperlink.main' to='/signup' component={RouterLink}>Create new account</Link>
+                    }
                 </Stack>
                 <StyledDarkModeIconButton
                     onClick={() => dispatch(toggleDarkMode())}
