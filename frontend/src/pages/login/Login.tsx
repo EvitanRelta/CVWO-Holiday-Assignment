@@ -14,7 +14,6 @@ interface LoginProps {}
 const StyledPaper = styled(Paper)({
     position: 'absolute',
     width: 400,
-    //height: 450,
     left: 'calc(50% - 400px/2)',
     top: 'calc(50% - 400px/2 - 0.5px)',
     padding: 40
@@ -26,8 +25,6 @@ const FullWidthButton = styled(Button)({
 
 const StyledDarkModeIconButton = styled(IconButton)({
     position: 'absolute',
-    width: 45,
-    height: 45,
     right: 20,
     bottom: 20
 });
