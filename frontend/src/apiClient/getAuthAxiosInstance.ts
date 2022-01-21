@@ -14,7 +14,7 @@ export type AuthAxiosInstance = AxiosInstance & {
     clearAuthHeadersAndCookies: () => void;
 };
 
-const getAuthAxiosInstance = ({ baseURL, timeout=1000 }: GetAuthAxiosInstance): AuthAxiosInstance => {
+const getAuthAxiosInstance = ({ baseURL, timeout=10000 }: GetAuthAxiosInstance): AuthAxiosInstance => {
     const authAxiosInstance = axios.create({
         baseURL,
         timeout
