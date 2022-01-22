@@ -1,7 +1,6 @@
-import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosRequestHeaders, AxiosResponse, AxiosResponseHeaders } from 'axios';
+import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 import Lodash from 'lodash';
 import Cookies from 'js-cookie';
-import { RawUser, User } from './types';
 
 
 type GetAuthAxiosInstance = {

@@ -1,9 +1,7 @@
-import { AxiosInstance } from 'axios';
 import { RawTasks, RawUser, Task, User } from './types';
 import { AuthAxiosInstance } from './getAuthAxiosInstance';
 import { transformRawUser, transformRawTasks } from './rawDataTransformers';
 import Lodash from 'lodash';
-import Axios from 'axios';
 import signInErrorTransformer from './errorHandlers/signInErrorTransformer';
 import signupErrorTransformer from './errorHandlers/signupErrorTransformer';
 
