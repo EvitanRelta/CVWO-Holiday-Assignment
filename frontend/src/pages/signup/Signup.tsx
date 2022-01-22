@@ -68,6 +68,7 @@ const Signup = ({}: SignupProps) => {
                 <TextField
                     error={hasNicknameError && !nickname}
                     helperText={(hasNicknameError && !nickname) ? 'Cannot be empty' : ''}
+                    disabled={userState.isLoading}
                     color='primary'
                     autoFocus
                     variant='outlined'
@@ -83,6 +84,7 @@ const Signup = ({}: SignupProps) => {
                 <TextField
                     error={hasEmailError && !email}
                     helperText={(hasEmailError && !email) ? 'Cannot be empty' : ''}
+                    disabled={userState.isLoading}
                     color='primary'
                     variant='outlined'
                     id='email'
@@ -97,6 +99,7 @@ const Signup = ({}: SignupProps) => {
                 <TextField
                     error={hasPasswordError}
                     helperText={(hasPasswordError && !password) ? 'Cannot be empty' : ''}
+                    disabled={userState.isLoading}
                     variant='outlined'
                     id='password'
                     label='Password'
@@ -117,6 +120,7 @@ const Signup = ({}: SignupProps) => {
                 <TextField
                     error={hasPasswordConfirmationError}
                     helperText={(hasPasswordConfirmationError && !passwordConfirmation) ? 'Cannot be empty' : ''}
+                    disabled={userState.isLoading}
                     variant='outlined'
                     id='password-confirmation'
                     label='Confirm Password'
@@ -141,11 +145,15 @@ const Signup = ({}: SignupProps) => {
                 <FullWidthButton
                     variant='contained'
                     onClick={handleSubmission}
+                    disabled={userState.isLoading}
                 >
                     Sign up
                 </FullWidthButton>
                 <Box>
-                    <Link color='hyperlink.main' to='/login' component={RouterLink}>Login to existing account</Link>
+                    {userState.isLoading
+                        ? <Typography color='hyperlink.disabled' sx={{textDecoration: 'underline'}}>Login to existing account</Typography>
+                        : <Link color='hyperlink.main' to='/login' component={RouterLink}>Login to existing account</Link>
+                    }
                     <IconButton
                         onClick={() => dispatch(toggleDarkMode())}
                         sx={{ float: 'right' }}
