@@ -3,6 +3,9 @@ import { RawTasks, RawUser, Task, User } from './types';
 import { AuthAxiosInstance } from './getAuthAxiosInstance';
 import { transformRawUser, transformRawTasks } from './rawDataTransformers';
 import Lodash from 'lodash';
+import Axios from 'axios';
+import signInErrorTransformer from './errorHandlers/signInErrorTransformer';
+import signupErrorTransformer from './errorHandlers/signupErrorTransformer';
 
 export type AuthMethods = {
     hasAuthTokens: () => boolean;
@@ -27,12 +30,20 @@ const getApiClient = (authAxiosInstance: AuthAxiosInstance): ApiClient => {
             return transformRawUser(rawUser as RawUser);
         },
         emailSignIn: async (email, password) => {
-            const { data: rawUser } = await authAxiosInstance.post('/auth/sign_in', { email, password });
-            return transformRawUser(rawUser as RawUser);
+            try {
+                const { data: rawUser } = await authAxiosInstance.post('/auth/sign_in', { email, password });
+                return transformRawUser(rawUser as RawUser);
+            } catch (err) {
+                throw signInErrorTransformer(err as Error);
+            }
         },
         emailSignUp: async (email, password, passwordConfirmation) => {
-            const { data: rawUser } = await authAxiosInstance.post('/auth', { email, password, 'password_confirmation': passwordConfirmation });
-            return transformRawUser(rawUser as RawUser);
+            try {
+                const { data: rawUser } = await authAxiosInstance.post('/auth', { email, password, 'password_confirmation': passwordConfirmation });
+                return transformRawUser(rawUser as RawUser);
+            } catch (err) {
+                throw signupErrorTransformer(err as Error);
+            }
         },
         signOut: async () => {
             await authAxiosInstance.delete('/auth/sign_out');

@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { styled } from '@mui/material/styles';
 import { Button, Stack, TextField, Typography, IconButton, Link, Box, Alert } from '@mui/material';
 import { DarkMode, Email, NineK, Password } from '@mui/icons-material';
-import { PwVisibilityIconAdornment, LoginSignupContainer } from '../components';
+import { PwVisibilityIconAdornment, LoginSignupContainer, ErrorAlert } from '../components';
 import { Link as RouterLink, Navigate } from 'react-router-dom';
 import { RootState } from '../../store/rootReducer';
 import { useDispatch, useSelector } from 'react-redux';
@@ -135,7 +135,7 @@ const Signup = ({}: SignupProps) => {
                     }}
                 />
                 {userState.signupErrorMessage
-                    ? <Alert severity="error">{userState.signupErrorMessage}</Alert>
+                    ? <ErrorAlert text={userState.signupErrorMessage} />
                     : null
                 }
                 <FullWidthButton

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { styled } from '@mui/material/styles';
 import { Button, Paper, Stack, TextField, Typography, IconButton, Link, Alert, Box } from '@mui/material';
 import { DarkMode, Google } from '@mui/icons-material';
-import { PwVisibilityIconAdornment, LoginSignupContainer } from '../components';
+import { PwVisibilityIconAdornment, LoginSignupContainer, ErrorAlert } from '../components';
 import { Link as RouterLink, Navigate } from 'react-router-dom';
 import { RootState } from '../../store/rootReducer';
 import { useDispatch, useSelector } from 'react-redux';
@@ -100,7 +100,7 @@ const Login = ({}: LoginProps) => {
                     }}
                 />
                 {userState.loginErrorMessage
-                    ? <Alert severity="error">{userState.loginErrorMessage}</Alert>
+                    ? <ErrorAlert text={userState.loginErrorMessage} />
                     : null
                 }
                 <FullWidthButton
