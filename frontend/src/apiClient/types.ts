@@ -1,4 +1,4 @@
-export type UserInfo = {
+export type UserInfoOptions = {
     nickname?: string;
 };
 
@@ -35,7 +35,7 @@ export type User = {
     id: number;
     provider: string;
     allow_password_change: boolean;
-    name: string;
+    name: null;
     nickname: string | null;
     image: null;
 };
