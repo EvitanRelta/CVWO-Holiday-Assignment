@@ -13,6 +13,7 @@ const PwVisibilityIconAdornment = ({ isPasswordVisible, onClick }: PwVisibilityI
         <IconButton
             onClick={onClick}
             edge="end"
+            tabIndex={-1}
         >
             {isPasswordVisible ? <VisibilityOff /> : <Visibility />}
         </IconButton>

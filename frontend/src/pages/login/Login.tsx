@@ -121,6 +121,7 @@ const Login = ({}: LoginProps) => {
                     <IconButton
                         onClick={() => dispatch(toggleDarkMode())}
                         sx={{ float: 'right' }}
+                        tabIndex={-1}
                     >
                         <DarkMode />
                     </IconButton>

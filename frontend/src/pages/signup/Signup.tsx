@@ -160,6 +160,7 @@ const Signup = ({}: SignupProps) => {
                     <IconButton 
                         onClick={() => dispatch(toggleDarkMode())}
                         sx={{ float: 'right' }}
+                        tabIndex={-1}
                     >
                         <DarkMode />
                     </IconButton>
