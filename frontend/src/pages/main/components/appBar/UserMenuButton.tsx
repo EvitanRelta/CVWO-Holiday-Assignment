@@ -9,15 +9,13 @@ import { AccountCircle } from '@mui/icons-material';
 import { RootState } from '../../../../store/rootReducer';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleDarkMode } from '../../../../store/isDarkMode/actionCreators';
-import { Switch } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import { Switch, Divider } from '@mui/material';
 import signOut from '../../../../store/user/thunkActionCreators/signOut';
 
 
 interface UserMenuButtonProps {}
 
 const UserMenuButton = ({}: UserMenuButtonProps) => {
-    const navigate = useNavigate();
     const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
     const isDarkMode = useSelector((state: RootState) => state.isDarkMode);
     const userState = useSelector((state: RootState) => state.user);
@@ -60,18 +58,28 @@ const UserMenuButton = ({}: UserMenuButtonProps) => {
                 open={Boolean(anchorElUser)}
                 onClose={handleCloseUserMenu}
             >
+                <Typography sx={{
+                    fontWeight: 'bold',
+                    paddingX: 2,
+                    paddingY: 1.5,
+                    textAlign: 'center'
+                }}>
+                    {userState.user?.nickname || userState.user?.email}
+                </Typography>
+                <Divider />
                 <MenuItem key={'profile'} onClick={handleCloseUserMenu}>
-                    <Typography textAlign="center">Profile</Typography>
+                    <Typography>Profile</Typography>
                 </MenuItem>
                 <MenuItem key={'logout'} onClick={() => dispatch(signOut())}>
-                    <Typography textAlign="center">Logout</Typography>
+                    <Typography>Logout</Typography>
                 </MenuItem>
-                <MenuItem key={'Dark'}>
-                    <Typography textAlign="center">Dark Mode</Typography>
+                <MenuItem key={'Dark'} onClick={() => dispatch(toggleDarkMode())}>
+                    <Typography>Dark Mode</Typography>
                     <Switch
                         color='default'
+                        size='small'
                         checked={isDarkMode}
-                        onChange={() => dispatch(toggleDarkMode())}
+                        sx={{ marginLeft: 'auto', marginRight: 0 }}
                         inputProps={{ 'aria-label': 'controlled' }}
                     />
                 </MenuItem>
