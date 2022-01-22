@@ -8,7 +8,7 @@ import MenuItem from '@mui/material/MenuItem';
 import { AccountCircle } from '@mui/icons-material';
 import { RootState } from '../../../../store/rootReducer';
 import { useDispatch, useSelector } from 'react-redux';
-import { toggleDarkMode } from '../../../../store/isDarkMode/actionCreators';
+import toggleDarkMode from '../../../../store/isDarkMode/thunkActionCreators/toggleDarkMode';
 import { Switch, Divider } from '@mui/material';
 import signOut from '../../../../store/user/thunkActionCreators/signOut';
 

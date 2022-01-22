@@ -1,18 +1,16 @@
-import { Action, Reducer } from 'redux';
-import { SetDarkModeAction } from './actionCreators/setDarkMode';
+import Cookies from 'js-cookie';
+import { IsDarkModeDispatchTypes, ISDARKMODE_SET } from './actionTypes';
 
 // Defaults to Light-Mode if fail to get preference.
-const systemPrefersDarkMode = (
-    window.matchMedia 
-        && window.matchMedia('(prefers-color-scheme: dark)').matches
-) || false;
+const cookiesIsDarkMode = Cookies.get('dark-mode');
+const isDarkMode = cookiesIsDarkMode
+    ? cookiesIsDarkMode === 'true'
+    : window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
 
-const isDarkModeReducer: Reducer<boolean, SetDarkModeAction | Action<'isDarkMode/toggle'>> = (state = systemPrefersDarkMode, action) => {
+const isDarkModeReducer = (state=isDarkMode, action: IsDarkModeDispatchTypes): boolean => {
     switch (action.type) {
-        case 'isDarkMode/set':
+        case ISDARKMODE_SET:
             return action.payload;
-        case 'isDarkMode/toggle':
-            return !state;
         default:
             return state;
     }

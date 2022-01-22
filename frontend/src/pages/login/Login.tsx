@@ -6,7 +6,7 @@ import { PwVisibilityIconAdornment, LoginSignupContainer, ErrorAlert } from '../
 import { Link as RouterLink, Navigate } from 'react-router-dom';
 import { RootState } from '../../store/rootReducer';
 import { useDispatch, useSelector } from 'react-redux';
-import { toggleDarkMode } from '../../store/isDarkMode/actionCreators';
+import toggleDarkMode from '../../store/isDarkMode/thunkActionCreators/toggleDarkMode';
 import emailSignIn from '../../store/user/thunkActionCreators/emailSignIn';
 import setEmailLoginError from '../../store/user/basicActionCreators/setEmailLoginError';
 import clearLoginSignupErrors from '../../store/user/basicActionCreators/clearLoginSignupErrors';
