@@ -4,7 +4,7 @@ import Center from './Center';
 
 
 const StyledPaper = styled(Paper)({
-    maxWidth: 400,
+    maxWidth: 410,
     width: '100%',
     margin: 7,
     paddingLeft: 40,
