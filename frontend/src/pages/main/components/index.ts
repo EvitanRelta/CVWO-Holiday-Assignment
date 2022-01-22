@@ -1,3 +1,3 @@
-import ResponsiveAppBar from './appBar/ResponsiveAppBar';
+import AppBarWrapper from './appBar/AppBarWrapper';
 
-export { ResponsiveAppBar };
+export { AppBarWrapper };
