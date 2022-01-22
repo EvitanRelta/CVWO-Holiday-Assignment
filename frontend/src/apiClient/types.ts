@@ -1,3 +1,7 @@
+export type UserInfo = {
+    nickname?: string;
+};
+
 export type Task = {
     id: number;
     title: string;

@@ -47,7 +47,7 @@ const Signup = ({}: SignupProps) => {
             dispatch(setEmailSignupError('Passwords don\'t match.'));
             return;
         }
-        dispatch(emailSignup(email, password, passwordConfirmation));
+        dispatch(emailSignup(email, password, passwordConfirmation, { nickname }));
     };
     const handleKeyPress = (e: React.KeyboardEvent) => {
         if (e.key !== 'Enter') return;
