@@ -3,8 +3,9 @@ import { styled } from '@mui/material/styles';
 import { Button, Stack, TextField, Typography, IconButton, Link, Box } from '@mui/material';
 import { DarkMode } from '@mui/icons-material';
 import { PwVisibilityIconAdornment, LoginSignupContainer } from '../components';
-import { Link as RouterLink } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { Link as RouterLink, Navigate } from 'react-router-dom';
+import { RootState } from '../../store/rootReducer';
+import { useDispatch, useSelector } from 'react-redux';
 import { toggleDarkMode } from '../../store/isDarkMode/actionCreators';
 
 
@@ -21,9 +22,12 @@ const Signup = ({}: SignupProps) => {
     const [passwordConfirmation, setConfirmPassword] = useState('');
     const [isPasswordVisible, setIsPasswordVisible] = useState(false);
     const [isConfirmPwVisible, setIsConfirmPwVisible] = useState(false);
+    const userState = useSelector((state: RootState) => state.user);
     const dispatch = useDispatch();
 
-    return (
+    return userState.user
+    ? <Navigate to={'../home'} replace />
+    : (
         <LoginSignupContainer>
             <Stack spacing={2}>
                 <Typography variant='h4'>Sign up</Typography>
