@@ -1,11 +1,11 @@
 import { Dispatch } from 'react';
 import apiClient from '../../../apiClient';
-import { UserDispatchTypes, USER_LOGIN_SUCCESS, USER_SIGNED_OUT, USER_LOGGING_IN_FROM_COOKIES } from '../actionTypes';
+import { UserDispatchTypes, USER_LOGIN_SUCCESS, USER_CLEAR_DATA, USER_LOGGING_IN_FROM_COOKIES } from '../actionTypes';
 
 export default () => async (dispatch: Dispatch<UserDispatchTypes>) => {
     try {
         if (!apiClient.hasAuthTokens()) {
-            dispatch({ type: USER_SIGNED_OUT });
+            dispatch({ type: USER_CLEAR_DATA });
             return;
         }
         dispatch({ type: USER_LOGGING_IN_FROM_COOKIES });
@@ -15,6 +15,6 @@ export default () => async (dispatch: Dispatch<UserDispatchTypes>) => {
             payload: user
         })
     } catch (err) {
-        dispatch({ type: USER_SIGNED_OUT });
+        dispatch({ type: USER_CLEAR_DATA });
     }
 };

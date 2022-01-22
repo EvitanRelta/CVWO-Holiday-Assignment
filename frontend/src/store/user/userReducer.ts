@@ -1,11 +1,12 @@
 import { User } from '../../apiClient/types';
-import { UserDispatchTypes, USER_EMAIL_LOGIN_FAIL, USER_LOGIN_SUCCESS, USER_LOADING, USER_SIGNED_OUT, USER_LOGGING_IN_FROM_COOKIES } from './actionTypes';
+import { UserDispatchTypes, USER_EMAIL_LOGIN_FAIL, USER_LOGIN_SUCCESS, USER_LOADING, USER_CLEAR_DATA, USER_LOGGING_IN_FROM_COOKIES, USER_EMAIL_SIGNUP_FAIL } from './actionTypes';
 
 type UserState = {
     user?: User;
     isLoading: boolean;
     loggingInFromCookies: boolean;
-    errorMessage?: string;
+    loginErrorMessage?: string;
+    signupErrorMessage?: string;
 };
 
 const initialState: UserState = {
@@ -24,7 +25,7 @@ const userReducer = (state: UserState = initialState, action: UserDispatchTypes)
             return {
                 isLoading: false,
                 loggingInFromCookies: false,
-                errorMessage: action.payload
+                loginErrorMessage: action.payload
             };
         case USER_LOGIN_SUCCESS:
             return {
@@ -32,7 +33,7 @@ const userReducer = (state: UserState = initialState, action: UserDispatchTypes)
                 loggingInFromCookies: false,
                 user: action.payload
             };
-        case USER_SIGNED_OUT:
+        case USER_CLEAR_DATA:
             return {
                 isLoading: false,
                 loggingInFromCookies: false
@@ -41,6 +42,12 @@ const userReducer = (state: UserState = initialState, action: UserDispatchTypes)
             return {
                 isLoading: false,
                 loggingInFromCookies: true
+            };
+        case USER_EMAIL_SIGNUP_FAIL:
+            return {
+                isLoading: false,
+                loggingInFromCookies: false,
+                signupErrorMessage: action.payload
             };
         default:
             return state;

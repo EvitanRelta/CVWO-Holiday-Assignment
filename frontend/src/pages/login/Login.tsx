@@ -8,6 +8,7 @@ import { RootState } from '../../store/rootReducer';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleDarkMode } from '../../store/isDarkMode/actionCreators';
 import emailSignIn from '../../store/user/thunkActionCreators/emailSignIn';
+import setEmailLoginError from '../../store/user/basicActionCreators/setEmailLoginError';
 
 
 interface LoginProps {}
@@ -20,11 +21,18 @@ const Login = ({}: LoginProps) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+
+    const [hasEmailError, setHasEmailError] = useState(false);
+    const [hasPasswordError, setHasPasswordError] = useState(false);
+
     const userState = useSelector((state: RootState) => state.user);
     const dispatch = useDispatch();
 
     const handleSubmission = async () => {
-        //navigate('/home');
+        setHasEmailError(!Boolean(email));
+        setHasPasswordError(!Boolean(password));
+        if (!email || !password)
+            return;
         dispatch(emailSignIn(email, password));
     };
     const handleKeyPress = (e: React.KeyboardEvent) => {
@@ -50,6 +58,8 @@ const Login = ({}: LoginProps) => {
                 </FullWidthButton>
                 <Typography align='center'>or</Typography>
                 <TextField
+                    error={hasEmailError}
+                    helperText={(hasEmailError && !email) ? 'Cannot be empty' : ''}
                     disabled={userState.isLoading}
                     color='primary'
                     autoFocus
@@ -58,9 +68,14 @@ const Login = ({}: LoginProps) => {
                     label='Email'
                     value={email}
                     onChange={e => setEmail(e.target.value)}
-                    onKeyPress={handleKeyPress}
+                    onKeyPress={e => {
+                        setHasEmailError(false);
+                        handleKeyPress(e);
+                    }}
                 />
                 <TextField
+                    error={hasPasswordError}
+                    helperText={(hasPasswordError && !password) ? 'Cannot be empty' : ''}
                     disabled={userState.isLoading}
                     variant='outlined'
                     id='password'
@@ -68,7 +83,10 @@ const Login = ({}: LoginProps) => {
                     type={isPasswordVisible ? 'text' : 'password'}
                     value={password}
                     onChange={e => setPassword(e.target.value)}
-                    onKeyPress={handleKeyPress}
+                    onKeyPress={e => {
+                        setHasPasswordError(false);
+                        handleKeyPress(e);
+                    }}
                     InputProps={{
                         endAdornment: <PwVisibilityIconAdornment
                             isPasswordVisible={isPasswordVisible}
