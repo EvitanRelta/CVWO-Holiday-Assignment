@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { styled } from '@mui/material/styles';
-import { Button, Paper, Stack, TextField, Typography, IconButton, Link, Alert, Box } from '@mui/material';
+import { Button, Paper, Stack, TextField, Typography, IconButton, Link, Alert, Box, CircularProgress } from '@mui/material';
 import { DarkMode, Google } from '@mui/icons-material';
 import { PwVisibilityIconAdornment, LoginSignupContainer, ErrorAlert } from '../components';
 import { Link as RouterLink, Navigate } from 'react-router-dom';
@@ -108,19 +108,22 @@ const Login = ({}: LoginProps) => {
                     variant='contained'
                     onClick={handleSubmission}
                 >
-                    Login
+                    {userState.isLoading
+                        ? <CircularProgress color='inherit' size={24.5} />
+                        : 'Login'
+                    }
                 </FullWidthButton>
                 <Box>
-                {userState.isLoading
-                    ? <Typography color='hyperlink.disabled' sx={{textDecoration: 'underline'}}>Create new account</Typography>
-                    : <Link color='hyperlink.main' to='/signup' component={RouterLink}>Create new account</Link>
-                }
-                <IconButton
-                    onClick={() => dispatch(toggleDarkMode())}
-                    sx={{ float: 'right' }}
-                >
-                    <DarkMode />
-                </IconButton>
+                    {userState.isLoading
+                        ? <Typography color='hyperlink.disabled' sx={{textDecoration: 'underline'}}>Create new account</Typography>
+                        : <Link color='hyperlink.main' to='/signup' component={RouterLink}>Create new account</Link>
+                    }
+                    <IconButton
+                        onClick={() => dispatch(toggleDarkMode())}
+                        sx={{ float: 'right' }}
+                    >
+                        <DarkMode />
+                    </IconButton>
                 </Box>
             </Stack>
         </LoginSignupContainer>

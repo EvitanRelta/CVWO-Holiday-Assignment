@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { styled } from '@mui/material/styles';
-import { Button, Stack, TextField, Typography, IconButton, Link, Box, Alert } from '@mui/material';
+import { Button, Stack, TextField, Typography, IconButton, Link, Box, Alert, CircularProgress } from '@mui/material';
 import { DarkMode, Email, NineK, Password } from '@mui/icons-material';
 import { PwVisibilityIconAdornment, LoginSignupContainer, ErrorAlert } from '../components';
 import { Link as RouterLink, Navigate } from 'react-router-dom';
@@ -147,14 +147,17 @@ const Signup = ({}: SignupProps) => {
                     onClick={handleSubmission}
                     disabled={userState.isLoading}
                 >
-                    Sign up
+                    {userState.isLoading
+                        ? <CircularProgress color='inherit' size={24.5} />
+                        : 'Sign up'
+                    }
                 </FullWidthButton>
                 <Box>
                     {userState.isLoading
                         ? <Typography color='hyperlink.disabled' sx={{textDecoration: 'underline'}}>Login to existing account</Typography>
                         : <Link color='hyperlink.main' to='/login' component={RouterLink}>Login to existing account</Link>
                     }
-                    <IconButton
+                    <IconButton 
                         onClick={() => dispatch(toggleDarkMode())}
                         sx={{ float: 'right' }}
                     >

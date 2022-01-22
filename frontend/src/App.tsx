@@ -10,7 +10,7 @@ import tryLoginFromCookies from './store/user/thunkActionCreators/tryLoginFromCo
 import { Center } from './pages/components';
 
 interface AppProps {}
-
+console.log(darkTheme, lightTheme);
 const App = ({}: AppProps) => {
     const isDarkMode = useSelector((state: RootState) => state.isDarkMode);
     const userState = useSelector((state: RootState) => state.user);
