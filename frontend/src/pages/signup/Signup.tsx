@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { toggleDarkMode } from '../../store/isDarkMode/actionCreators';
 import emailSignup from '../../store/user/thunkActionCreators/emailSignup';
 import setEmailSignupError from '../../store/user/basicActionCreators/setEmailSignupError';
+import clearLoginSignupErrors from '../../store/user/basicActionCreators/clearLoginSignupErrors';
 
 
 interface SignupProps {}
@@ -52,6 +53,11 @@ const Signup = ({}: SignupProps) => {
         if (e.key !== 'Enter') return;
         handleSubmission()
     };
+
+    useEffect(() => {
+        const clearErrorsOnNavigate = () => { dispatch(clearLoginSignupErrors()) };
+        return clearErrorsOnNavigate;
+    }, []);
 
     return userState.user
     ? <Navigate to={'../home'} replace />

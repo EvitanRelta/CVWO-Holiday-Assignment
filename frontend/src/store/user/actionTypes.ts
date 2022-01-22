@@ -6,6 +6,7 @@ export const USER_LOGIN_SUCCESS = 'user/emailLoginSuccess';
 export const USER_EMAIL_LOGIN_FAIL = 'user/emailLoginFail';
 export const USER_EMAIL_SIGNUP_FAIL = 'user/emailSignupFail';
 export const USER_CLEAR_DATA = 'user/clearData';
+export const USER_CLEAR_ERRORS = 'user/clearErrors';
 export const USER_LOGGING_IN_FROM_COOKIES = 'user/loggingInFromCookies';
 
 export type UserLoading = {
@@ -31,8 +32,12 @@ export type UserClearData = {
     type: typeof USER_CLEAR_DATA;
 };
 
+export type UserClearErrors = {
+    type: typeof USER_CLEAR_ERRORS;
+};
+
 export type UserLoggingInFromCookies = {
     type: typeof USER_LOGGING_IN_FROM_COOKIES;
 }
 
-export type UserDispatchTypes = UserLoading | UserLoginSuccess | UserEmailLoginFail | UserClearData | UserLoggingInFromCookies | UserEmailSignupFail;
+export type UserDispatchTypes = UserLoading | UserLoginSuccess | UserEmailLoginFail | UserClearData| UserClearErrors | UserLoggingInFromCookies | UserEmailSignupFail;

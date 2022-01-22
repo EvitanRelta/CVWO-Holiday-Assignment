@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { styled } from '@mui/material/styles';
 import { Button, Paper, Stack, TextField, Typography, IconButton, Link, Alert, Box } from '@mui/material';
 import { DarkMode, Google } from '@mui/icons-material';
@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { toggleDarkMode } from '../../store/isDarkMode/actionCreators';
 import emailSignIn from '../../store/user/thunkActionCreators/emailSignIn';
 import setEmailLoginError from '../../store/user/basicActionCreators/setEmailLoginError';
+import clearLoginSignupErrors from '../../store/user/basicActionCreators/clearLoginSignupErrors';
 
 
 interface LoginProps {}
@@ -40,6 +41,10 @@ const Login = ({}: LoginProps) => {
         handleSubmission();
     };
 
+    useEffect(() => {
+        const clearErrorsOnNavigate = () => { dispatch(clearLoginSignupErrors()) };
+        return clearErrorsOnNavigate;
+    }, []);
 
     return userState.user
     ? <Navigate to={'../home'} replace />

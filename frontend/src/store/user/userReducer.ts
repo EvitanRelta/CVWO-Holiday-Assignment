@@ -1,5 +1,5 @@
 import { User } from '../../apiClient/types';
-import { UserDispatchTypes, USER_EMAIL_LOGIN_FAIL, USER_LOGIN_SUCCESS, USER_LOADING, USER_CLEAR_DATA, USER_LOGGING_IN_FROM_COOKIES, USER_EMAIL_SIGNUP_FAIL } from './actionTypes';
+import { UserDispatchTypes, USER_EMAIL_LOGIN_FAIL, USER_LOGIN_SUCCESS, USER_LOADING, USER_CLEAR_DATA, USER_LOGGING_IN_FROM_COOKIES, USER_EMAIL_SIGNUP_FAIL, USER_CLEAR_ERRORS } from './actionTypes';
 
 type UserState = {
     user?: User;
@@ -37,6 +37,12 @@ const userReducer = (state: UserState = initialState, action: UserDispatchTypes)
             return {
                 isLoading: false,
                 loggingInFromCookies: false
+            };
+        case USER_CLEAR_ERRORS:
+            return {
+                ...state,
+                loginErrorMessage: undefined,
+                signupErrorMessage: undefined
             };
         case USER_LOGGING_IN_FROM_COOKIES:
             return {
