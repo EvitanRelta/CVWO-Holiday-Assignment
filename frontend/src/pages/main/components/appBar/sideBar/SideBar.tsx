@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, Divider, Grid, List, ListItem, ListItemIcon, ListItemText, Toolbar } from '@mui/material';
-import Logo from './Logo';
+import { Logo } from '../../../../components';
 import CategoryList, { CategoryListProps } from './CategoryList'
 
 interface SideBarProps extends CategoryListProps {

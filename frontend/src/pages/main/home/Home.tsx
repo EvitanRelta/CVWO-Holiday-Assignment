@@ -2,9 +2,9 @@ import React from 'react';
 import { IconButton } from '@mui/material';
 import { DarkMode } from '@mui/icons-material';
 import { ResponsiveAppBar } from '../components';
-import { RootState } from '../../store/rootReducer';
+import { RootState } from '../../../store/rootReducer';
 import { useDispatch, useSelector } from 'react-redux';
-import { toggleDarkMode } from '../../store/isDarkMode/actionCreators';
+import { toggleDarkMode } from '../../../store/isDarkMode/actionCreators';
 import { Navigate } from 'react-router-dom';
 
 interface HomeProps {}

@@ -6,12 +6,12 @@ import Menu from '@mui/material/Menu';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import { AccountCircle } from '@mui/icons-material';
-import { RootState } from '../../../store/rootReducer';
+import { RootState } from '../../../../store/rootReducer';
 import { useDispatch, useSelector } from 'react-redux';
-import { toggleDarkMode } from '../../../store/isDarkMode/actionCreators';
+import { toggleDarkMode } from '../../../../store/isDarkMode/actionCreators';
 import { Switch } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import signOut from '../../../store/user/thunkActionCreators/signOut';
+import signOut from '../../../../store/user/thunkActionCreators/signOut';
 
 
 interface UserMenuButtonProps {}

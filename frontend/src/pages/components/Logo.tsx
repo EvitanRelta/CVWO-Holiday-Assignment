@@ -2,7 +2,7 @@ import { Typography, Avatar } from '@mui/material';
 import React from 'react';
 
 
-const logoImage = require('../../../../assets/logo_no_bg.png');
+const logoImage = require('../../assets/logo_no_bg.png');
 
 const Logo = () => (
     <>

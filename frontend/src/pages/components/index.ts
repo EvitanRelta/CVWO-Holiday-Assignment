@@ -1,7 +1,7 @@
 import PwVisibilityIconAdornment from "./PwVisibilityIconAdornment";
-import ResponsiveAppBar from './appBar/ResponsiveAppBar';
 import Center from './Center';
 import LoginSignupContainer from './LoginSignupContainer';
 import ErrorAlert from './ErrorAlert';
+import Logo from './Logo'
 
-export { PwVisibilityIconAdornment, ResponsiveAppBar, Center, LoginSignupContainer, ErrorAlert }
+export { PwVisibilityIconAdornment, Center, LoginSignupContainer, ErrorAlert, Logo }
