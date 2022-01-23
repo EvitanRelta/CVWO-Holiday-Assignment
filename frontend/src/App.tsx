@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
-import { Login, Signup, AllTasks } from './pages';
+import { Login, Signup, AllTasks, TasksByTag } from './pages';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material/styles';
-import { CircularProgress, CssBaseline, Grid } from '@mui/material';
+import { CircularProgress, CssBaseline } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from './store/rootReducer';
 import { darkTheme, lightTheme } from './themes';
@@ -11,9 +11,8 @@ import { Center } from './pages/components';
 import { AppBarWrapper } from './pages/main/components';
 import { RequireAuth, RequireUnauth } from './routeComponents';
 
-interface AppProps {}
 
-const App = ({}: AppProps) => {
+const App = () => {
     const isDarkMode = useSelector((state: RootState) => state.isDarkMode);
     const userState = useSelector((state: RootState) => state.user);
     const dispatch = useDispatch();
@@ -41,6 +40,7 @@ const App = ({}: AppProps) => {
                         <Route element={<RequireAuth />}>
                             <Route element={<AppBarWrapper />}>
                                 <Route path='all' element={<AllTasks />} />
+                                <Route path='tag/:id' element={<TasksByTag />} />
                             </Route>
                         </Route>
                     </Routes>
