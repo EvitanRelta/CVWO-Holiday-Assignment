@@ -13,8 +13,8 @@ const AllTasks = ({}: HomeProps) => {
 
 
     useEffect(() => {
+        dispatch(setAppbarHeader('All Tasks'));
         dispatch(getAllTasks());
-        dispatch(setAppbarHeader('All Tasks'))
     }, []);
 
 
