@@ -46,7 +46,16 @@ const AppBarWrapper: React.FC = () => {
         <SideBar {...sideBarProps} />
     );
     const header = (
-        <Breadcrumbs separator="›" aria-label="breadcrumb" component={Typography} variant='h5'>
+        <Breadcrumbs
+            separator="›"
+            aria-label="breadcrumb"
+            sx={{
+                fontSize: {
+                    xs: 20,
+                    md: 25
+                }
+            }} 
+        >
             {
                 appbarState.header.map((str, index) => (
                     <Typography variant='inherit' key={index} color="text.primary">
