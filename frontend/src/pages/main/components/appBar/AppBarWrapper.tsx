@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { AppBar, Box, Breadcrumbs, Drawer, IconButton, Toolbar, Typography } from '@mui/material';
 import { Menu } from '@mui/icons-material';
-import SideBar, { SideBarProps } from './sideBar/SideBar';
+import SideBar from './sideBar/SideBar';
 import UserMenuButton from './UserMenuButton';
 import { Outlet } from 'react-router-dom';
 import { useSelector } from 'react-redux';
@@ -18,33 +18,7 @@ const AppBarWrapper: React.FC = () => {
         setMobileOpen(!mobileOpen);
     };
 
-    const sideBarProps: SideBarProps = {
-        items: [
-            {
-                text: 'New Category',
-                onClick: ()=>null
-            }
-        ],
-        categories: [
-            {
-                name: 'Category 1',
-                tagItems: [
-                    {name: 'Tag 1', onClick:()=>null},
-                    {name: 'Tag 2', onClick:()=>null},
-                ]
-            },
-            {
-                name: 'Category 2',
-                tagItems: [
-                    {name: 'Tag 3', onClick:()=>null},
-                    {name: 'Tag 4', onClick:()=>null},
-                ]
-            }
-        ]
-    };
-    const drawer = (
-        <SideBar {...sideBarProps} />
-    );
+    const drawer = <SideBar />;
     const header = (
         <Breadcrumbs
             separator="›"

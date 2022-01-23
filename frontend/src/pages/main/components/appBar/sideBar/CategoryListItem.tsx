@@ -1,26 +1,13 @@
 import React, { useState } from 'react';
 import { List, ListItemIcon, ListItemText, Collapse, ListItemButton } from '@mui/material';
 import { ExpandLess, ExpandMore, AutoAwesomeMotion } from '@mui/icons-material';
+import { Category } from '../../../../../apiClient/types';
+import { Link } from 'react-router-dom';
 
 
-interface CategoryListItemProps {
-    name: string;
-    tagItems: TagItem[];
-}
-
-interface TagItem {
-    name: string;
-    onClick: React.MouseEventHandler<HTMLDivElement>;
-}
-
-
-const CategoryListItem = ({
-    name: categoryName,
-    tagItems
-}: CategoryListItemProps) => {
+const CategoryListItem = ({ category }: { category: Category }) => {
     const [isOpen, setIsOpen] = useState(false);
     const toggleExpand = () => setIsOpen(state => !state);
-
 
     return (
         <>
@@ -30,7 +17,7 @@ const CategoryListItem = ({
                 <ListItemIcon>
                     <AutoAwesomeMotion />
                 </ListItemIcon>
-                <ListItemText primary={categoryName} />
+                <ListItemText primary={category.name} />
                 {isOpen ? <ExpandLess /> : <ExpandMore />}
             </ListItemButton>
             <Collapse in={isOpen} timeout="auto" unmountOnExit>
@@ -41,13 +28,16 @@ const CategoryListItem = ({
                         backgroundColor: 'background.nestedSideBarItem'
                     }}
                 >
-                    {tagItems.map(({ name, onClick }) => (
+                    {category.tags.map(tag => (
+                        //@ts-ignore
                         <ListItemButton
-                            onClick={onClick}
                             sx={{ paddingLeft: 7 }}
-                            key={`${categoryName}-${name}`}
+                            key={`${category.name}-${tag.name}`}
+                            href='#'
+                            LinkComponent={Link}
+                            to={`../tag/${tag.id}`}
                         >
-                            <ListItemText primary={name} />
+                            <ListItemText primary={tag.name} />
                         </ListItemButton>
                     ))}
                 </List>
@@ -57,4 +47,3 @@ const CategoryListItem = ({
 };
 
 export default CategoryListItem;
-export type { CategoryListItemProps };

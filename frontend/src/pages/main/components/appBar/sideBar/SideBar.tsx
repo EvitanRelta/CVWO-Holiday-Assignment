@@ -1,19 +1,10 @@
 import React from 'react';
 import { Button, Divider, Grid, List, ListItem, ListItemIcon, ListItemText, Toolbar } from '@mui/material';
 import { Logo } from '../../../../components';
-import CategoryList, { CategoryListProps } from './CategoryList'
+import CategoryList from './CategoryList'
 
-interface SideBarProps extends CategoryListProps {
-    items: SideBarItem[];
-}
 
-interface SideBarItem {
-    text: string;
-    onClick: React.MouseEventHandler<HTMLDivElement>;
-    iconComponent?: React.FC;
-}
-
-const SideBar = ({ items, categories }: SideBarProps) => (
+const SideBar = () => (
     <>
         <Toolbar>
             <Grid
@@ -29,25 +20,16 @@ const SideBar = ({ items, categories }: SideBarProps) => (
         </Toolbar>
         <Divider />
         <List>
-            {items.map(({ text, onClick, iconComponent: IconComponent }) => (
-                <ListItem
-                    button
-                    key={text}
-                    onClick={onClick}
-                >
-                    <ListItemIcon>
-                        {IconComponent && (
-                            <IconComponent />
-                        )}
-                    </ListItemIcon>
-                    <ListItemText primary={text} />
-                </ListItem>
-            ))}
+            <ListItem
+                button
+                onClick={()=>undefined}
+            >
+                <ListItemText primary={'Click me'} />
+            </ListItem>
         </List>
         <Divider />
-        <CategoryList categories={categories}/>
+        <CategoryList />
     </>
 );
 
 export default SideBar;
-export type { SideBarProps, SideBarItem };
