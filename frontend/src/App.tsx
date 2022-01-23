@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Login, TestRoutesHome, Signup, Home } from './pages';
+import { Login, Signup, Home } from './pages';
 import { Routes, Route } from "react-router-dom";
 import { ThemeProvider } from '@mui/material/styles';
 import { CircularProgress, CssBaseline, Grid } from '@mui/material';
@@ -31,7 +31,6 @@ const App = ({}: AppProps) => {
                 )
                 : (
                     <Routes>
-                        <Route path="/" element={<TestRoutesHome />} />
                         <Route path="login" element={<Login />} />
                         <Route path="signup" element={<Signup />} />
                         <Route path="home" element={<Home />} />
