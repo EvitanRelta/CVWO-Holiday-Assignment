@@ -65,6 +65,12 @@ type RawTask = RawTaskBase & {
 };
 
 
+// Format of successful POST "/tasks"
+export type RawNewTask = RawTaskBase & {
+    user_id: number;
+};
+
+
 // Format of successful GET "/categories"
 export type RawCategories = RawCategory[];
 type RawCategory = {

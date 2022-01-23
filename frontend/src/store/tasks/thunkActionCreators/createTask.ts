@@ -1,15 +1,14 @@
 import { Dispatch } from 'react';
 import apiClient from '../../../apiClient';
 import ApiError from '../../../apiClient/ApiError';
-import { TasksDispatchTypes, TASKS_ERROR, TASKS_LOADING, TASKS_SET_ALL } from '../actionTypes';
+import { TasksDispatchTypes, TASKS_APPEND, TASKS_ERROR } from '../actionTypes';
 
-export default () => async (dispatch: Dispatch<TasksDispatchTypes>) => {
+export default (title: string, description: string) => async (dispatch: Dispatch<TasksDispatchTypes>) => {
     try {
-        dispatch({ type: TASKS_LOADING });
-        const tasks = await apiClient.getTasks();
+        const newTask = await apiClient.createTask(title, description);
         dispatch({
-            type: TASKS_SET_ALL,
-            payload: tasks
+            type: TASKS_APPEND,
+            payload: newTask
         });
     } catch (err) {
         if (err instanceof ApiError)

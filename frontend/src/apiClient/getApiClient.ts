@@ -1,6 +1,6 @@
-import { RawTasks, RawUser, Task, User, UserInfoOptions } from './types';
+import { RawNewTask, RawTasks, RawUser, Task, User, UserInfoOptions } from './types';
 import { AuthAxiosInstance } from './getAuthAxiosInstance';
-import { transformRawUser, transformRawTasks } from './rawDataTransformers';
+import { transformRawUser, transformRawTasks, transformRawNewTask } from './rawDataTransformers';
 import Lodash from 'lodash';
 import signInErrorTransformer from './errorHandlers/signInErrorTransformer';
 import signupErrorTransformer from './errorHandlers/signupErrorTransformer';
@@ -17,6 +17,7 @@ export type AuthMethods = {
 
 export type ApiMethods = {
     getTasks: () => Promise<Task[]>;
+    createTask: (title: string, description: string) => Promise<Task>;
 };
 
 export type ApiClient = AuthMethods & ApiMethods;
@@ -60,6 +61,12 @@ const getApiClient = (authAxiosInstance: AuthAxiosInstance): ApiClient => {
             const { data: rawTasks } = await authAxiosInstance.get('/tasks');
             return transformRawTasks(rawTasks as RawTasks);
         },
+        createTask: async (title, description) => {
+            const newTask: RawNewTask = await authAxiosInstance.post('/tasks', {
+                task: { title, description }
+            });
+            return transformRawNewTask(newTask);
+        }
     };
     return Lodash.assign({}, authMethods, apiMethods);
 };
