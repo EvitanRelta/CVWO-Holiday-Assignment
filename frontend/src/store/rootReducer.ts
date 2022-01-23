@@ -2,13 +2,13 @@ import { combineReducers } from 'redux';
 import isDarkModeReducer from './isDarkMode/isDarkModeReducer';
 import userReducer from './user/userReducer';
 import appbarReducer from './appbar/appbarReducer';
-import tasksReducer from './tasks/tasksReducer';
+import dataReducer from './data/dataReducer';
 
 
 const rootReducer = combineReducers({
     isDarkMode: isDarkModeReducer,
     user: userReducer,
-    tasks: tasksReducer,
+    data: dataReducer,
     appbar: appbarReducer
 });
 

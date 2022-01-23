@@ -1,35 +1,35 @@
 import { Task } from '../../apiClient/types';
-import { TasksDispatchTypes, TASKS_APPEND, TASKS_ERROR, TASKS_LOADING, TASKS_SET_ALL } from './actionTypes';
+import { DataDispatchTypes, DATA_APPEND_TASK, DATA_ERROR, DATA_LOADING, DATA_SET_ALL_TASKS } from './actionTypes';
 
-type TasksState = {
+type DataState = {
     isLoading: boolean;
     errorMessage?: string;
     tasks: Task[];
 };
 
-const initialState: TasksState = {
+const initialState: DataState = {
     isLoading: false,
     tasks: []
 };
 
-const tasksReducer = (state=initialState, action: TasksDispatchTypes): TasksState => {
+const dataReducer = (state=initialState, action: DataDispatchTypes): DataState => {
     switch (action.type) {
-        case TASKS_LOADING:
+        case DATA_LOADING:
             return {
                 ...state,
                 isLoading: true,
             };
-        case TASKS_ERROR:
+        case DATA_ERROR:
             return {
                 ...state,
                 errorMessage: action.payload
             };
-        case TASKS_SET_ALL:
+        case DATA_SET_ALL_TASKS:
             return {
                 isLoading: false,
                 tasks: action.payload
             };
-        case TASKS_APPEND:
+        case DATA_APPEND_TASK:
             return {
                 isLoading: false,
                 tasks: state.tasks.concat([action.payload])
@@ -39,4 +39,4 @@ const tasksReducer = (state=initialState, action: TasksDispatchTypes): TasksStat
     }
 };
 
-export default tasksReducer;
+export default dataReducer;

@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { RootState } from '../../store/rootReducer';
 import { useDispatch, useSelector } from 'react-redux';
 import { Tasks, AddItemDial } from './components';
-import getAllTasks from '../../store/tasks/thunkActionCreators/getAllTasks';
+import getAllTasks from '../../store/data/thunkActionCreators/getAllTasks';
 import selectTag from '../../store/appbar/thunkActionCreators/selectTagId';
 import { useParams } from 'react-router-dom';
 import Lodash from 'lodash';
@@ -10,7 +10,7 @@ import Lodash from 'lodash';
 const TasksByTag = () => {
     const { id } = useParams();
     const tagId = Number(id);
-    const tasksState = useSelector((state: RootState) => state.tasks);
+    const data = useSelector((state: RootState) => state.data);
     const appbarState = useSelector((state: RootState) => state.appbar);
     const dispatch = useDispatch();
 
@@ -19,7 +19,7 @@ const TasksByTag = () => {
         dispatch(getAllTasks());
     }, []);
 
-    const tasksByTag = Lodash.filter(tasksState.tasks, { categories: [{ tags: [{ id: tagId }] }] });
+    const tasksByTag = Lodash.filter(data.tasks, { categories: [{ tags: [{ id: tagId }] }] });
 
     return (
         <>
