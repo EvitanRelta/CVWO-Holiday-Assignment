@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { RootState } from '../../store/rootReducer';
 import { useDispatch, useSelector } from 'react-redux';
-import { Tasks } from './components';
+import { Tasks, AddItemDial } from './components';
 import getAllTasks from '../../store/tasks/thunkActionCreators/getAllTasks';
 
 interface HomeProps {}
@@ -17,7 +17,10 @@ const AllTasks = ({}: HomeProps) => {
 
 
     return (
-        <Tasks tasks={tasksState.tasks} />
+        <>
+            <Tasks tasks={tasksState.tasks} />
+            <AddItemDial />
+        </>
     );
 };
 
