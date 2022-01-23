@@ -5,11 +5,11 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../../../../store/rootReducer';
 
 const CategoryList = () => {
-    const appbarState = useSelector((state: RootState) => state.appbar);
+    const data = useSelector((state: RootState) => state.data);
 
     return (
         <List>
-            {appbarState.categories.map(category =>
+            {data.categories.map(category =>
                 <CategoryListItem category={category} />
             )}
         </List>

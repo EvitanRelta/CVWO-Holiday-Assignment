@@ -1,12 +1,10 @@
 import { Dispatch } from 'react';
 import apiClient from '../../../apiClient';
 import ApiError from '../../../apiClient/ApiError';
-import { DataDispatchTypes, DATA_ERROR, DATA_LOADING, DATA_SET_ALL_TASKS } from '../actionTypes';
+import { DataDispatchTypes, DATA_ERROR, DATA_LOADING, DATA_SET_ALL_TASKS, DATA_SET_CATEGORIES } from '../actionTypes';
 import getCategoriesFromTasks from './helperFunctions/getCategoriesFromTasks';
-import setAppbarCategories from '../../appbar/basicActionCreators/setAppbarCategories';
-import { AppbarSetCategories } from '../../appbar/actionTypes';
 
-export default () => async (dispatch: Dispatch<DataDispatchTypes | AppbarSetCategories>) => {
+export default () => async (dispatch: Dispatch<DataDispatchTypes>) => {
     try {
         dispatch({ type: DATA_LOADING });
         const tasks = await apiClient.getTasks();
@@ -15,7 +13,10 @@ export default () => async (dispatch: Dispatch<DataDispatchTypes | AppbarSetCate
             type: DATA_SET_ALL_TASKS,
             payload: tasks
         });
-        dispatch(setAppbarCategories(categories));
+        dispatch({
+            type: DATA_SET_CATEGORIES,
+            payload: categories
+        });
     } catch (err) {
         if (err instanceof ApiError)
             dispatch({
