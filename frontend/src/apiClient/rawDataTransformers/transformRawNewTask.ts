@@ -1,4 +1,4 @@
-import { CategorySimplified, RawNewTask, RawTasks, Task } from '../types';
+import { RawNewTask, Task } from '../types';
 
 export default ({ id, title, description, created_at, updated_at }: RawNewTask): Task => ({
     id, title, description,

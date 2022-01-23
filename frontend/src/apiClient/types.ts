@@ -8,16 +8,16 @@ export type Task = {
     description: string;
     created_at: Date;
     updated_at: Date;
-    categories: CategorySimplified[];
+    categories: Category[];
 };
 
-export type Category = CategorySimplified & {
+export type CategoryExtended = Category & {
     allow_multiple_tags: boolean;
     created_at: Date;
     updated_at: Date;
 };
 
-export type CategorySimplified = {
+export type Category = {
     id: number;
     name: string;
     tags: Tag[];

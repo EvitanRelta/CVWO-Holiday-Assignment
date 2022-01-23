@@ -1,9 +1,9 @@
-import { CategorySimplified, RawTasks, Task } from '../types';
+import { Category, RawTasks, Task } from '../types';
 
 export default (rawTasks: RawTasks): Task[] => {
     return rawTasks.map(rawTask => {
         const { id, title, description, created_at, updated_at, categories } = rawTask;
-        const transformedCategories: CategorySimplified[] = [];
+        const transformedCategories: Category[] = [];
         for (const [categoryName, tags] of Object.entries(categories))
             transformedCategories.push({
                 id: tags[0].category_id,
