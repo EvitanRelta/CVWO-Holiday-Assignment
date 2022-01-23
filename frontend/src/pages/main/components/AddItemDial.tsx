@@ -18,8 +18,7 @@ const makeSpeedDialActionBigger = {
 
 export default () => {
     const [isOpen, setIsOpen] = useState(false);
-    const handleOpen = () => setIsOpen(true);
-    const handleClose = () => setIsOpen(false);
+    
     return (
         <Popper open>
             <Box
@@ -27,8 +26,9 @@ export default () => {
                     flexGrow: 1
                 }}
             >
-                <Backdrop open={isOpen} />
+                <Backdrop open={isOpen} onClick={() => setIsOpen(false)} />
                 <SpeedDial
+                    open={isOpen}
                     ariaLabel="Add Item"
                     // open={isOpen}
                     sx={{
@@ -38,8 +38,7 @@ export default () => {
                     }}
                     FabProps={makeSpeedDialBigger}
                     icon={<SpeedDialIcon sx={{ transform:{ sm:`scale(${80/56})` } }} />}
-                    onOpen={handleOpen}
-                    onClose={handleClose}
+                    onClick={() => setIsOpen(state => !state)}
                 >
                     <SpeedDialAction
                         FabProps={makeSpeedDialActionBigger}
