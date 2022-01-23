@@ -1,5 +1,5 @@
 import Login from './login/Login';
 import Signup from './signup/Signup'
-import Home from './main/home/Home'
+import AllTasks from './main/AllTasks'
 
-export { Login, Signup, Home };
+export { Login, Signup, AllTasks };

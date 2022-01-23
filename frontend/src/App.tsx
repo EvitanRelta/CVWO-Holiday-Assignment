@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Login, Signup, Home } from './pages';
+import { Login, Signup, AllTasks } from './pages';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material/styles';
 import { CircularProgress, CssBaseline, Grid } from '@mui/material';
@@ -40,7 +40,7 @@ const App = ({}: AppProps) => {
                         </Route>
                         <Route element={<RequireAuth />}>
                             <Route element={<AppBarWrapper />}>
-                                <Route path='home' element={<Home />} />
+                                <Route path='all' element={<AllTasks />} />
                             </Route>
                         </Route>
                     </Routes>

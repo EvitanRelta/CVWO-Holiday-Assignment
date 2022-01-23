@@ -7,7 +7,7 @@ const RequireUnauth = () => {
     const userState = useSelector((state: RootState) => state.user);
 
     return userState.user
-        ? <Navigate to={'../home'} replace />
+        ? <Navigate to={'../all'} replace />
         : <Outlet />
 };
 

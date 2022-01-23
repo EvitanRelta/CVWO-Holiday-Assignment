@@ -1,13 +1,12 @@
 import React, { useEffect } from 'react';
-import { RootState } from '../../../store/rootReducer';
+import { RootState } from '../../store/rootReducer';
 import { useDispatch, useSelector } from 'react-redux';
-import { Navigate } from 'react-router-dom';
-import Tasks from '../components/Tasks';
-import getAllTasks from '../../../store/tasks/thunkActionCreators/getAllTasks';
+import Tasks from './components/Tasks';
+import getAllTasks from '../../store/tasks/thunkActionCreators/getAllTasks';
 
 interface HomeProps {}
 
-const Home = ({}: HomeProps) => {
+const AllTasks = ({}: HomeProps) => {
     const tasksState = useSelector((state: RootState) => state.tasks);
     const dispatch = useDispatch();
 
@@ -22,4 +21,4 @@ const Home = ({}: HomeProps) => {
     );
 };
 
-export default Home;
+export default AllTasks;
