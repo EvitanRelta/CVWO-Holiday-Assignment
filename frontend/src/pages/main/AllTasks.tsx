@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { RootState } from '../../store/rootReducer';
 import { useDispatch, useSelector } from 'react-redux';
-import Tasks from './components/Tasks';
+import { Tasks } from './components';
 import getAllTasks from '../../store/tasks/thunkActionCreators/getAllTasks';
 
 interface HomeProps {}
