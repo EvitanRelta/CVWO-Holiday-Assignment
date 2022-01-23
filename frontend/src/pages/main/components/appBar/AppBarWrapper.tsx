@@ -3,11 +3,12 @@ import { AppBar, Box, Drawer, IconButton, Toolbar, Typography } from '@mui/mater
 import { Menu } from '@mui/icons-material';
 import SideBar, { SideBarProps } from './sideBar/SideBar';
 import UserMenuButton from './UserMenuButton';
+import { Outlet } from 'react-router-dom';
 
 
 const drawerWidth = 240;
 
-const AppBarWrapper: React.FC = ({ children }) => {
+const AppBarWrapper: React.FC = () => {
     const [mobileOpen, setMobileOpen] = React.useState(false);
 
     const handleDrawerToggle = () => {
@@ -106,7 +107,7 @@ const AppBarWrapper: React.FC = ({ children }) => {
                 sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` } }}
             >
                 <Toolbar />
-                {children}
+                <Outlet />
             </Box>
         </Box>
     );

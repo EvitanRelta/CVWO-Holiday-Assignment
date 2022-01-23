@@ -59,9 +59,7 @@ const Signup = ({}: SignupProps) => {
         return clearErrorsOnNavigate;
     }, []);
 
-    return userState.user
-    ? <Navigate to={'../home'} replace />
-    : (
+    return (
         <LoginSignupContainer>
             <Stack spacing={2}>
                 <Typography variant='h4'>Sign up</Typography>

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Login, Signup, Home } from './pages';
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material/styles';
 import { CircularProgress, CssBaseline, Grid } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
@@ -8,6 +8,8 @@ import { RootState } from './store/rootReducer';
 import { darkTheme, lightTheme } from './themes';
 import tryLoginFromCookies from './store/user/thunkActionCreators/tryLoginFromCookies';
 import { Center } from './pages/components';
+import { AppBarWrapper } from './pages/main/components';
+import { RequireAuth, RequireUnauth } from './routeComponents';
 
 interface AppProps {}
 
@@ -31,9 +33,16 @@ const App = ({}: AppProps) => {
                 )
                 : (
                     <Routes>
-                        <Route path="login" element={<Login />} />
-                        <Route path="signup" element={<Signup />} />
-                        <Route path="home" element={<Home />} />
+                        <Route path='/' element={<Navigate to='login' />} />
+                        <Route element={<RequireUnauth />}>
+                            <Route path='login' element={<Login />} />
+                            <Route path='signup' element={<Signup />} />
+                        </Route>
+                        <Route element={<RequireAuth />}>
+                            <Route element={<AppBarWrapper />}>
+                                <Route path='home' element={<Home />} />
+                            </Route>
+                        </Route>
                     </Routes>
                 )
             }
