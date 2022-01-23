@@ -1,4 +1,4 @@
-export const APPBAR_SET_HEADER = 'user/setHeader';
+export const APPBAR_SET_HEADER = 'appbar/setHeader';
 
 export type AppbarSetHeader = {
     type: typeof APPBAR_SET_HEADER;
