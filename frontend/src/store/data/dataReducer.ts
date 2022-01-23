@@ -2,6 +2,7 @@ import { Category, Task } from '../../apiClient/types';
 import { DataDispatchTypes, DATA_APPEND_TASK, DATA_ERROR, DATA_LOADING, DATA_SET_ALL_TASKS, DATA_SET_CATEGORIES } from './actionTypes';
 
 type DataState = {
+    hasInitData: boolean;
     isLoading: boolean;
     errorMessage?: string;
     tasks: Task[];
@@ -9,6 +10,7 @@ type DataState = {
 };
 
 const initialState: DataState = {
+    hasInitData: false,
     isLoading: false,
     tasks: [],
     categories: []
@@ -29,6 +31,7 @@ const dataReducer = (state=initialState, action: DataDispatchTypes): DataState =
         case DATA_SET_ALL_TASKS:
             return {
                 ...state,
+                hasInitData: true,
                 isLoading: false,
                 tasks: action.payload
             };

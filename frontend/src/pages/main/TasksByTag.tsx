@@ -11,13 +11,16 @@ const TasksByTag = () => {
     const { id } = useParams();
     const tagId = Number(id);
     const data = useSelector((state: RootState) => state.data);
-    const appbarState = useSelector((state: RootState) => state.appbar);
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(selectTag(tagId));
         dispatch(getAllTasks());
     }, []);
+    
+    useEffect(() => {
+        if (data.hasInitData)
+            dispatch(selectTag(tagId));
+    }, [id, data.tasks])
 
     const tasksByTag = Lodash.filter(data.tasks, { categories: [{ tags: [{ id: tagId }] }] });
 
