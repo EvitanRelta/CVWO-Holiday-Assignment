@@ -3,6 +3,7 @@ import { RootState } from '../../store/rootReducer';
 import { useDispatch, useSelector } from 'react-redux';
 import { Tasks, AddItemDial } from './components';
 import getAllTasks from '../../store/tasks/thunkActionCreators/getAllTasks';
+import setAppbarHeader from '../../store/appbar/basicActionCreators/setAppbarHeader';
 
 interface HomeProps {}
 
@@ -12,7 +13,8 @@ const AllTasks = ({}: HomeProps) => {
 
 
     useEffect(() => {
-        dispatch(getAllTasks())
+        dispatch(getAllTasks());
+        dispatch(setAppbarHeader('All Tasks'))
     }, []);
 
 

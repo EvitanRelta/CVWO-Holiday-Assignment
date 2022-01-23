@@ -1,14 +1,17 @@
 import * as React from 'react';
-import { AppBar, Box, Drawer, IconButton, Toolbar, Typography } from '@mui/material';
+import { AppBar, Box, Breadcrumbs, Drawer, IconButton, Toolbar, Typography } from '@mui/material';
 import { Menu } from '@mui/icons-material';
 import SideBar, { SideBarProps } from './sideBar/SideBar';
 import UserMenuButton from './UserMenuButton';
 import { Outlet } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../../store/rootReducer';
 
 
 const drawerWidth = 240;
 
 const AppBarWrapper: React.FC = () => {
+    const appbarState = useSelector((state: RootState) => state.appbar);
     const [mobileOpen, setMobileOpen] = React.useState(false);
 
     const handleDrawerToggle = () => {
@@ -42,6 +45,17 @@ const AppBarWrapper: React.FC = () => {
     const drawer = (
         <SideBar {...sideBarProps} />
     );
+    const header = (
+        <Breadcrumbs separator="›" aria-label="breadcrumb" component={Typography} variant='h5'>
+            {
+                appbarState.header.map((str, index) => (
+                    <Typography variant='inherit' key={index} color="text.primary">
+                        {str}
+                    </Typography>
+                ))
+            }
+        </Breadcrumbs>
+    );
 
     return (
         <Box sx={{ display: 'flex' }}>
@@ -61,9 +75,7 @@ const AppBarWrapper: React.FC = () => {
                     >
                         <Menu />
                     </IconButton>
-                    <Typography variant='h6' noWrap component='div'>
-                        Responsive drawer
-                    </Typography>
+                    {header}
                     <Box
                         sx={{marginLeft: 'auto'}}
                     >
