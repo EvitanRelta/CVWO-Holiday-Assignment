@@ -62,7 +62,7 @@ class Api::TasksController < ApplicationController
     # Require params when creating
     def create_params
       task = params.require(:task)
-      task.require([:title, :description])
-      task.permit(:title, :description)
+      task.require([:title])
+      task.permit(:title, :description, description: "")
     end
 end
