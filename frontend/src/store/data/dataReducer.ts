@@ -1,5 +1,5 @@
 import { Category, Task } from '../../apiClient/types';
-import { DataDispatchTypes, DATA_APPEND_TASK, DATA_EDIT_TASK, DATA_ERROR, DATA_LOADING, DATA_SET_ALL_TASKS, DATA_SET_CATEGORIES } from './actionTypes';
+import { DataDispatchTypes, DATA_APPEND_TASK, DATA_EDIT_TASK, DATA_ERROR, DATA_LOADING, DATA_REMOVE_TASK, DATA_SET_ALL_TASKS, DATA_SET_CATEGORIES } from './actionTypes';
 import Lodash from 'lodash';
 
 type DataState = {
@@ -60,6 +60,12 @@ const dataReducer = (state=initialState, action: DataDispatchTypes): DataState =
                 ...state,
                 isLoading: false,
                 tasks: tasksShallowCopy
+            };
+        case DATA_REMOVE_TASK:
+            return {
+                ...state,
+                isLoading: false,
+                tasks: Lodash.filter(state.tasks, task => task.id !== action.payload)
             };
         default:
             return state;

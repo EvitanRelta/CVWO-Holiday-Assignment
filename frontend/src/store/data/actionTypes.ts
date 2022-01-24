@@ -6,6 +6,7 @@ export const DATA_SET_ALL_TASKS = 'data/setAllTasks';
 export const DATA_APPEND_TASK = 'data/appendTask';
 export const DATA_SET_CATEGORIES = 'data/setCategories';
 export const DATA_EDIT_TASK = 'data/editTask';
+export const DATA_REMOVE_TASK = 'data/deleteTask';
 
 export type DataLoading = {
     type: typeof DATA_LOADING;
@@ -30,5 +31,9 @@ export type DataEditTask = {
     type: typeof DATA_EDIT_TASK;
     payload: TaskWOCategories;
 };
+export type DataRemoveTask = {
+    type: typeof DATA_REMOVE_TASK;
+    payload: number;
+};
 
-export type DataDispatchTypes = DataLoading | DataError | DataSetAllTasks | DataAppendTask | DataSetCategories | DataEditTask;
+export type DataDispatchTypes = DataLoading | DataError | DataSetAllTasks | DataAppendTask | DataSetCategories | DataEditTask | DataRemoveTask;
