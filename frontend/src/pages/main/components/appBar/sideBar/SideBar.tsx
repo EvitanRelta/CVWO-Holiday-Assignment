@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, Divider, Grid, List, ListItemButton, ListItemIcon, ListItemText, Toolbar } from '@mui/material';
-import { Logo } from '../../../../components';
+import { Center, Logo } from '../../../../components';
 import CategoryList from './CategoryList'
 import { Link } from 'react-router-dom';
 import { AllInbox, LabelOff } from '@mui/icons-material';
@@ -9,16 +9,9 @@ import { AllInbox, LabelOff } from '@mui/icons-material';
 const SideBar = () => (
     <>
         <Toolbar>
-            <Grid
-                container
-                spacing={0}
-                alignItems="center"
-                justifyContent="center"
-                component={Button}
-                color='inherit'
-            >
+            <Center color='inherit' >
                 <Logo />
-            </Grid>
+            </Center>
         </Toolbar>
         <Divider />
         <List>
