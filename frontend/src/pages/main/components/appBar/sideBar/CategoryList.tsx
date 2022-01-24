@@ -10,7 +10,7 @@ const CategoryList = () => {
     return (
         <List>
             {data.categories.map(category =>
-                <CategoryListItem category={category} />
+                <CategoryListItem key={category.id} category={category} />
             )}
         </List>
     );
