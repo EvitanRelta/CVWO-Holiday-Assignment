@@ -1,10 +1,16 @@
-import { Divider, Grid, Typography } from '@mui/material';
+import { Divider, Grid, IconButton, Typography } from '@mui/material';
 import React from 'react';
 import { Category } from '../../../../apiClient/types';
 import Tags from './Tags';
+import { AddCircle } from '@mui/icons-material';
 
 
-export default ({ categories }: { categories: Category[]}) => categories.length === 0
+type CategoriesProps = {
+    isSelected: boolean;
+    categories: Category[];
+};
+
+export default ({ isSelected, categories }: CategoriesProps) => categories.length === 0
     ? <></>
     : (
         <>
@@ -25,6 +31,17 @@ export default ({ categories }: { categories: Category[]}) => categories.length 
                             <Tags tags={category.tags} />
                         </Grid>
                     ))
+                }
+                {
+                    isSelected
+                        ? (
+                            <Grid item xs='auto' sx={{ marginRight: 3 }}>
+                                <IconButton>
+                                    <AddCircle fontSize='large' />
+                                </IconButton>
+                            </Grid>
+                        )
+                        : null
                 }
             </Grid>
         </>

@@ -70,10 +70,8 @@ export default ({ task, onClickTask, isSelected, onUnselect }: TaskProps) => {
     ? null
     : (
         <CardContent>
-            <Stack spacing={1}>
-                <Categories categories={task.categories} />
+            <Categories isSelected={isSelected} categories={task.categories} />
                 {description}
-            </Stack>
         </CardContent>
     );
 
