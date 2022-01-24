@@ -74,14 +74,14 @@ const getApiClient = (authAxiosInstance: AuthAxiosInstance): ApiClient => {
             return transformRawTasks(rawTasks as RawTasks);
         },
         createTask: async (title, description) => {
-            const newTask: RawTaskWOCategories = await authAxiosInstance.post('/tasks', {
+            const { data: { task: newTask } } = await authAxiosInstance.post('/tasks', {
                 task: { title, description }
             });
-            return transformRawTaskWOCategories(newTask);
+            return transformRawTaskWOCategories(newTask as RawTaskWOCategories);
         },
         editTask: async (taskId, taskOptions) => {
-            const updatedTask: RawTaskWOCategories = await authAxiosInstance.patch(`/tasks/${taskId}`, { tasks: taskOptions })
-            return transformRawTaskWOCategories(updatedTask);
+            const { data: { task: updatedTask } } = await authAxiosInstance.patch(`/tasks/${taskId}`, { tasks: taskOptions })
+            return transformRawTaskWOCategories(updatedTask as RawTaskWOCategories);
         },
         deleteTask: async (taskId) => {
             await authAxiosInstance.delete(`/tasks/${taskId}`);
@@ -93,33 +93,33 @@ const getApiClient = (authAxiosInstance: AuthAxiosInstance): ApiClient => {
             await authAxiosInstance.delete(`/tasks/${taskId}/tags/${tagId}`);
         },
         createTag: async (categoryId, name) => {
-            const newTag: RawTag = await authAxiosInstance.post('/tags', {
+            const { data: newTag } = await authAxiosInstance.post('/tags', {
                 tag: {
                     name,
                     category_id: categoryId
                 }
             });
-            return transformRawNewTag(newTag);
+            return transformRawNewTag(newTag as RawTag);
         },
         editTag: async (tagId, name) => {
-            const updatedTag: RawTag = await authAxiosInstance.post(`/tags/${tagId}`, { tag: { name } });
-            return transformRawNewTag(updatedTag);
+            const { data: updatedTag } = await authAxiosInstance.post(`/tags/${tagId}`, { tag: { name } });
+            return transformRawNewTag(updatedTag as RawTag);
         },
         deleteTag: async (tagId) => {
             await authAxiosInstance.delete(`/tags/${tagId}`);
         },
         createCategory: async (name) => {
-            const newCategory: RawCategoryWOTags = await authAxiosInstance.post('/categories', {
+            const { data: newCategory }= await authAxiosInstance.post('/categories', {
                 category: {
                     name,
                     allow_multiple_tags: true
                 }
             });
-            return transformRawCategoryWOTags(newCategory);
+            return transformRawCategoryWOTags(newCategory as RawCategoryWOTags);
         },
         editCategory: async (categoryId, name) => {
-            const updatedCategory: RawCategoryWOTags = await authAxiosInstance.patch(`/categories/${categoryId}`, { category: { name } });
-            return transformRawCategoryWOTags(updatedCategory);
+            const { data: updatedCategory } = await authAxiosInstance.patch(`/categories/${categoryId}`, { category: { name } });
+            return transformRawCategoryWOTags(updatedCategory as RawCategoryWOTags);
         },
         deleteCategory: async (categoryId) => {
             await authAxiosInstance.delete(`/categories/${categoryId}`);
