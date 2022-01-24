@@ -22,7 +22,7 @@ let lightTheme = createTheme(
 lightTheme = createTheme(lightTheme, {
     palette: {
         background: {
-            default: grey[500],
+            default: '#c8c8c8',
             paper: grey[50],
             nestedSideBarItem: grey[300],
         },
