@@ -83,7 +83,7 @@ const getApiClient = (authAxiosInstance: AuthAxiosInstance): ApiClient => {
             return transformRawTaskWOCategories(newTask as RawTaskWOCategories);
         },
         editTask: async (taskId, taskOptions) => {
-            const { data: { task: updatedTask } } = await authAxiosInstance.patch(`/tasks/${taskId}`, { tasks: taskOptions })
+            const { data: updatedTask } = await authAxiosInstance.patch(`/tasks/${taskId}`, { task: taskOptions })
             return transformRawTaskWOCategories(updatedTask as RawTaskWOCategories);
         },
         deleteTask: async (taskId) => {
