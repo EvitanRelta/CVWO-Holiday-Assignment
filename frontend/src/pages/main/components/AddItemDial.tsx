@@ -2,6 +2,7 @@ import { Box, SpeedDial, SpeedDialIcon, SpeedDialAction, Backdrop } from '@mui/m
 import React, { useState } from 'react';
 import { LocalOffer, AutoAwesomeMotion, Task } from '@mui/icons-material';
 import NewTaskDialog from './dialogs/NewTaskDialog';
+import NewCategoryDialog from './dialogs/NewCategoryDialog';
 
 const makeSpeedDialBigger = {
     sx: {
@@ -18,7 +19,9 @@ const makeSpeedDialActionBigger = {
 
 export default () => {
     const [isOpen, setIsOpen] = useState(false);
-    const [newTaskIsOpen, setNewTaskIsOpen] = useState(false);
+    const [isNewTaskDialogOpen, setIsNewTaskDialogOpen] = useState(false);
+    const [isNewCategoryDialogOpen, setIsNewCategoryDialogOpen] = useState(false);
+    
     
     return (
         <Box
@@ -27,7 +30,8 @@ export default () => {
             }}
         >
             <Backdrop open={isOpen} onClick={() => setIsOpen(false)} />
-            <NewTaskDialog isOpen={newTaskIsOpen} onClose={() => setNewTaskIsOpen(false)} />
+            <NewTaskDialog isOpen={isNewTaskDialogOpen} onClose={() => setIsNewTaskDialogOpen(false)} />
+            <NewCategoryDialog isOpen={isNewCategoryDialogOpen} onClose={() => setIsNewCategoryDialogOpen(false)} />
             <SpeedDial
                 open={isOpen}
                 ariaLabel="Add Item"
@@ -46,13 +50,14 @@ export default () => {
                     icon={<Task />}
                     tooltipTitle='New Task'
                     tooltipOpen
-                    onClick={() => setNewTaskIsOpen(true)}
+                    onClick={() => setIsNewTaskDialogOpen(true)}
                 />
                 <SpeedDialAction
                     FabProps={makeSpeedDialActionBigger}
                     icon={<AutoAwesomeMotion />}
                     tooltipTitle='New Category'
                     tooltipOpen
+                    onClick={() => setIsNewCategoryDialogOpen(true)}
                 />
                 <SpeedDialAction
                     FabProps={makeSpeedDialActionBigger}
