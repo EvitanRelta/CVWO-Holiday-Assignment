@@ -4,7 +4,7 @@ import { Task } from '../../../../apiClient/types';
 import Categories from './Categories';
 import { dateTransformer } from './helperFunctions';
 import { Close, Edit, Delete } from '@mui/icons-material';
-import DeleteDialog from './DeleteDialog';
+import DeleteDialog from '../dialogs/DeleteDialog';
 import { useDispatch } from 'react-redux';
 import deleteTask from '../../../../store/data/thunkActionCreators/deleteTask';
 
@@ -20,8 +20,6 @@ export default ({ task, onClickTask, isSelected, onUnselect }: TaskProps) => {
     const [cardIsActive, setCardIsActive] = useState(true);
     const dispatch = useDispatch();
 
-    const handleDelete = () => setIsDeleteDialogOpen(true);
-    
     const closeTaskIcon = (
         <IconButton onClick={onUnselect}>
             <Close />
@@ -50,7 +48,7 @@ export default ({ task, onClickTask, isSelected, onUnselect }: TaskProps) => {
                     size='small'
                     variant='contained'
                     startIcon={<Delete />}
-                    onClick={handleDelete}
+                    onClick={() => setIsDeleteDialogOpen(true)}
                 >
                     Delete
                 </Button>

@@ -1,4 +1,4 @@
-import AddItemDial from './AddItem/AddItemDial';
+import AddItemDial from './AddItemDial';
 import AppBarWrapper from './appBar/AppBarWrapper';
 import Tasks from './Tasks/Tasks';
 

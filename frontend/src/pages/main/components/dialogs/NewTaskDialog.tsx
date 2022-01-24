@@ -1,11 +1,11 @@
-import React, { ReactEventHandler, useState } from 'react';
-import { Dialog, DialogTitle, DialogContent, DialogContentText, TextField, DialogActions, Button, Alert } from '@mui/material';
+import React, { useState } from 'react';
+import { Dialog, DialogTitle, DialogContent, TextField, DialogActions, Button, Alert } from '@mui/material';
 import createTask from '../../../../store/data/thunkActionCreators/createTask';
 import { useDispatch } from 'react-redux';
 
 type NewTaskDialogProps = {
-    isOpen: boolean,
-    onClose: ({}, reason?: string) => void
+    isOpen: boolean;
+    onClose: ({}, reason?: string) => void;
 };
 
 export default ({ isOpen, onClose }: NewTaskDialogProps): JSX.Element => {

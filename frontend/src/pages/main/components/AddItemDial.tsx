@@ -1,7 +1,7 @@
 import { Box, SpeedDial, SpeedDialIcon, SpeedDialAction, Backdrop } from '@mui/material';
 import React, { useState } from 'react';
 import { LocalOffer, AutoAwesomeMotion, Task } from '@mui/icons-material';
-import NewTaskDialog from './NewTaskDialog';
+import NewTaskDialog from './dialogs/NewTaskDialog';
 
 const makeSpeedDialBigger = {
     sx: {
