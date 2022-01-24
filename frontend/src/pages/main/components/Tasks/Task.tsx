@@ -98,7 +98,7 @@ export default ({ task, onClickTask, isSelected, onUnselect }: TaskProps) => {
                 <Box
                     component={!isSelected ? CardActionArea : 'div'}
                     onClick={!isSelected ? onClickTask : undefined}
-
+                    onDoubleClick={() => setIsEditDialogOpen(true)}
                 >
                     {header}
                     {body}
