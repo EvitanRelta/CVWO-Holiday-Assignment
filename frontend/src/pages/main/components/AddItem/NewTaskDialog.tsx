@@ -15,7 +15,7 @@ export default ({ isOpen, onClose }: NewTaskDialogProps): JSX.Element => {
     const dispatch = useDispatch();
 
     const handleSubmission = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => {
-        if (!title)
+        if (!title.trim())
             return setErrorMessage('Title cannot be empty.')
         dispatch(createTask(title, description));
         onClose(e);
