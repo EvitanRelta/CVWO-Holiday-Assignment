@@ -8,6 +8,8 @@ const Center = (props: BoxProps) => (
         justifyContent='center'
         alignItems='center'
         position='absolute'
+        width='100%'
+        height='100%'
         left='50%'
         top='50%'
         sx={{ transform: 'translate(-50%, -50%)' }}
