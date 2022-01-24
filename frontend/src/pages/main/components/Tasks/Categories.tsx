@@ -14,7 +14,7 @@ export default ({ isSelected, categories }: CategoriesProps) => categories.lengt
     ? <></>
     : (
         <>
-            <Divider />
+            <Divider sx={{ marginY: 1 }} />
             <Grid container spacing={0}>
                 {
                     categories.map(category => (

@@ -34,6 +34,7 @@ export default ({ task, onClickTask, isSelected, onUnselect }: TaskProps) => {
             action={isSelected ? closeTaskIcon : null}
             title={task.title}
             subheader={dateTransformer(task.updated_at)}
+            sx={{ paddingBottom: 0, marginBottom: -1 }}
         />
     );
     const actionsFooter = (
@@ -62,7 +63,7 @@ export default ({ task, onClickTask, isSelected, onUnselect }: TaskProps) => {
         ? null
         : (
             <>
-                <Divider />
+                <Divider sx={{ marginY: 1 }} />
                 <Typography variant='body2'>{task.description}</Typography>
             </>
         );
@@ -71,7 +72,7 @@ export default ({ task, onClickTask, isSelected, onUnselect }: TaskProps) => {
     : (
         <CardContent>
             <Categories isSelected={isSelected} categories={task.categories} />
-                {description}
+            {description}
         </CardContent>
     );
 
