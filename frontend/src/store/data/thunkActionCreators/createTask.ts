@@ -8,7 +8,10 @@ export default (title: string, description: string) => async (dispatch: Dispatch
         const newTask = await apiClient.createTask(title, description);
         dispatch({
             type: DATA_APPEND_TASK,
-            payload: newTask
+            payload: {
+                ...newTask,
+                categories: []
+            }
         });
     } catch (err) {
         if (err instanceof ApiError)

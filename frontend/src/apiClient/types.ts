@@ -2,13 +2,16 @@ export type UserInfoOptions = {
     nickname?: string;
 };
 
-export type Task = {
+export type Task = TaskWOCategories & {
+    categories: Category[];
+};
+
+export type TaskWOCategories = {
     id: number;
     title: string;
     description: string;
     created_at: Date;
     updated_at: Date;
-    categories: Category[];
 };
 
 export type CategoryExtended = Category & {
@@ -17,10 +20,13 @@ export type CategoryExtended = Category & {
     updated_at: Date;
 };
 
-export type Category = {
+export type Category = CategoryWOTags & {
+    tags: Tag[];
+};
+
+export type CategoryWOTags = {
     id: number;
     name: string;
-    tags: Tag[];
 };
 
 export type Tag = {
@@ -66,7 +72,7 @@ type RawTask = RawTaskBase & {
 
 
 // Format of successful POST "/tasks"
-export type RawNewTask = RawTaskBase & {
+export type RawTaskWOCategories = RawTaskBase & {
     user_id: number;
 };
 
@@ -86,4 +92,22 @@ type RawTagInCategory = {
     name: string;
     category_id: number;
     tasks: RawTaskBase[]
+};
+
+
+// Format of successful POST "/tags"
+export type RawTag = Tag & {
+    created_at: string;
+    updated_at: string;
+}
+
+
+// Format of successful POST "/categories"
+export type RawCategoryWOTags = {
+    id: number;
+    name: string;
+    allow_multiple_tags: boolean;
+    user_id: number;
+    created_at: string;
+    updated_at: string;
 };
