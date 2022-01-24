@@ -18,6 +18,11 @@ export default ({ isOpen, onClose }: NewTaskDialogProps): JSX.Element => {
         if (!title.trim())
             return setErrorMessage('Title cannot be empty.')
         dispatch(createTask(title, description));
+        
+        // Clears fields on submission, else keep it.
+        setTitle('');
+        setDescription('');
+        
         onClose(e);
     };
 
