@@ -1,7 +1,9 @@
 import React from 'react';
-import { Button, Divider, Grid, List, ListItem, ListItemIcon, ListItemText, Toolbar } from '@mui/material';
+import { Button, Divider, Grid, List, ListItemButton, ListItemIcon, ListItemText, Toolbar } from '@mui/material';
 import { Logo } from '../../../../components';
 import CategoryList from './CategoryList'
+import { Link } from 'react-router-dom';
+import { AllInbox, LabelOff } from '@mui/icons-material';
 
 
 const SideBar = () => (
@@ -20,12 +22,18 @@ const SideBar = () => (
         </Toolbar>
         <Divider />
         <List>
-            <ListItem
-                button
-                onClick={()=>undefined}
-            >
-                <ListItemText primary={'Click me'} />
-            </ListItem>
+            <ListItemButton component={Link} to={`../all`}>
+                <ListItemIcon>
+                    <AllInbox />
+                </ListItemIcon>
+                <ListItemText primary={'All Tasks'} />
+            </ListItemButton>
+            <ListItemButton component={Link} to={`../untagged`}>
+                <ListItemIcon>
+                    <LabelOff />
+                </ListItemIcon>
+                <ListItemText primary={'Untagged Tasks'} />
+            </ListItemButton>
         </List>
         <Divider />
         <CategoryList />

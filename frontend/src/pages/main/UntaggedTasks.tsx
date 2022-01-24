@@ -3,27 +3,30 @@ import { RootState } from '../../store/rootReducer';
 import { useDispatch, useSelector } from 'react-redux';
 import { Tasks, AddItemDial } from './components';
 import getTasksAndCategories from '../../store/data/thunkActionCreators/getTasksAndCategories';
-import selectAllTasks from '../../store/appbar/thunkActionCreators/selectAllTasks';
+import selectUntagged from '../../store/appbar/thunkActionCreators/selectUntagged';
+import Lodash from 'lodash';
 
-interface HomeProps {}
-
-const AllTasks = ({}: HomeProps) => {
+const UntaggedTasks = () => {
     const data = useSelector((state: RootState) => state.data);
     const dispatch = useDispatch();
 
-
     useEffect(() => {
-        dispatch(selectAllTasks());
         dispatch(getTasksAndCategories());
     }, []);
+    
+    useEffect(() => {
+        if (data.hasInitData)
+            dispatch(selectUntagged());
+    }, [data.hasInitData])
 
+    const untaggedTasks = Lodash.filter(data.tasks, task => Lodash.isEmpty(task.categories));
 
     return (
         <>
-            <Tasks tasks={data.tasks} />
+            <Tasks tasks={untaggedTasks} />
             <AddItemDial />
         </>
     );
 };
 
-export default AllTasks;
+export default UntaggedTasks;

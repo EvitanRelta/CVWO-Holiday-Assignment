@@ -10,6 +10,7 @@ import tryLoginFromCookies from './store/user/thunkActionCreators/tryLoginFromCo
 import { Center } from './pages/components';
 import { AppBarWrapper } from './pages/main/components';
 import { RequireAuth, RequireUnauth } from './routeComponents';
+import UntaggedTasks from './pages/main/UntaggedTasks';
 
 
 const App = () => {
@@ -41,6 +42,7 @@ const App = () => {
                             <Route element={<AppBarWrapper />}>
                                 <Route path='all' element={<AllTasks />} />
                                 <Route path='tag/:id' element={<TasksByTag />} />
+                                <Route path='untagged' element={<UntaggedTasks />} />
                             </Route>
                         </Route>
                     </Routes>

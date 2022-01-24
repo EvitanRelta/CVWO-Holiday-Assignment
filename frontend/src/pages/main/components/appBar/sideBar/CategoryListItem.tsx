@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { List, ListItemIcon, ListItemText, Collapse, ListItemButton, ListItem } from '@mui/material';
+import { List, ListItemIcon, ListItemText, Collapse, ListItemButton } from '@mui/material';
 import { ExpandLess, ExpandMore, AutoAwesomeMotion } from '@mui/icons-material';
 import { Category } from '../../../../../apiClient/types';
 import { Link } from 'react-router-dom';
@@ -33,7 +33,6 @@ const CategoryListItem = ({ category }: { category: Category }) => {
                             component={Link}
                             sx={{ paddingLeft: 7 }}
                             key={`${category.name}-${tag.name}`}
-                            LinkComponent={Link}
                             to={`../tag/${tag.id}`}
                         >
                             <ListItemText primary={tag.name} />

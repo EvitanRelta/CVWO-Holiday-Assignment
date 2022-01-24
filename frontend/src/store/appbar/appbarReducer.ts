@@ -1,15 +1,17 @@
-import { AppbarDispatchTypes, APPBAR_SET_SELECTED_TAG, APPBAR_SET_HEADER } from './actionTypes';
-import { Category, Tag } from '../../apiClient/types';
+import { AppbarDispatchTypes, APPBAR_SET_SELECTED_TAG, APPBAR_SET_HEADER, APPBAR_ALL_TASKS, APPBAR_SELECT_UNTAGGED } from './actionTypes';
+import { Tag } from '../../apiClient/types';
 
 
 type AppbarState = {
     header: string[];
-    selectedTag: Tag | null;
+
+    // undefined => all tasks
+    // null => untagged tasks
+    selectedTag?: Tag | null;
 };
 
 const initialState: AppbarState = {
-    header: [],
-    selectedTag: null
+    header: []
 };
 
 const appbarReducer = (state=initialState, action: AppbarDispatchTypes): AppbarState => {
@@ -23,6 +25,16 @@ const appbarReducer = (state=initialState, action: AppbarDispatchTypes): AppbarS
             return {
                 ...state,
                 selectedTag: action.payload
+            };
+        case APPBAR_SELECT_UNTAGGED:
+            return {
+                ...state,
+                selectedTag: null
+            };
+        case APPBAR_ALL_TASKS:
+            return {
+                ...state,
+                selectedTag: undefined
             };
         default:
             return state;

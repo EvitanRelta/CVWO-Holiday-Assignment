@@ -4,10 +4,7 @@ import { AppbarDispatchTypes, APPBAR_SET_SELECTED_TAG } from '../actionTypes';
 import setAppbarHeader from '../basicActionCreators/setAppbarHeader';
 import Lodash from 'lodash';
 
-export default (tagId: number | null) => async (dispatch: Dispatch<AppbarDispatchTypes>, getState: () => RootState) => {
-    if (tagId === null)
-        return dispatch(setAppbarHeader('All Tasks'));
-    
+export default (tagId: number) => async (dispatch: Dispatch<AppbarDispatchTypes>, getState: () => RootState) => {
     const { data } = getState();
     const category = Lodash.find(data.categories, { tags: [{ id: tagId }] });
     const tag = category?.tags.find(tag => tag.id === tagId);
