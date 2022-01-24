@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { RootState } from '../../store/rootReducer';
 import { useDispatch, useSelector } from 'react-redux';
 import { Tasks, AddItemDial } from './components';
-import getAllTasks from '../../store/data/thunkActionCreators/getAllTasks';
+import getTasksAndCategories from '../../store/data/thunkActionCreators/getTasksAndCategories';
 import setAppbarHeader from '../../store/appbar/basicActionCreators/setAppbarHeader';
 
 interface HomeProps {}
@@ -14,7 +14,7 @@ const AllTasks = ({}: HomeProps) => {
 
     useEffect(() => {
         dispatch(setAppbarHeader('All Tasks'));
-        dispatch(getAllTasks());
+        dispatch(getTasksAndCategories());
     }, []);
 
 

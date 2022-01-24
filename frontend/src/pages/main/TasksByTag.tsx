@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { RootState } from '../../store/rootReducer';
 import { useDispatch, useSelector } from 'react-redux';
 import { Tasks, AddItemDial } from './components';
-import getAllTasks from '../../store/data/thunkActionCreators/getAllTasks';
+import getTasksAndCategories from '../../store/data/thunkActionCreators/getTasksAndCategories';
 import selectTag from '../../store/appbar/thunkActionCreators/selectTagId';
 import { useParams } from 'react-router-dom';
 import Lodash from 'lodash';
@@ -14,7 +14,7 @@ const TasksByTag = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(getAllTasks());
+        dispatch(getTasksAndCategories());
     }, []);
     
     useEffect(() => {

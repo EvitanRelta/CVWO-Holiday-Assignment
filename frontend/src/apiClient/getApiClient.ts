@@ -1,6 +1,6 @@
-import { RawTaskWOCategories, RawTasks, RawUser, Task, User, UserInfoOptions, Tag, RawTag, Category, RawCategoryWOTags, CategoryWOTags, TaskWOCategories } from './types';
+import { RawTaskWOCategories, RawTasks, RawUser, Task, User, UserInfoOptions, Tag, RawTag, Category, RawCategoryWOTags, CategoryWOTags, TaskWOCategories, RawCategories } from './types';
 import { AuthAxiosInstance } from './getAuthAxiosInstance';
-import { transformRawUser, transformRawTasks, transformRawTaskWOCategories, transformRawNewTag, transformRawCategoryWOTags } from './rawDataTransformers';
+import { transformRawUser, transformRawTasks, transformRawTaskWOCategories, transformRawNewTag, transformRawCategoryWOTags, transformRawCategories } from './rawDataTransformers';
 import Lodash from 'lodash';
 import signInErrorTransformer from './errorHandlers/signInErrorTransformer';
 import signupErrorTransformer from './errorHandlers/signupErrorTransformer';
@@ -27,6 +27,7 @@ export type ApiMethods = {
     editTag: (tagId: number, name: string) => Promise<Tag>;
     deleteTag: (tagId: number) => Promise<void>;
 
+    getCategories: () => Promise<Category[]>;
     createCategory: (name: string) => Promise<CategoryWOTags>;
     editCategory: (categoryId: number, name: string) => Promise<CategoryWOTags>;
     deleteCategory: (categoryId: number) => Promise<void>;
@@ -69,6 +70,8 @@ const getApiClient = (authAxiosInstance: AuthAxiosInstance): ApiClient => {
     };
 
     const apiMethods: ApiMethods = {
+        
+        // Task methods
         getTasks: async () => {
             const { data: rawTasks } = await authAxiosInstance.get('/tasks');
             return transformRawTasks(rawTasks as RawTasks);
@@ -92,6 +95,9 @@ const getApiClient = (authAxiosInstance: AuthAxiosInstance): ApiClient => {
         removeTagFromTask: async (taskId, tagId) => {
             await authAxiosInstance.delete(`/tasks/${taskId}/tags/${tagId}`);
         },
+
+
+        // Tag methods
         createTag: async (categoryId, name) => {
             const { data: newTag } = await authAxiosInstance.post('/tags', {
                 tag: {
@@ -108,8 +114,15 @@ const getApiClient = (authAxiosInstance: AuthAxiosInstance): ApiClient => {
         deleteTag: async (tagId) => {
             await authAxiosInstance.delete(`/tags/${tagId}`);
         },
+
+
+        // Category methods
+        getCategories: async () => {
+            const { data: rawCategories } = await authAxiosInstance.get('/categories');
+            return transformRawCategories(rawCategories as RawCategories);
+        },
         createCategory: async (name) => {
-            const { data: newCategory }= await authAxiosInstance.post('/categories', {
+            const { data: newCategory } = await authAxiosInstance.post('/categories', {
                 category: {
                     name,
                     allow_multiple_tags: true
