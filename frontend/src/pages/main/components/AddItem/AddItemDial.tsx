@@ -1,4 +1,4 @@
-import { Box, SpeedDial, SpeedDialIcon, SpeedDialAction, Popper, Backdrop } from '@mui/material';
+import { Box, SpeedDial, SpeedDialIcon, SpeedDialAction, Backdrop } from '@mui/material';
 import React, { useState } from 'react';
 import { LocalOffer, AutoAwesomeMotion, Task } from '@mui/icons-material';
 import NewTaskDialog from './NewTaskDialog';
@@ -21,48 +21,46 @@ export default () => {
     const [newTaskIsOpen, setNewTaskIsOpen] = useState(false);
     
     return (
-        <Popper open>
-            <Box
+        <Box
+            sx={{
+                flexGrow: 1
+            }}
+        >
+            <Backdrop open={isOpen} onClick={() => setIsOpen(false)} />
+            <NewTaskDialog isOpen={newTaskIsOpen} onClose={() => setNewTaskIsOpen(false)} />
+            <SpeedDial
+                open={isOpen}
+                ariaLabel="Add Item"
+                // open={isOpen}
                 sx={{
-                    flexGrow: 1
+                    position: 'fixed',
+                    bottom: '3vh',
+                    right: '3vh',
                 }}
+                FabProps={makeSpeedDialBigger}
+                icon={<SpeedDialIcon sx={{ transform:{ sm:`scale(${80/56})` } }} />}
+                onClick={() => setIsOpen(state => !state)}
             >
-                <Backdrop open={isOpen} onClick={() => setIsOpen(false)} />
-                <NewTaskDialog isOpen={newTaskIsOpen} onClose={() => setNewTaskIsOpen(false)} />
-                <SpeedDial
-                    open={isOpen}
-                    ariaLabel="Add Item"
-                    // open={isOpen}
-                    sx={{
-                        position: 'fixed',
-                        bottom: '3vh',
-                        right: '3vh',
-                    }}
-                    FabProps={makeSpeedDialBigger}
-                    icon={<SpeedDialIcon sx={{ transform:{ sm:`scale(${80/56})` } }} />}
-                    onClick={() => setIsOpen(state => !state)}
-                >
-                    <SpeedDialAction
-                        FabProps={makeSpeedDialActionBigger}
-                        icon={<Task />}
-                        tooltipTitle='New Task'
-                        tooltipOpen
-                        onClick={() => setNewTaskIsOpen(true)}
-                    />
-                    <SpeedDialAction
-                        FabProps={makeSpeedDialActionBigger}
-                        icon={<AutoAwesomeMotion />}
-                        tooltipTitle='New Category'
-                        tooltipOpen
-                    />
-                    <SpeedDialAction
-                        FabProps={makeSpeedDialActionBigger}
-                        icon={<LocalOffer />}
-                        tooltipTitle='New Tag'
-                        tooltipOpen
-                    />
-                </SpeedDial>
-            </Box>
-        </Popper>
+                <SpeedDialAction
+                    FabProps={makeSpeedDialActionBigger}
+                    icon={<Task />}
+                    tooltipTitle='New Task'
+                    tooltipOpen
+                    onClick={() => setNewTaskIsOpen(true)}
+                />
+                <SpeedDialAction
+                    FabProps={makeSpeedDialActionBigger}
+                    icon={<AutoAwesomeMotion />}
+                    tooltipTitle='New Category'
+                    tooltipOpen
+                />
+                <SpeedDialAction
+                    FabProps={makeSpeedDialActionBigger}
+                    icon={<LocalOffer />}
+                    tooltipTitle='New Tag'
+                    tooltipOpen
+                />
+            </SpeedDial>
+        </Box>
     );
 };  
