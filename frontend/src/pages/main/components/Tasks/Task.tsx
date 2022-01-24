@@ -7,6 +7,7 @@ import { Close, Edit, Delete } from '@mui/icons-material';
 import DeleteDialog from '../dialogs/DeleteDialog';
 import { useDispatch } from 'react-redux';
 import deleteTask from '../../../../store/data/thunkActionCreators/deleteTask';
+import EditTaskDialog from '../dialogs/EditTaskDialog';
 
 type TaskProps = {
     task: Task;
@@ -17,9 +18,10 @@ type TaskProps = {
 
 export default ({ task, onClickTask, isSelected, onUnselect }: TaskProps) => {
     const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
+    const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
     const [cardIsActive, setCardIsActive] = useState(true);
     const dispatch = useDispatch();
-
+    
     const closeTaskIcon = (
         <IconButton onClick={onUnselect}>
             <Close />
@@ -41,6 +43,7 @@ export default ({ task, onClickTask, isSelected, onUnselect }: TaskProps) => {
                     size='small'
                     variant='contained'
                     startIcon={<Edit />}
+                    onClick={() => setIsEditDialogOpen(true)}
                 >
                     Edit
                 </Button>
@@ -85,6 +88,11 @@ export default ({ task, onClickTask, isSelected, onUnselect }: TaskProps) => {
                     setCardIsActive(false);
                     dispatch(deleteTask(task.id));
                 }}
+            />
+            <EditTaskDialog
+                isOpen={isEditDialogOpen}
+                task={task}
+                onClose={() => setIsEditDialogOpen(false)}
             />
             <Card>
                 <Box
