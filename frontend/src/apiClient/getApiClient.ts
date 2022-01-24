@@ -77,7 +77,7 @@ const getApiClient = (authAxiosInstance: AuthAxiosInstance): ApiClient => {
             return transformRawTasks(rawTasks as RawTasks);
         },
         createTask: async (title, description) => {
-            const { data: { task: newTask } } = await authAxiosInstance.post('/tasks', {
+            const { data: newTask } = await authAxiosInstance.post('/tasks', {
                 task: { title, description }
             });
             return transformRawTaskWOCategories(newTask as RawTaskWOCategories);
