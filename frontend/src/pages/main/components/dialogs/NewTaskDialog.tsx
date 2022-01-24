@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 
 type NewTaskDialogProps = {
     isOpen: boolean;
-    onClose: ({}, reason?: string) => void;
+    onClose: ({}?, reason?: string) => void;
 };
 
 export default ({ isOpen, onClose }: NewTaskDialogProps): JSX.Element => {
@@ -13,17 +13,24 @@ export default ({ isOpen, onClose }: NewTaskDialogProps): JSX.Element => {
     const [description, setDescription] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
     const dispatch = useDispatch();
-
-    const handleSubmission = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => {
+    
+    const handleSubmission = () => {
         if (!title.trim())
             return setErrorMessage('Title cannot be empty.')
         dispatch(createTask(title, description));
         
         // Clears fields on submission, else keep it.
-        setTitle('');
-        setDescription('');
+        setTimeout(() => {
+            setTitle('');
+            setDescription('');
+        }, 300)
         
-        onClose(e);
+        onClose();
+    };
+    const handleKeyPress = (e: React.KeyboardEvent) => {
+        setErrorMessage('');
+        if (e.key === 'Enter')
+            handleSubmission();
     };
 
     const errorAlert = errorMessage
@@ -42,7 +49,7 @@ export default ({ isOpen, onClose }: NewTaskDialogProps): JSX.Element => {
                     fullWidth
                     value={title}
                     onChange={e => setTitle(e.target.value)}
-                    onKeyPress={() => setErrorMessage('')}
+                    onKeyPress={handleKeyPress}
                 />
                 <TextField
                     margin="dense"
@@ -54,7 +61,7 @@ export default ({ isOpen, onClose }: NewTaskDialogProps): JSX.Element => {
                     maxRows={10}
                     value={description}
                     onChange={e => setDescription(e.target.value)}
-                    onKeyPress={() => setErrorMessage('')}
+                    onKeyPress={handleKeyPress}
                 />
                 {errorAlert}
             </DialogContent>

@@ -4,13 +4,13 @@ import editTask from '../../../../store/data/thunkActionCreators/editTask';
 import { useDispatch } from 'react-redux';
 import { Task } from '../../../../apiClient/types';
 
-type NewTaskDialogProps = {
+type EditTaskDialogProps = {
     isOpen: boolean;
     task: Task;
     onClose: ({}?, reason?: string) => void;
 };
 
-export default ({ isOpen, task, onClose }: NewTaskDialogProps): JSX.Element => {
+export default ({ isOpen, task, onClose }: EditTaskDialogProps): JSX.Element => {
     const [title, setTitle] = useState(task.title);
     const [description, setDescription] = useState(task.description);
     const [errorMessage, setErrorMessage] = useState('');
