@@ -1,4 +1,4 @@
-import { Stack } from '@mui/material';
+import { Grid, Stack } from '@mui/material';
 import React, { useState } from 'react';
 import { Task } from '../../../../apiClient/types';
 import TaskComponent from './Task';
@@ -10,18 +10,19 @@ export default ({ tasks }: { tasks: Task[] }) => {
     const onClickTask = (taskId: number) => () => setSelectedId(taskId);
 
     return (
-        <Stack spacing={2}>
+        <Grid container spacing={2}>
             {
                 tasks.map(task => (
-                    <TaskComponent
-                        key={task.id}
-                        task={task}
-                        isSelected={task.id === selectedId}
-                        onClickTask={onClickTask(task.id)}
-                        onUnselect={() => setSelectedId(-1)}
-                    />
+                    <Grid item key={task.id} xs={12} md={6} lg={4} xl={3}>
+                        <TaskComponent
+                            task={task}
+                            isSelected={task.id === selectedId}
+                            onClickTask={onClickTask(task.id)}
+                            onUnselect={() => setSelectedId(-1)}
+                        />
+                    </Grid>
                 ))
             }
-        </Stack>
+        </Grid>
     );
 }
