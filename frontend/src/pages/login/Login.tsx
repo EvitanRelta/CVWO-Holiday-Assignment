@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { styled } from '@mui/material/styles';
-import { Button, Paper, Stack, TextField, Typography, IconButton, Link, Alert, Box, CircularProgress } from '@mui/material';
+import { Button, Stack, TextField, Typography, IconButton, Link, Box, CircularProgress } from '@mui/material';
 import { DarkMode, Google } from '@mui/icons-material';
 import { PwVisibilityIconAdornment, LoginSignupContainer, ErrorAlert } from '../components';
-import { Link as RouterLink, Navigate } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
 import { RootState } from '../../store/rootReducer';
 import { useDispatch, useSelector } from 'react-redux';
 import toggleDarkMode from '../../store/isDarkMode/thunkActionCreators/toggleDarkMode';
 import emailSignIn from '../../store/user/thunkActionCreators/emailSignIn';
-import setEmailLoginError from '../../store/user/basicActionCreators/setEmailLoginError';
 import clearLoginSignupErrors from '../../store/user/basicActionCreators/clearLoginSignupErrors';
 
 
@@ -52,6 +50,8 @@ const Login = ({}: LoginProps) => {
                     variant='contained'
                     onClick={handleSubmission}
                     startIcon={<Google />}
+                    //@ts-ignore
+                    // MUI color type not recognising custom color palettes
                     color='google'
                 >
                     Continue with Google
