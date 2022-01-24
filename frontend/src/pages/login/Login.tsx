@@ -14,10 +14,6 @@ import clearLoginSignupErrors from '../../store/user/basicActionCreators/clearLo
 
 interface LoginProps {}
 
-const FullWidthButton = styled(Button)({
-    width: '100%'
-});
-
 const Login = ({}: LoginProps) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -50,7 +46,8 @@ const Login = ({}: LoginProps) => {
         <LoginSignupContainer>
             <Stack spacing={2}>
                 <Typography variant='h4'>Log in</Typography>
-                <FullWidthButton
+                <Button
+                    fullWidth
                     disabled={userState.isLoading}
                     variant='contained'
                     onClick={handleSubmission}
@@ -58,7 +55,7 @@ const Login = ({}: LoginProps) => {
                     color='google'
                 >
                     Continue with Google
-                </FullWidthButton>
+                </Button>
                 <Typography align='center'>or</Typography>
                 <TextField
                     error={hasEmailError}
@@ -101,7 +98,8 @@ const Login = ({}: LoginProps) => {
                     ? <ErrorAlert text={userState.loginErrorMessage} />
                     : null
                 }
-                <FullWidthButton
+                <Button
+                    fullWidth
                     disabled={userState.isLoading}
                     variant='contained'
                     onClick={handleSubmission}
@@ -110,7 +108,7 @@ const Login = ({}: LoginProps) => {
                         ? <CircularProgress color='inherit' size={24.5} />
                         : 'Login'
                     }
-                </FullWidthButton>
+                </Button>
                 <Box>
                     {userState.isLoading
                         ? <Typography color='hyperlink.disabled' sx={{textDecoration: 'underline'}}>Create new account</Typography>
