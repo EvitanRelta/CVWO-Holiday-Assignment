@@ -1,7 +1,7 @@
 import { Box, SpeedDial, SpeedDialIcon, SpeedDialAction, Popper, Backdrop } from '@mui/material';
 import React, { useState } from 'react';
 import { LocalOffer, AutoAwesomeMotion, Task } from '@mui/icons-material';
-
+import NewTaskDialog from './NewTaskDialog';
 
 const makeSpeedDialBigger = {
     sx: {
@@ -18,6 +18,7 @@ const makeSpeedDialActionBigger = {
 
 export default () => {
     const [isOpen, setIsOpen] = useState(false);
+    const [newTaskIsOpen, setNewTaskIsOpen] = useState(false);
     
     return (
         <Popper open>
@@ -27,6 +28,7 @@ export default () => {
                 }}
             >
                 <Backdrop open={isOpen} onClick={() => setIsOpen(false)} />
+                <NewTaskDialog isOpen={newTaskIsOpen} onClose={() => setNewTaskIsOpen(false)} />
                 <SpeedDial
                     open={isOpen}
                     ariaLabel="Add Item"
@@ -45,6 +47,7 @@ export default () => {
                         icon={<Task />}
                         tooltipTitle='New Task'
                         tooltipOpen
+                        onClick={() => setNewTaskIsOpen(true)}
                     />
                     <SpeedDialAction
                         FabProps={makeSpeedDialActionBigger}
