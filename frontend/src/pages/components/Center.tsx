@@ -1,16 +1,18 @@
-import { Grid } from '@mui/material';
-import { Box } from '@mui/system';
+import { Box, BoxProps } from '@mui/material';
 import React from 'react';
 
 
-const Center: React.FC = ({ children }) => (
+const Center = (props: BoxProps) => (
     <Box
         display='flex'
         justifyContent='center'
         alignItems='center'
-        minHeight='100vh'
+        position='absolute'
+        left='50%'
+        top='50%'
+        sx={{ transform: 'translate(-50%, -50%)' }}
     >
-        {children}
+        {props.children}
     </Box> 
 );
 
