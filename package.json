@@ -12,7 +12,11 @@
     "serve-frontend": "cd frontend && yarn run serve",
 
     "start": "concurrently --kill-others-on-fail \"node setupProxy.js\" \"yarn run backend\" \"yarn run frontend\"",
-    "serve": "concurrently --kill-others-on-fail \"node setupProxy.js\" \"yarn run backend\" \"yarn run serve-frontend\""
+    "serve": "concurrently --kill-others-on-fail \"node setupProxy.js\" \"yarn run backend\" \"yarn run serve-frontend\"",
+    
+    "heroku-postbuild": "yarn install && yarn run setup-frontend && yarn run build-frontend",
+    "heroku-backend": "cd backend && rails server -p 3000 -e $RAILS_ENV",
+    "heroku-serve": "concurrently --kill-others-on-fail \"node setupProxy.js\" \"yarn run heroku-backend\" \"yarn run serve-frontend\""
   },
   "dependencies": {
     "concurrently": "^7.0.0",
