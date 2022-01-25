@@ -2,6 +2,9 @@
   "scripts": {
     "frontend": "cd frontend && yarn start",
     "backend": "cd backend && rails s",
+    "setup-frontend": "cd frontend && yarn install",
+    "setup-backend": "cd backend && bundle install && rails db:migrate db:seed",
+    "setup": "yarn install && concurrently \"yarn run setup-frontend\" \"yarn run setup-backend\"",
     "start": "concurrently \"yarn run frontend\" \"yarn run backend\""
   },
   "devDependencies": {
