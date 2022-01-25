@@ -6,6 +6,8 @@ Name: &nbsp; Tan Zong Zhi, Shaun (A0235143N)
 
 Deployed at: &nbsp; [`https://tododex.herokuapp.com/`](https://tododex.herokuapp.com/)
 
+<br><br>
+
 ## Running locally
 
 ### Setup
