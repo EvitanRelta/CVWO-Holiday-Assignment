@@ -46,7 +46,7 @@ export default ({ isOpen, task, onClose }: EditTaskDialogProps): JSX.Element => 
                 <TextField
                     autoFocus
                     margin="dense"
-                    id="new-task-title"
+                    id="edit-task-title"
                     label="Title"
                     fullWidth
                     value={title}
@@ -55,7 +55,7 @@ export default ({ isOpen, task, onClose }: EditTaskDialogProps): JSX.Element => 
                 />
                 <TextField
                     margin="dense"
-                    id="new-task-description"
+                    id="edit-task-description"
                     label="Description"
                     fullWidth
                     multiline

@@ -1,4 +1,4 @@
-import { Category, Task, TaskWOCategories } from '../../apiClient/types';
+import { Category, Tag, Task, TaskWOCategories } from '../../apiClient/types';
 
 export const DATA_LOADING = 'data/loading';
 export const DATA_ERROR = 'data/error';
@@ -8,6 +8,7 @@ export const DATA_SET_CATEGORIES = 'data/setCategories';
 export const DATA_EDIT_TASK = 'data/editTask';
 export const DATA_REMOVE_TASK = 'data/deleteTask';
 export const DATA_APPEND_CATEGORY = 'data/appendCategory';
+export const DATA_APPEND_TAG = 'data/appendTag';
 
 export type DataLoading = {
     type: typeof DATA_LOADING;
@@ -40,5 +41,14 @@ export type DataAppendCategory = {
     type: typeof DATA_APPEND_CATEGORY;
     payload: Category;
 };
+export type DataAppendTag = {
+    type: typeof DATA_APPEND_TAG;
+    payload: {
+        categoryId: number;
+        tag: Tag;
+    };
+};
 
-export type DataDispatchTypes = DataLoading | DataError | DataSetAllTasks | DataAppendTask | DataSetCategories | DataEditTask | DataRemoveTask | DataAppendCategory;
+export type DataDispatchTypes = DataLoading | DataError | DataSetAllTasks
+    | DataAppendTask | DataSetCategories | DataEditTask | DataRemoveTask
+    | DataAppendCategory | DataAppendTag;

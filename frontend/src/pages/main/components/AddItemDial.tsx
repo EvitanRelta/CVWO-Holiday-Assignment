@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { LocalOffer, AutoAwesomeMotion, Task } from '@mui/icons-material';
 import NewTaskDialog from './dialogs/NewTaskDialog';
 import NewCategoryDialog from './dialogs/NewCategoryDialog';
+import NewTagDialog from './dialogs/NewTagDialog';
 
 const makeSpeedDialBigger = {
     sx: {
@@ -21,6 +22,7 @@ export default () => {
     const [isOpen, setIsOpen] = useState(false);
     const [isNewTaskDialogOpen, setIsNewTaskDialogOpen] = useState(false);
     const [isNewCategoryDialogOpen, setIsNewCategoryDialogOpen] = useState(false);
+    const [isNewTagDialogOpen, setIsNewTagDialogOpen] = useState(false);
     
     
     return (
@@ -32,6 +34,7 @@ export default () => {
             <Backdrop open={isOpen} onClick={() => setIsOpen(false)} />
             <NewTaskDialog isOpen={isNewTaskDialogOpen} onClose={() => setIsNewTaskDialogOpen(false)} />
             <NewCategoryDialog isOpen={isNewCategoryDialogOpen} onClose={() => setIsNewCategoryDialogOpen(false)} />
+            <NewTagDialog isOpen={isNewTagDialogOpen} onClose={() => setIsNewTagDialogOpen(false)} />
             <SpeedDial
                 open={isOpen}
                 ariaLabel="Add Item"
@@ -64,6 +67,7 @@ export default () => {
                     icon={<LocalOffer />}
                     tooltipTitle='New Tag'
                     tooltipOpen
+                    onClick={() => setIsNewTagDialogOpen(true)}
                 />
             </SpeedDial>
         </Box>

@@ -1,30 +1,44 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Dialog, DialogTitle, DialogContent, TextField, DialogActions, Button, Alert } from '@mui/material';
-import createCategory from '../../../../store/data/thunkActionCreators/createCategory';
+import createTag from '../../../../store/data/thunkActionCreators/createTag';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../../store/rootReducer';
+import { Category } from '../../../../apiClient/types';
+import DropDownCategories from './DropDownCategories';
 
-type NewCategoryDialogProps = {
+
+type NewTagDialogProps = {
     isOpen: boolean;
     onClose: ({}?, reason?: string) => void;
 };
 
-export default ({ isOpen, onClose }: NewCategoryDialogProps): JSX.Element => {
+export default ({ isOpen, onClose }: NewTagDialogProps): JSX.Element => {
+    const [category, setCategory] = useState<Category | null>(null);
     const [name, setName] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
     const data = useSelector((state: RootState) => state.data);
     const dispatch = useDispatch();
     
+    useEffect(() => {
+        setTimeout(() => {
+            setCategory(null);
+            setName('');
+        }, 300)
+    }, [isOpen])
+    
     const handleSubmission = () => {
         if (!name.trim())
             return setErrorMessage('Name cannot be empty.')
-        if (data.categories.find(category => category.name === name))
-            return setErrorMessage('Name already taken.')
+        if (!category)
+            return setErrorMessage('No category selected.')
+        if (category.tags.find(tag => tag.name === name))
+            return setErrorMessage(`Name already taken in "${category.name}".`)
             
-        dispatch(createCategory(name));
+        dispatch(createTag(category.id, name));
         
         // Clears fields on submission, else keep it.
         setTimeout(() => {
+            setCategory(null);
             setName('');
         }, 300)
         
@@ -44,10 +58,11 @@ export default ({ isOpen, onClose }: NewCategoryDialogProps): JSX.Element => {
         <Dialog open={isOpen} onClose={onClose}>
             <DialogTitle>New Category</DialogTitle>
             <DialogContent>
+                <DropDownCategories category={category} setCategory={setCategory} />
                 <TextField
                     autoFocus
                     margin="dense"
-                    id="new-category-name"
+                    id="new-tag-name"
                     label="Name"
                     fullWidth
                     value={name}
