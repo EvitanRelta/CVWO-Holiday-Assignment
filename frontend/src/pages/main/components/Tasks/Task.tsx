@@ -80,7 +80,7 @@ export default ({ task, onClickTask, isSelected, onUnselect }: TaskProps) => {
                 <Typography variant='body2'>{task.description}</Typography>
             </>
         );
-    const body = !task.description && task.categories.length === 0
+    const body = !task.description && task.categories.length === 0 && !isSelected
         ? null
         : (
             <CardContent
