@@ -1,26 +1,31 @@
-import React, { useEffect } from 'react';
-import { RootState } from '../../store/rootReducer';
-import { useDispatch, useSelector } from 'react-redux';
-import { Tasks, AddItemDial } from './components';
-import getTasksAndCategories from '../../store/data/thunkActionCreators/getTasksAndCategories';
-import selectTagId from '../../store/appbar/thunkActionCreators/selectTagId';
-import { useParams } from 'react-router-dom';
 import Lodash from 'lodash';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate, useParams } from 'react-router-dom';
+import selectTagId from '../../store/appbar/thunkActionCreators/selectTagId';
+import getTasksAndCategories from '../../store/data/thunkActionCreators/getTasksAndCategories';
+import { RootState } from '../../store/rootReducer';
+import { AddItemDial, Tasks } from './components';
 
 const TasksByTag = () => {
     const { id } = useParams();
     const tagId = Number(id);
     const data = useSelector((state: RootState) => state.data);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const category = Lodash.find(data.categories, { tags: [{ id: tagId }] });
 
     useEffect(() => {
-        dispatch(getTasksAndCategories());
-    }, []);
-    
+        if (category || !data.hasInitData)
+            dispatch(getTasksAndCategories());
+    }, [category?.name, data.hasInitData]);
+
     useEffect(() => {
-        if (data.hasInitData)
-            dispatch(selectTagId(tagId));
-    }, [id, data.hasInitData])
+        if (!data.hasInitData) return;
+        if (!category)
+            return navigate('../all');
+        dispatch(selectTagId(tagId));
+    }, [id, data.hasInitData, category]);
 
     const tasksByTag = Lodash.filter(data.tasks, { categories: [{ tags: [{ id: tagId }] }] });
 

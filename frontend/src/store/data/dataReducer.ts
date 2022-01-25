@@ -1,9 +1,9 @@
-import { Category, Task } from '../../apiClient/types';
-import { DataDispatchTypes, DATA_APPEND_CATEGORY, DATA_APPEND_TAG, DATA_APPEND_TASK, DATA_EDIT_CATEGORY, DATA_EDIT_TASK, DATA_ERROR, DATA_LOADING, DATA_REMOVE_TASK, DATA_SET_ALL_TASKS, DATA_SET_CATEGORIES } from './actionTypes';
 import Lodash from 'lodash';
-import updateTask from './helperFunctions/updateTask';
-import updateCategory from './helperFunctions/updateCategory';
+import { Category, Task } from '../../apiClient/types';
+import { DataDispatchTypes, DATA_APPEND_CATEGORY, DATA_APPEND_TAG, DATA_APPEND_TASK, DATA_EDIT_CATEGORY, DATA_EDIT_TASK, DATA_ERROR, DATA_LOADING, DATA_REMOVE_CATEGORY, DATA_REMOVE_TASK, DATA_SET_ALL_TASKS, DATA_SET_CATEGORIES } from './actionTypes';
 import appendTagToCategory from './helperFunctions/appendTagToCategory';
+import updateCategory from './helperFunctions/updateCategory';
+import updateTask from './helperFunctions/updateTask';
 
 type DataState = {
     hasInitData: boolean;
@@ -20,7 +20,7 @@ const initialState: DataState = {
     categories: []
 };
 
-const dataReducer = (state=initialState, action: DataDispatchTypes): DataState => {
+const dataReducer = (state = initialState, action: DataDispatchTypes): DataState => {
     switch (action.type) {
         case DATA_LOADING:
             return {
@@ -80,6 +80,12 @@ const dataReducer = (state=initialState, action: DataDispatchTypes): DataState =
                 ...state,
                 isLoading: false,
                 categories: updateCategory(state.categories, action.payload)
+            };
+        case DATA_REMOVE_CATEGORY:
+            return {
+                ...state,
+                isLoading: false,
+                categories: Lodash.filter(state.categories, category => category.id !== action.payload)
             };
         default:
             return state;

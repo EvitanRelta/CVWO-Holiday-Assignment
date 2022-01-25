@@ -1,7 +1,7 @@
 import { Dispatch } from 'react';
 import apiClient from '../../../apiClient';
 import ApiError from '../../../apiClient/ApiError';
-import { DataDispatchTypes, DATA_APPEND_CATEGORY, DATA_APPEND_TAG, DATA_ERROR } from '../actionTypes';
+import { DataDispatchTypes, DATA_APPEND_TAG, DATA_ERROR } from '../actionTypes';
 
 export default (categoryId: number, name: string) => async (dispatch: Dispatch<DataDispatchTypes>) => {
     try {

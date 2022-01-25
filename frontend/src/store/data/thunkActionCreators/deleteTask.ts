@@ -1,7 +1,7 @@
 import { Dispatch } from 'react';
 import apiClient from '../../../apiClient';
 import ApiError from '../../../apiClient/ApiError';
-import { DataDispatchTypes, DATA_APPEND_TASK, DATA_ERROR, DATA_REMOVE_TASK } from '../actionTypes';
+import { DataDispatchTypes, DATA_ERROR, DATA_REMOVE_TASK } from '../actionTypes';
 
 export default (taskId: number) => async (dispatch: Dispatch<DataDispatchTypes>) => {
     try {
