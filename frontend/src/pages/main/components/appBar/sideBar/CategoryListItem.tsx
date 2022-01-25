@@ -1,31 +1,46 @@
 import React, { useState } from 'react';
-import { List, ListItemIcon, ListItemText, Collapse, ListItemButton } from '@mui/material';
+import { List, ListItemIcon, ListItemText, Collapse, ListItemButton, IconButton, ListItem } from '@mui/material';
 import { ExpandLess, ExpandMore, AutoAwesomeMotion } from '@mui/icons-material';
 import { Category } from '../../../../../apiClient/types';
 import { Link } from 'react-router-dom';
+import EditCategoryDialog from '../../dialogs/EditCategoryDialog';
 
 
 const CategoryListItem = ({ category }: { category: Category }) => {
     const [isOpen, setIsOpen] = useState(false);
+    const [isEditCategoryDialogOpen, setIsEditCategoryDialogOpen] = useState(false);
     const toggleExpand = () => setIsOpen(state => !state);
+
+    const expandButton = category.tags.length === 0
+        ? null
+        : (
+            <IconButton
+                onClick={toggleExpand}
+            >
+                {
+                    isOpen
+                        ? <ExpandLess />
+                        : <ExpandMore />
+                }
+            </IconButton>
+        );
 
     return (
         <>
-            <ListItemButton
-                onClick={toggleExpand}
+            <EditCategoryDialog
+                isOpen={isEditCategoryDialogOpen}
+                category={category}
+                onClose={() => setIsEditCategoryDialogOpen(false)}
+            />
+            <ListItem
+                onDoubleClick={() => setIsEditCategoryDialogOpen(true)}
             >
                 <ListItemIcon>
                     <AutoAwesomeMotion />
                 </ListItemIcon>
                 <ListItemText primary={category.name} />
-                {
-                    category.tags.length === 0
-                        ? null
-                        : isOpen
-                        ? <ExpandLess />
-                        : <ExpandMore />
-                }
-            </ListItemButton>
+                {expandButton}
+            </ListItem>
             <Collapse in={isOpen} timeout="auto" unmountOnExit>
                 <List
                     component="div"

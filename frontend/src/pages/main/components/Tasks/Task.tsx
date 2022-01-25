@@ -79,6 +79,7 @@ export default ({ task, onClickTask, isSelected, onUnselect }: TaskProps) => {
     return (
         <Collapse timeout={200} in={cardIsActive} unmountOnExit>
             <DeleteDialog
+                type='Task'
                 name={task.title}
                 isOpen={isDeleteDialogOpen}
                 onCancel={() => setIsDeleteDialogOpen(false)}
