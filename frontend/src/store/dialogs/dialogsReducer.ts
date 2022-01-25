@@ -1,25 +1,19 @@
 import { AddTagDialogProps } from '../../pages/main/components/dialogs/AddTagDialog';
+import { DeleteDialogProps } from '../../pages/main/components/dialogs/DeleteDialog';
 import { DialogDispatchTypes, DIALOGS_CLOSE_ADD_TAG, DIALOGS_CLOSE_DELETE_DIALOG, DIALOGS_OPEN_ADD_TAG, DIALOGS_OPEN_DELETE_DIALOG } from './actionTypes';
 
-export type DeleteDialogPropsWOIsOpen = {
-    type: string;
-    name: string;
-    onDelete: () => void;
-    onCancel: () => void;
-};
+
 
 type DialogsState = {
-    deleteDialogProps: DeleteDialogPropsWOIsOpen & {
-        isOpen: boolean;
-    };
+    deleteDialogProps: DeleteDialogProps
     addTagDialogProps: AddTagDialogProps;
 };
 
 const initialState: DialogsState = {
     deleteDialogProps: {
         isOpen: false,
-        type: '',
-        name: '',
+        title: '',
+        description: '',
         onDelete: () => undefined,
         onCancel: () => undefined
     },

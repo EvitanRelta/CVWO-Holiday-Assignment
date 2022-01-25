@@ -27,8 +27,8 @@ export default ({ isOpen, category, onClose }: EditCategoryDialogProps): JSX.Ele
 
     const openCategoryDeleteDialog = () => {
         dispatch(openDeleteDialog({
-            type: 'Category',
-            name: category.name,
+            title: 'Delete Category?',
+            description: `Delete "${category.name}"?`,
             onCancel: closeCategoryDeleteDialog,
             onDelete: () => {
                 closeCategoryDeleteDialog();

@@ -44,7 +44,11 @@ export default ({ task, isSelected, categories }: CategoriesProps) => {
                                 >
                                     {category.name}
                                 </Typography>
-                                <Tags tags={category.tags} />
+                                <Tags
+                                    isSelected={isSelected}
+                                    task={task}
+                                    tags={category.tags}
+                                />
                             </Grid>
                         ))
                     }

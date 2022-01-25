@@ -29,8 +29,8 @@ export default ({ isOpen, task, onClose }: EditTaskDialogProps): JSX.Element => 
 
     const openTaskDeleteDialog = () => {
         dispatch(openDeleteDialog({
-            type: 'Task',
-            name: task.title,
+            title: 'Delete Task?',
+            description: `Delete "${task.title}"?`,
             onCancel: closeTaskDeleteDialog,
             onDelete: () => {
                 closeTaskDeleteDialog();

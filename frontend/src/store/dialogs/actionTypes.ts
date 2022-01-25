@@ -1,5 +1,5 @@
 import { AddTagDialogPropsWOIsOpen } from '../../pages/main/components/dialogs/AddTagDialog';
-import { DeleteDialogPropsWOIsOpen } from './dialogsReducer';
+import { DeleteDialogPropsWOIsOpen } from '../../pages/main/components/dialogs/DeleteDialog';
 
 export const DIALOGS_OPEN_DELETE_DIALOG = 'dialog/openDeleteDialog';
 export const DIALOGS_CLOSE_DELETE_DIALOG = 'dialog/closeDeleteDialog';

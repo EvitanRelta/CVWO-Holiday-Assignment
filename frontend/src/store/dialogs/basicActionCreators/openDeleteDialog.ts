@@ -1,6 +1,6 @@
 
+import { DeleteDialogPropsWOIsOpen } from '../../../pages/main/components/dialogs/DeleteDialog';
 import { DialogsOpenDeleteDialog, DIALOGS_OPEN_DELETE_DIALOG } from '../actionTypes';
-import { DeleteDialogPropsWOIsOpen } from '../dialogsReducer';
 
 
 export default (deleteDialogProps: DeleteDialogPropsWOIsOpen): DialogsOpenDeleteDialog => ({
