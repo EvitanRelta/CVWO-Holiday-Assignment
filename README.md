@@ -10,20 +10,74 @@ Deployed at: &nbsp; [`https://tododex.herokuapp.com/`](https://tododex.herokuapp
 
 ## Running locally
 
-### Setup
+### Requirements
 
-I've included a setup script in the root package.json, for that installs and rails migrate all in 1 command:
+- Yarn
+- NodeJS 17
+- Ruby 3.0.3
+- SQLite3 &nbsp; _(for Ruby on Rails database)_
+
+<br>
+
+### Setup & run development server
+
+I've included a setup script in the root `package.json` for easy setup. Just run `setup`, then `start` to start development server.
+
+The app will be accessible at `http://localhost:3002`
+
+- Port 3000 is the REST API backend
+- Port 3001 is the raw NodeJS frontend
+- Port 3002 is the proxy that routes "/api" requests to Port 3000<br> and any other paths to Port 3001
+
 
 ```bash
+git clone https://github.com/EvitanRelta/cvwo-holiday-assignment.git [REPO_DIR]
+cd [REPO_DIR]
 yarn run setup
+yarn start
+# App accessible at http://localhost:3002
 ```
 
-### Setup
+<br>
 
-To start both front and backend locally, simply run the command in the root directory:
+### Building & serving server
+
+The `build` script does both the setup & build. The built static app can then be served via `serve` script.
 
 ```bash
-yarn start
+git clone https://github.com/EvitanRelta/cvwo-holiday-assignment.git [REPO_DIR]
+cd [REPO_DIR]
+yarn run build
+yarn run serve
+# App accessible at http://localhost:3002
+```
+
+<br><br>
+
+## Deploying to Heroku
+
+Deploying both back & frontend to 1 Heroku dyno is really tricky. Heroku doesn't allow SQLite3, and have troubles detecting that the app requires BOTH NodeJS + Ruby.
+
+The `heroku-deploy` branch has the necessary changes. You'll need the `Heroku CLI` for the below steps:
+
+```bash
+git clone https://github.com/EvitanRelta/cvwo-holiday-assignment.git [REPO_DIR]
+cd [REPO_DIR]
+
+# Setting up Heroku
+# You'll need to create a Heroku app on their website and
+# replace [YOUR_HEROKU_APP_NAME] with your app's name.
+heroku git:remote -a [YOUR_HEROKU_APP_NAME]
+heroku buildpacks:add -i 1 heroku/nodejs
+heroku buildpacks:add -i 2 heroku/ruby
+heroku addons:create heroku-postgresql:hobby-dev
+
+# Pushing "heroku-deploy" branch to Heroku
+git push heroku heroku-deploy:master
+
+# Heroku doesn't seem to load Ruby when building, thus
+# migration can only be done after pushing to Heroku.
+heroku run "cd backend && rake db:migrate db:seed"
 ```
 
 <br><br>
@@ -40,7 +94,7 @@ To add new tasks/categories/tags, click on the `+` circle icon on bottom right:
 
 ## Edit Tasks/Categories
 
-To edit tasks and categories, just double click them (or long press on mobile).
+To edit tasks and categories, just **double click** them.
 
 <p align="center">
     <img src="./readme_assets/task.jpg?raw=true" width="400px">
