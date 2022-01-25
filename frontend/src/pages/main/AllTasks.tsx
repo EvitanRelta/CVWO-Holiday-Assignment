@@ -4,6 +4,7 @@ import selectAllTasks from '../../store/appbar/thunkActionCreators/selectAllTask
 import getTasksAndCategories from '../../store/data/thunkActionCreators/getTasksAndCategories';
 import { RootState } from '../../store/rootReducer';
 import { AddItemDial, Tasks } from './components';
+import AddTagDialog from './components/dialogs/AddTagDialog';
 import DeleteDialog from './components/dialogs/DeleteDialog';
 
 interface HomeProps { }
@@ -11,7 +12,6 @@ interface HomeProps { }
 const AllTasks = ({ }: HomeProps) => {
     const data = useSelector((state: RootState) => state.data);
     const dispatch = useDispatch();
-
 
     useEffect(() => {
         dispatch(selectAllTasks());
@@ -24,6 +24,7 @@ const AllTasks = ({ }: HomeProps) => {
             <Tasks tasks={data.tasks} />
             <AddItemDial />
             <DeleteDialog />
+            <AddTagDialog />
         </>
     );
 };

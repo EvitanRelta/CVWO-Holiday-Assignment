@@ -89,7 +89,7 @@ export default ({ task, onClickTask, isSelected, onUnselect }: TaskProps) => {
                     marginTop: -2
                 }}
             >
-                <Categories isSelected={isSelected} categories={task.categories} />
+                <Categories isSelected={isSelected} categories={task.categories} task={task} />
                 {description}
             </CardContent>
         );

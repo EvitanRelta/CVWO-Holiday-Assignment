@@ -1,4 +1,5 @@
-import { DialogDispatchTypes, DIALOGS_CLOSE_DELETE_DIALOG, DIALOGS_OPEN_DELETE_DIALOG } from './actionTypes';
+import { AddTagDialogProps } from '../../pages/main/components/dialogs/AddTagDialog';
+import { DialogDispatchTypes, DIALOGS_CLOSE_ADD_TAG, DIALOGS_CLOSE_DELETE_DIALOG, DIALOGS_OPEN_ADD_TAG, DIALOGS_OPEN_DELETE_DIALOG } from './actionTypes';
 
 export type DeleteDialogPropsWOIsOpen = {
     type: string;
@@ -10,7 +11,8 @@ export type DeleteDialogPropsWOIsOpen = {
 type DialogsState = {
     deleteDialogProps: DeleteDialogPropsWOIsOpen & {
         isOpen: boolean;
-    }
+    };
+    addTagDialogProps: AddTagDialogProps;
 };
 
 const initialState: DialogsState = {
@@ -20,6 +22,11 @@ const initialState: DialogsState = {
         name: '',
         onDelete: () => undefined,
         onCancel: () => undefined
+    },
+    addTagDialogProps: {
+        isOpen: false,
+        task: null,
+        onClose: () => undefined
     }
 };
 
@@ -38,6 +45,22 @@ const dialogsReducer = (state: DialogsState = initialState, action: DialogDispat
                 ...state,
                 deleteDialogProps: {
                     ...state.deleteDialogProps,
+                    isOpen: false
+                }
+            };
+        case DIALOGS_OPEN_ADD_TAG:
+            return {
+                ...state,
+                addTagDialogProps: {
+                    ...action.payload,
+                    isOpen: true
+                }
+            };
+        case DIALOGS_CLOSE_ADD_TAG:
+            return {
+                ...state,
+                addTagDialogProps: {
+                    ...state.addTagDialogProps,
                     isOpen: false
                 }
             };
