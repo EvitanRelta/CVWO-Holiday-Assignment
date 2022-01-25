@@ -4,11 +4,13 @@ import { ExpandLess, ExpandMore, AutoAwesomeMotion } from '@mui/icons-material';
 import { Category } from '../../../../../apiClient/types';
 import { Link } from 'react-router-dom';
 import EditCategoryDialog from '../../dialogs/EditCategoryDialog';
+import { useLongPress } from 'use-long-press';
 
 
 const CategoryListItem = ({ category }: { category: Category }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [isEditCategoryDialogOpen, setIsEditCategoryDialogOpen] = useState(false);
+    const longPressBind = useLongPress(() => setIsEditCategoryDialogOpen(true));
     const toggleExpand = () => setIsOpen(state => !state);
 
     const expandButton = category.tags.length === 0
@@ -33,6 +35,7 @@ const CategoryListItem = ({ category }: { category: Category }) => {
                 onClose={() => setIsEditCategoryDialogOpen(false)}
             />
             <ListItem
+                {...longPressBind}
                 onDoubleClick={() => setIsEditCategoryDialogOpen(true)}
             >
                 <ListItemIcon>
