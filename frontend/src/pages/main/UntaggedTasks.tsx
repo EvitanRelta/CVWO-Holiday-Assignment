@@ -5,6 +5,7 @@ import selectUntagged from '../../store/appbar/thunkActionCreators/selectUntagge
 import getTasksAndCategories from '../../store/data/thunkActionCreators/getTasksAndCategories';
 import { RootState } from '../../store/rootReducer';
 import { AddItemDial, Tasks } from './components';
+import AddTagDialog from './components/dialogs/AddTagDialog';
 import DeleteDialog from './components/dialogs/DeleteDialog';
 
 const UntaggedTasks = () => {
@@ -27,6 +28,7 @@ const UntaggedTasks = () => {
             <Tasks tasks={untaggedTasks} />
             <AddItemDial />
             <DeleteDialog />
+            <AddTagDialog />
         </>
     );
 };
