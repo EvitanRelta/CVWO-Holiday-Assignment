@@ -1,13 +1,14 @@
+import { ArrowBack, Delete, Edit } from '@mui/icons-material';
+import { Box, Button, Card, CardActionArea, CardActionAreaProps, CardActions, CardContent, CardHeader, Collapse, Divider, IconButton, Typography } from '@mui/material';
 import React, { useState } from 'react';
-import { Card, CardActionArea, CardContent, Stack, Typography, Divider, Chip, Box, CardActionAreaProps, CardHeader, IconButton, Collapse, CardActions, Button, Container } from '@mui/material';
+import { useDispatch } from 'react-redux';
 import { Task } from '../../../../apiClient/types';
+import deleteTask from '../../../../store/data/thunkActionCreators/deleteTask';
+import closeDeleteDialog from '../../../../store/dialogs/basicActionCreators/closeDeleteDialog';
+import openDeleteDialog from '../../../../store/dialogs/basicActionCreators/openDeleteDialog';
+import EditTaskDialog from '../dialogs/EditTaskDialog';
 import Categories from './Categories';
 import { dateTransformer } from './helperFunctions';
-import { ArrowBack, Edit, Delete } from '@mui/icons-material';
-import DeleteDialog from '../dialogs/DeleteDialog';
-import { useDispatch } from 'react-redux';
-import deleteTask from '../../../../store/data/thunkActionCreators/deleteTask';
-import EditTaskDialog from '../dialogs/EditTaskDialog';
 
 type TaskProps = {
     task: Task;
@@ -17,11 +18,24 @@ type TaskProps = {
 };
 
 export default ({ task, onClickTask, isSelected, onUnselect }: TaskProps) => {
-    const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
     const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
     const [cardIsActive, setCardIsActive] = useState(true);
     const dispatch = useDispatch();
-    
+
+    const openTaskDeleteDialog = () => {
+        dispatch(openDeleteDialog({
+            type: 'Task',
+            name: task.title,
+            onCancel: closeTaskDeleteDialog,
+            onDelete: () => {
+                closeTaskDeleteDialog();
+                setCardIsActive(false);
+                dispatch(deleteTask(task.id));
+            }
+        }))
+    }
+    const closeTaskDeleteDialog = () => dispatch(closeDeleteDialog());
+
     const closeTaskIcon = (
         <IconButton onClick={onUnselect}>
             <ArrowBack />
@@ -52,7 +66,7 @@ export default ({ task, onClickTask, isSelected, onUnselect }: TaskProps) => {
                     size='small'
                     variant='contained'
                     startIcon={<Delete />}
-                    onClick={() => setIsDeleteDialogOpen(true)}
+                    onClick={openTaskDeleteDialog}
                 >
                     Delete
                 </Button>
@@ -68,27 +82,16 @@ export default ({ task, onClickTask, isSelected, onUnselect }: TaskProps) => {
             </>
         );
     const body = !task.description && task.categories.length === 0
-    ? null
-    : (
-        <CardContent>
-            <Categories isSelected={isSelected} categories={task.categories} />
-            {description}
-        </CardContent>
-    );
+        ? null
+        : (
+            <CardContent>
+                <Categories isSelected={isSelected} categories={task.categories} />
+                {description}
+            </CardContent>
+        );
 
     return (
         <Collapse timeout={200} in={cardIsActive} unmountOnExit>
-            <DeleteDialog
-                type='Task'
-                name={task.title}
-                isOpen={isDeleteDialogOpen}
-                onCancel={() => setIsDeleteDialogOpen(false)}
-                onDelete={() => {
-                    setIsDeleteDialogOpen(false);
-                    setCardIsActive(false);
-                    dispatch(deleteTask(task.id));
-                }}
-            />
             <EditTaskDialog
                 isOpen={isEditDialogOpen}
                 task={task}

@@ -5,7 +5,8 @@ import { useDispatch } from 'react-redux';
 import { Category } from '../../../../apiClient/types';
 import deleteCategory from '../../../../store/data/thunkActionCreators/deleteCategory';
 import editCategory from '../../../../store/data/thunkActionCreators/editCategory';
-import DeleteDialog from './DeleteDialog';
+import closeDeleteDialog from '../../../../store/dialogs/basicActionCreators/closeDeleteDialog';
+import openDeleteDialog from '../../../../store/dialogs/basicActionCreators/openDeleteDialog';
 
 type EditCategoryDialogProps = {
     isOpen: boolean;
@@ -15,7 +16,6 @@ type EditCategoryDialogProps = {
 
 export default ({ isOpen, category, onClose }: EditCategoryDialogProps): JSX.Element => {
     const [name, setName] = useState(category.name);
-    const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
     const dispatch = useDispatch();
 
@@ -25,6 +25,19 @@ export default ({ isOpen, category, onClose }: EditCategoryDialogProps): JSX.Ele
         }, 300)
     }, [isOpen])
 
+    const openCategoryDeleteDialog = () => {
+        dispatch(openDeleteDialog({
+            type: 'Category',
+            name: category.name,
+            onCancel: closeCategoryDeleteDialog,
+            onDelete: () => {
+                closeCategoryDeleteDialog();
+                dispatch(deleteCategory(category.id));
+                onClose();
+            }
+        }))
+    }
+    const closeCategoryDeleteDialog = () => dispatch(closeDeleteDialog());
     const handleSubmission = () => {
         if (!name.trim())
             return setErrorMessage('Name cannot be empty.')
@@ -53,7 +66,7 @@ export default ({ isOpen, category, onClose }: EditCategoryDialogProps): JSX.Ele
                             right: 8,
                             top: 8
                         }}
-                        onClick={() => setIsDeleteDialogOpen(true)}
+                        onClick={openCategoryDeleteDialog}
                     >
                         <Delete />
                     </IconButton>
@@ -76,17 +89,6 @@ export default ({ isOpen, category, onClose }: EditCategoryDialogProps): JSX.Ele
                     <Button variant='contained' onClick={handleSubmission}>Save</Button>
                 </DialogActions>
             </Dialog>
-            <DeleteDialog
-                isOpen={isDeleteDialogOpen}
-                type='Category'
-                name={category.name}
-                onCancel={() => setIsDeleteDialogOpen(false)}
-                onDelete={() => {
-                    setIsDeleteDialogOpen(false);
-                    dispatch(deleteCategory(category.id));
-                    onClose();
-                }}
-            />
         </>
     );
 };

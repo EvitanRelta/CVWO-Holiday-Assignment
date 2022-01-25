@@ -1,10 +1,11 @@
-import React, { useEffect } from 'react';
-import { RootState } from '../../store/rootReducer';
-import { useDispatch, useSelector } from 'react-redux';
-import { Tasks, AddItemDial } from './components';
-import getTasksAndCategories from '../../store/data/thunkActionCreators/getTasksAndCategories';
-import selectUntagged from '../../store/appbar/thunkActionCreators/selectUntagged';
 import Lodash from 'lodash';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import selectUntagged from '../../store/appbar/thunkActionCreators/selectUntagged';
+import getTasksAndCategories from '../../store/data/thunkActionCreators/getTasksAndCategories';
+import { RootState } from '../../store/rootReducer';
+import { AddItemDial, Tasks } from './components';
+import DeleteDialog from './components/dialogs/DeleteDialog';
 
 const UntaggedTasks = () => {
     const data = useSelector((state: RootState) => state.data);
@@ -13,7 +14,7 @@ const UntaggedTasks = () => {
     useEffect(() => {
         dispatch(getTasksAndCategories());
     }, []);
-    
+
     useEffect(() => {
         if (data.hasInitData)
             dispatch(selectUntagged());
@@ -25,6 +26,7 @@ const UntaggedTasks = () => {
         <>
             <Tasks tasks={untaggedTasks} />
             <AddItemDial />
+            <DeleteDialog />
         </>
     );
 };
