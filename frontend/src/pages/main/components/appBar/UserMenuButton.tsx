@@ -67,9 +67,6 @@ const UserMenuButton = ({}: UserMenuButtonProps) => {
                     {userState.user?.nickname || userState.user?.email}
                 </Typography>
                 <Divider />
-                <MenuItem key={'profile'} onClick={handleCloseUserMenu}>
-                    <Typography>Profile</Typography>
-                </MenuItem>
                 <MenuItem key={'logout'} onClick={() => dispatch(signOut())}>
                     <Typography>Logout</Typography>
                 </MenuItem>

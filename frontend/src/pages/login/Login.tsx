@@ -44,19 +44,6 @@ const Login = ({}: LoginProps) => {
         <LoginSignupContainer>
             <Stack spacing={2}>
                 <Typography variant='h4'>Log in</Typography>
-                <Button
-                    fullWidth
-                    disabled={userState.isLoading}
-                    variant='contained'
-                    onClick={handleSubmission}
-                    startIcon={<Google />}
-                    //@ts-ignore
-                    // MUI color type not recognising custom color palettes
-                    color='google'
-                >
-                    Continue with Google
-                </Button>
-                <Typography align='center'>or</Typography>
                 <TextField
                     error={hasEmailError}
                     helperText={(hasEmailError && !email) ? 'Cannot be empty' : ''}
