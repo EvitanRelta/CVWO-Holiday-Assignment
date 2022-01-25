@@ -34,7 +34,7 @@ export default ({ task, isSelected, categories }: CategoriesProps) => {
                 <Grid container spacing={0}>
                     {
                         categories.map(category => (
-                            <Grid item key={category.id} xs='auto' sx={{ marginRight: 3 }}>
+                            <Grid item key={category.id} xs='auto' sx={{ marginRight: 3, marginBottom: 1.5 }}>
                                 <Typography
                                     sx={{
                                         fontSize: 15,
@@ -51,8 +51,9 @@ export default ({ task, isSelected, categories }: CategoriesProps) => {
                     {
                         isSelected
                             ? (
-                                <Grid item xs='auto' sx={{ marginRight: 3 }}>
+                                <Grid item xs='auto' sx={{ marginRight: 3, marginBottom: 1.5 }}>
                                     <Chip
+                                        color='warning'
                                         label='Add tag'
                                         deleteIcon={<AddCircle />}
                                         onClick={openTaskAddTagDialog}
