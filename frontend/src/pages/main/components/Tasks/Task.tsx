@@ -9,7 +9,6 @@ import openDeleteDialog from '../../../../store/dialogs/basicActionCreators/open
 import EditTaskDialog from '../dialogs/EditTaskDialog';
 import Categories from './Categories';
 import { dateTransformer } from './helperFunctions';
-import { useLongPress } from 'use-long-press';
 
 type TaskProps = {
     task: Task;
@@ -22,7 +21,6 @@ export default ({ task, onClickTask, isSelected, onUnselect }: TaskProps) => {
     const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
     const [cardIsActive, setCardIsActive] = useState(true);
     const dispatch = useDispatch();
-    const longPressBind = useLongPress(() => setIsEditDialogOpen(true));
 
     const openTaskDeleteDialog = () => {
         dispatch(openDeleteDialog({
@@ -105,7 +103,6 @@ export default ({ task, onClickTask, isSelected, onUnselect }: TaskProps) => {
             />
             <Card>
                 <Box
-                    {...longPressBind}
                     component={!isSelected ? CardActionArea : 'div'}
                     onClick={!isSelected ? onClickTask : undefined}
                     onDoubleClick={() => setIsEditDialogOpen(true)}
