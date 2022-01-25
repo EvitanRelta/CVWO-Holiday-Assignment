@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 2022_01_10_151636) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "api_categories", force: :cascade do |t|
     t.string "name"
     t.boolean "allow_multiple_tags"
@@ -28,8 +31,8 @@ ActiveRecord::Schema.define(version: 2022_01_10_151636) do
   end
 
   create_table "api_tags_tasks", id: false, force: :cascade do |t|
-    t.integer "tag_id", null: false
-    t.integer "task_id", null: false
+    t.bigint "tag_id", null: false
+    t.bigint "task_id", null: false
     t.index ["tag_id", "task_id"], name: "index_api_tags_tasks_on_tag_id_and_task_id"
   end
 
