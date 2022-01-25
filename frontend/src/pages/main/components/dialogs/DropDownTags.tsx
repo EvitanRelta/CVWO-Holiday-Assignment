@@ -46,7 +46,10 @@ export default ({ categories, category, setCategory, tag, setTag }: DropDownTags
                     }
                 </Select>
             </FormControl>
-            <FormControl fullWidth>
+            <FormControl
+                fullWidth
+                disabled={!category}
+            >
                 <InputLabel id='select-tagging-tag-label'>Category</InputLabel>
                 <Select
                     labelId='select-tagging-tag-label'
