@@ -2,7 +2,7 @@ import getAuthAxiosInstance from './getAuthAxiosInstance';
 import getApiClient, { ApiClient } from './getApiClient';
 
 const authAxiosInstance = getAuthAxiosInstance({
-    baseURL: 'http://localhost:3001/api'
+    baseURL: '/api'
 });
 const apiClient = getApiClient(authAxiosInstance);
 

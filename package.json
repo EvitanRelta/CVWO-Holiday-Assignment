@@ -1,13 +1,22 @@
 {
+  "type": "module",
   "scripts": {
-    "frontend": "cd frontend && yarn start",
-    "backend": "cd backend && rails s",
+    "setup-backend": "cd backend && gem install bundler --conservative && bundle install && rake db:create db:migrate db:seed",
     "setup-frontend": "cd frontend && yarn install",
-    "setup-backend": "cd backend && bundle install && rails db:migrate db:seed",
-    "setup": "yarn install && concurrently \"yarn run setup-frontend\" \"yarn run setup-backend\"",
-    "start": "concurrently \"yarn run frontend\" \"yarn run backend\""
+    "setup": "yarn install && yarn run setup-backend && yarn run setup-frontend",
+    "build-frontend": "cd frontend && yarn run build",
+    "build": "yarn run setup && yarn run build-frontend",
+
+    "backend": "cd backend && rails server -p 3000",
+    "frontend": "cd frontend && yarn start",
+    "serve-frontend": "cd frontend && yarn run serve",
+
+    "start": "concurrently --kill-others-on-fail \"node setupProxy.js\" \"yarn run backend\" \"yarn run frontend\"",
+    "serve": "concurrently --kill-others-on-fail \"node setupProxy.js\" \"yarn run backend\" \"yarn run serve-frontend\""
   },
-  "devDependencies": {
-    "concurrently": "^7.0.0"
+  "dependencies": {
+    "concurrently": "^7.0.0",
+    "express": "^4.17.2",
+    "http-proxy-middleware": "^2.0.2"
   }
 }
