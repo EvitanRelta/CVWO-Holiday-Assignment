@@ -18,7 +18,13 @@ const CategoryListItem = ({ category }: { category: Category }) => {
                     <AutoAwesomeMotion />
                 </ListItemIcon>
                 <ListItemText primary={category.name} />
-                {isOpen ? <ExpandLess /> : <ExpandMore />}
+                {
+                    category.tags.length === 0
+                        ? null
+                        : isOpen
+                        ? <ExpandLess />
+                        : <ExpandMore />
+                }
             </ListItemButton>
             <Collapse in={isOpen} timeout="auto" unmountOnExit>
                 <List
