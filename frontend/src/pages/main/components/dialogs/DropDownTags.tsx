@@ -50,7 +50,7 @@ export default ({ categories, category, setCategory, tag, setTag }: DropDownTags
                 fullWidth
                 disabled={!category}
             >
-                <InputLabel id='select-tagging-tag-label'>Category</InputLabel>
+                <InputLabel id='select-tagging-tag-label'>Tag</InputLabel>
                 <Select
                     labelId='select-tagging-tag-label'
                     id='select-tagging-tag'
