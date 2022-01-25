@@ -1,13 +1,12 @@
 import Lodash from 'lodash';
 import { Task, TaskWOCategories } from '../../../apiClient/types';
+import insertByIndex from './insertByIndex';
 
 export default (tasks: Task[], newTask: TaskWOCategories) => {
-    const tasksShallowCopy = Lodash.clone(tasks);
-    const taskIndex = Lodash.findIndex(tasksShallowCopy, { id: newTask.id });
+    const taskIndex = Lodash.findIndex(tasks, { id: newTask.id });
     const updatedTask = {
-        ...tasksShallowCopy[taskIndex],
+        ...tasks[taskIndex],
         ...newTask
     };
-    tasksShallowCopy.splice(taskIndex, 1, updatedTask);
-    return tasksShallowCopy;
+    return insertByIndex(tasks, taskIndex, updatedTask) as Task[];
 };
