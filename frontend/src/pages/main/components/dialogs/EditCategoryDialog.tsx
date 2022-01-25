@@ -58,7 +58,7 @@ export default ({ isOpen, category, onClose }: EditCategoryDialogProps): JSX.Ele
         <>
             <Dialog open={isOpen} onClose={onClose}>
                 <DialogTitle>
-                    Edit Task
+                    Edit Category
                     <IconButton
                         color='error'
                         sx={{
