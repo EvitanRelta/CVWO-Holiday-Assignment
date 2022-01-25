@@ -23,7 +23,7 @@ export default ({ isOpen, category, onClose }: EditCategoryDialogProps): JSX.Ele
         setTimeout(() => {
             setName(category.name);
         }, 300)
-    }, [isOpen])
+    }, [isOpen]);
 
     const openCategoryDeleteDialog = () => {
         dispatch(openDeleteDialog({
@@ -35,8 +35,8 @@ export default ({ isOpen, category, onClose }: EditCategoryDialogProps): JSX.Ele
                 dispatch(deleteCategory(category.id));
                 onClose();
             }
-        }))
-    }
+        }));
+    };
     const closeCategoryDeleteDialog = () => dispatch(closeDeleteDialog());
     const handleSubmission = () => {
         if (!name.trim())
